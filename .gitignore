@@ -1,0 +1,26 @@
+## .NET / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+## Logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Rider / VS Code local settings (optional local tooling, not project config)
+.idea/
+*.swp
+
+## Local secrets - real connection string lives here only, never committed
+**/appsettings.Development.json

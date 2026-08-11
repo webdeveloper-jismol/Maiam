@@ -1,0 +1,101 @@
+@model CourseDetailViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">@Model.CertificationTag</p>
+        <h1>@Model.Title</h1>
+    </div>
+</section>
+
+<!-- Course Tabs -->
+<section class="section">
+    <div class="container-page">
+        <div class="course-tabs" role="tablist">
+            <button class="course-tabs__btn is-active" data-tab-target="overview" role="tab" aria-selected="true">Overview</button>
+            <button class="course-tabs__btn" data-tab-target="curriculum" role="tab" aria-selected="false">Curriculum</button>
+            <button class="course-tabs__btn" data-tab-target="third" role="tab" aria-selected="false">@Model.ThirdTabLabel</button>
+        </div>
+
+        <!-- Overview Panel -->
+        <div class="course-tab-panel is-active" id="tab-overview" role="tabpanel">
+            <p style="font-size:1.05rem; max-width:760px; margin-bottom:32px;">@Model.Description</p>
+            <div class="course-meta-grid">
+                <div class="course-meta-item">
+                    <p class="course-meta-item__label">Duration</p>
+                    <p class="course-meta-item__value">@Model.Duration</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-item__label">Level</p>
+                    <p class="course-meta-item__value">@Model.Level</p>
+                </div>
+                <div class="course-meta-item">
+                    <p class="course-meta-item__label">Certification</p>
+                    <p class="course-meta-item__value">@Model.Certification</p>
+                </div>
+            </div>
+            <h3 style="font-size:1.2rem; margin-bottom:20px;">Key Highlights</h3>
+            <ul class="course-highlights-list">
+                @foreach (var h in Model.KeyHighlights)
+                {
+                    <li>@h</li>
+                }
+            </ul>
+            <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Enrol Now</a>
+        </div>
+
+        <!-- Curriculum Panel -->
+        <div class="course-tab-panel" id="tab-curriculum" role="tabpanel">
+            <h3 style="font-size:1.2rem; margin-bottom:24px;">Course Curriculum</h3>
+            <ol class="curriculum-list">
+                @foreach (var module in Model.CurriculumModules)
+                {
+                    <li>@module</li>
+                }
+            </ol>
+        </div>
+
+        <!-- Third Panel: Career Path or Batches -->
+        <div class="course-tab-panel" id="tab-third" role="tabpanel">
+            @if (Model.CareerPaths.Any())
+            {
+                <h3 style="font-size:1.2rem; margin-bottom:24px;">Career Opportunities</h3>
+                <div class="grid-cards grid-cards-4">
+                    @foreach (var c in Model.CareerPaths)
+                    {
+                        <div class="card-maiam" data-reveal>
+                            <h4 style="font-size:1.05rem; margin-bottom:8px;">@c.Title</h4>
+                            <p>@c.Description</p>
+                        </div>
+                    }
+                </div>
+            }
+            else if (Model.Batches.Any())
+            {
+                <h3 style="font-size:1.2rem; margin-bottom:24px;">Available Batches</h3>
+                <div class="grid-cards grid-cards-3">
+                    @foreach (var b in Model.Batches)
+                    {
+                        <div class="card-maiam" data-reveal>
+                            <h4 style="font-size:1.1rem; margin-bottom:12px;">@b.Name</h4>
+                            <p style="margin-bottom:6px; font-weight:600; color:var(--color-navy);">@b.Duration</p>
+                            <p style="margin-bottom:6px;">@b.Schedule</p>
+                            <p>@b.Mode</p>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/courses.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/pages/courses.js" asp-append-version="true"></script>
+}

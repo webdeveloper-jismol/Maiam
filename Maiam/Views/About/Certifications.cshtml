@@ -1,0 +1,54 @@
+@model CertificationsViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Credentials</p>
+        <h1>Certifications</h1>
+    </div>
+</section>
+
+<!-- Accreditations -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Accredited</p>
+        <h2 class="section-title">Recognized By Leading Authorities</h2>
+        <p class="section-subtitle" style="margin-bottom:24px;">
+            MAIAM is proud to hold accreditations and affiliations with the most respected bodies in Indian skill development.
+        </p>
+        <div>
+            @foreach (var c in Model.Certifications)
+            {
+                <div class="certification-block" data-reveal>
+                    <div class="certification-block__code">@c.Code</div>
+                    <div>
+                        <h3>@c.Name</h3>
+                        <p>@c.Description</p>
+                        <ul>
+                            @foreach (var h in c.Highlights)
+                            {
+                                <li>@h</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+    <div class="container-page">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Start Your Certified Journey</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Enrol Now</h2>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Enrol Now</a>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

@@ -1,0 +1,45 @@
+@model TestimonialsPageViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Voices</p>
+        <h1>Student Testimonials</h1>
+    </div>
+</section>
+
+<!-- Featured Testimonial -->
+<section class="section">
+    <div class="container-page">
+        <div class="testimonial-featured" data-reveal>
+            <blockquote>&ldquo;@Model.Featured.Quote&rdquo;</blockquote>
+            <p class="testimonial-carousel__name">@Model.Featured.Name</p>
+            <p class="testimonial-carousel__role">@Model.Featured.Role</p>
+        </div>
+    </div>
+</section>
+
+<!-- More Stories -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page">
+        <p class="section-tag">Stories</p>
+        <h2 class="section-title">More Student Stories</h2>
+        <div class="grid-cards grid-cards-3" style="margin-top:40px;">
+            @foreach (var t in Model.Stories)
+            {
+                <div class="story-card" data-reveal>
+                    <blockquote>&ldquo;@t.Quote&rdquo;</blockquote>
+                    <p class="testimonial-carousel__name">@t.Name</p>
+                    <p class="testimonial-carousel__role">@t.Role</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

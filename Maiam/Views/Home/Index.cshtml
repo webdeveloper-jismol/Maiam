@@ -1,0 +1,201 @@
+@model HomeViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Hero Carousel -->
+<section class="hero" id="homeHero" data-autoplay="5000">
+    <div class="hero__slides">
+        @for (var i = 0; i < Model.HeroSlides.Count; i++)
+        {
+            var slide = Model.HeroSlides[i];
+            <div class="hero__slide @(i == 0 ? "is-active" : "")" style="background-image:url('@slide.ImageUrl')">
+                <div class="hero__overlay"></div>
+                <div class="container-page hero__content">
+                    <p class="section-tag" style="color:#f87171;">Kerala's 1st ASDC Accredited</p>
+                    <h1>@slide.Heading</h1>
+                    <p class="hero__subheading">@slide.Subheading</p>
+                    <div class="hero__actions">
+                        <a class="btn-maiam btn-maiam-primary" asp-controller="Courses" asp-action="AutoBodyRepair">Explore Courses</a>
+                        <a class="btn-maiam btn-maiam-ghost" asp-controller="Contact" asp-action="Index">Enquire Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="hero__controls container-page">
+        <span class="hero__counter"><span id="heroCounterCurrent">01</span> / @Model.HeroSlides.Count.ToString("00")</span>
+        <div class="hero__arrows">
+            <button class="hero__arrow" id="heroPrev" aria-label="Previous slide">&#8592;</button>
+            <button class="hero__arrow" id="heroNext" aria-label="Next slide">&#8594;</button>
+        </div>
+    </div>
+</section>
+
+<!-- Scholarship Ticker -->
+<div class="ticker">
+    <div class="ticker__track">
+        <span>10% Scholarship for BPL</span>
+        <span class="ticker__divider">|</span>
+        <span>5% for APL Backward Students</span>
+        <span class="ticker__divider">|</span>
+        <span>Auto Body Repair Course Only</span>
+    </div>
+</div>
+
+<!-- Why Choose Us -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Why Choose Us</p>
+        <h2 class="section-title">Built for Excellence</h2>
+        <div class="grid-cards grid-cards-3" style="margin-top:48px;">
+            @foreach (var card in Model.FeatureCards)
+            {
+                <div class="card-maiam" data-reveal>
+                    <div class="card-icon">@await Html.PartialAsync("_IconSvg", card.IconKey)</div>
+                    <h3 style="font-size:1.15rem; margin-bottom:10px;">@card.Title</h3>
+                    <p>@card.Description</p>
+                </div>
+            }
+            <div class="card-maiam card-maiam--stat" data-reveal>
+                <div class="card-maiam--stat__value">25+</div>
+                <p>Years Experience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About MAIAM -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page about-grid">
+        <div class="about-grid__image" data-reveal>
+            <img src="~/images/home/about/about-maiam.png" alt="Students training at MAIAM workshop" loading="lazy" />
+        </div>
+        <div data-reveal>
+            <p class="section-tag">About MAIAM</p>
+            <h2 class="section-title">Empowering Dreams, Shaping Automotive Careers</h2>
+            <p style="margin-bottom:16px;">MAIAM is an initiative of Manappuram Foundation (CSR arm of Manappuram Finance Ltd), dedicated to skill development.</p>
+            <p style="margin-bottom:16px;">Kerala's 1st Central Government-approved, ASDC-accredited institution specializing in Automotive Body Repair Technician.</p>
+            <p style="margin-bottom:28px;">Focused on continually developing Automotive &amp; Welding Skills, fostering economic growth and creating job opportunities.</p>
+            <a class="btn-maiam btn-maiam-primary" asp-controller="About" asp-action="AboutMaiam">Discover Our Story</a>
+        </div>
+    </div>
+</section>
+
+<!-- Programs / Courses -->
+<section class="section">
+    <div class="container-page">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:48px;">
+            <div>
+                <p class="section-tag">Programs</p>
+                <h2 class="section-title" style="margin-bottom:0;">Our Courses</h2>
+            </div>
+            <a class="btn-maiam btn-maiam-outline" asp-controller="Courses" asp-action="AutoBodyRepair">View All Courses</a>
+        </div>
+        <div class="grid-cards grid-cards-2">
+            @foreach (var course in Model.Courses)
+            {
+                <div class="course-card" data-reveal>
+                    <div class="course-card__image">
+                        <img src="@course.ImageUrl" alt="@course.Title" loading="lazy" />
+                        <span class="course-card__duration">@course.Duration</span>
+                    </div>
+                    <div class="course-card__body">
+                        <p class="course-card__tag">@course.CertificationTag</p>
+                        <h3>@course.Title</h3>
+                        <p class="course-card__desc">@course.Description</p>
+                        <ul class="course-card__highlights">
+                            @foreach (var h in course.Highlights)
+                            {
+                                <li>@h</li>
+                            }
+                        </ul>
+                        <a class="btn-maiam btn-maiam-primary btn-maiam-sm" asp-controller="@course.Controller" asp-action="@course.Action">View Full Curriculum &#8594;</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Stats Band -->
+<section class="stats-band">
+    <div class="container-page grid-cards grid-cards-4">
+        @foreach (var stat in Model.Stats)
+        {
+            <div class="stats-band__item">
+                <div class="stats-band__value" data-counter-target="@stat.Value" data-counter-suffix="@stat.Suffix">0@stat.Suffix</div>
+                <p>@stat.Label</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+    <div class="container-page" style="text-align:center;">
+        <p class="section-tag" style="justify-content:center;">Testimonials</p>
+        <h2 class="section-title">Student Voices</h2>
+    </div>
+    <div class="container-page testimonial-carousel" style="margin-top:40px;">
+        <div class="testimonial-carousel__track">
+            @for (var i = 0; i < Model.Testimonials.Count; i++)
+            {
+                var t = Model.Testimonials[i];
+                <div class="testimonial-carousel__slide @(i == 0 ? "is-active" : "")">
+                    <blockquote>&ldquo;@t.Quote&rdquo;</blockquote>
+                    <p class="testimonial-carousel__name">@t.Name</p>
+                    <p class="testimonial-carousel__role">@t.Role</p>
+                </div>
+            }
+        </div>
+        <div class="testimonial-carousel__dots">
+            @for (var i = 0; i < Model.Testimonials.Count; i++)
+            {
+                <button class="testimonial-carousel__dot @(i == 0 ? "is-active" : "")" data-index="@i" aria-label="Show testimonial @(i + 1)"></button>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Preview -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page">
+        <p class="section-tag">Gallery</p>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+            <h2 class="section-title" style="margin-bottom:0;">Campus Life</h2>
+            <a class="btn-maiam btn-maiam-outline" asp-controller="Gallery" asp-action="Index">View All Photos &#8594;</a>
+        </div>
+        <div class="gallery-grid">
+            @foreach (var img in Model.GalleryPreviewImages)
+            {
+                <div class="gallery-grid__item" data-reveal>
+                    <img src="@img" alt="MAIAM campus life" loading="lazy" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+    <div class="container-page" style="text-align:center;">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Begin Your Journey</p>
+        <h2 class="section-title" style="color:#fff;">Ready to Build Your Future?</h2>
+        <p class="section-subtitle" style="margin:0 auto 32px; color:var(--color-text-faint);">
+            Join Kerala's leading automotive skills institute. Get certified by NCVET, ASDC, and NSDC with guaranteed placement support.
+        </p>
+        <div class="hero__actions" style="justify-content:center;">
+            <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Register Now</a>
+            <a class="btn-maiam btn-maiam-ghost" href="tel:+917594810851">Call Us Today</a>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/home.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/pages/home.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,26 @@
+@model string
+@{
+    var svg = Model switch
+    {
+        "shield" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z\"/></svg>",
+        "trainer" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"12\" cy=\"8\" r=\"3.2\"/><path d=\"M5 20c0-3.5 3-6 7-6s7 2.5 7 6\"/></svg>",
+        "placement" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><rect x=\"3\" y=\"8\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2\"/></svg>",
+        "workshop" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M14.5 6.5a3.5 3.5 0 10-4.6 4.6L4 17l3 3 5.9-5.9a3.5 3.5 0 004.6-4.6l-3-3z\"/></svg>",
+        "scholarship" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><rect x=\"3\" y=\"9\" width=\"18\" height=\"11\" rx=\"1.5\"/><path d=\"M12 9V20M3 13h18M12 9c-1.5 0-3-1-3-2.5S10 4 12 4s3 1 3 2.5S13.5 9 12 9z\"/></svg>",
+        "location" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 21s7-6.4 7-11.5A7 7 0 105 9.5C5 14.6 12 21 12 21z\"/><circle cx=\"12\" cy=\"9.5\" r=\"2.4\"/></svg>",
+        "certificate" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"12\" cy=\"9\" r=\"5.5\"/><path d=\"M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5\"/></svg>",
+        "excellence" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 2l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1L6.6 18.3l1.3-6-4.6-4.1 6.1-.6z\"/></svg>",
+        "integrity" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z\"/><path d=\"M9 12l2 2 4-4\"/></svg>",
+        "student" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M12 4L2 8l10 4 10-4-10-4z\"/><path d=\"M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5\"/></svg>",
+        "innovation" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 00-3 11.2c.4.3.6.7.6 1.1V16h4.8v-.7c0-.4.2-.8.6-1.1A6 6 0 0012 3z\"/></svg>",
+        "collaboration" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"7\" cy=\"8\" r=\"2.6\"/><circle cx=\"17\" cy=\"8\" r=\"2.6\"/><path d=\"M2.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M12.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5\"/></svg>",
+        "inclusivity" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18\"/></svg>",
+        "welding" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M3 21l6-6M13 4l7 7-4 4-7-7 4-4zM8 13l3 3\"/></svg>",
+        "paint" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M4 15c0-5 4-9 9-9 3.9 0 7 3.1 7 7 0 2.2-1.8 4-4 4h-2.2c-.9 0-1.3 1.1-.6 1.7.6.5.3 1.3-.6 1.3H9a5 5 0 01-5-5z\"/><circle cx=\"9\" cy=\"11\" r=\"1\"/><circle cx=\"13\" cy=\"8.5\" r=\"1\"/></svg>",
+        "classroom" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"1.5\"/><path d=\"M8 21h8M12 17v4\"/></svg>",
+        "hostel" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M3 11l9-7 9 7\"/><path d=\"M5 10v10h14V10\"/><path d=\"M10 20v-6h4v6\"/></svg>",
+        "library" => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><path d=\"M4 5.5A2.5 2.5 0 016.5 3H12v18H6.5A2.5 2.5 0 014 18.5v-13z\"/><path d=\"M12 3h5.5A2.5 2.5 0 0120 5.5v13a2.5 2.5 0 01-2.5 2.5H12\"/></svg>",
+        _ => "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\"><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg>"
+    };
+}
+@Html.Raw(svg)

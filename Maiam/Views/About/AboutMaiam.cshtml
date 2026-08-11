@@ -1,0 +1,61 @@
+@model AboutMaiamViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">About Us</p>
+        <h1>About MAIAM</h1>
+    </div>
+</section>
+
+<!-- Intro -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Empowering Dreams, Shaping the Future of Automotive Careers</p>
+        <div style="max-width:840px;">
+            <p style="margin-bottom:16px; font-size:1.05rem;">
+                MAIAM – Manappuram Institute of Automotive Skills is an initiative of Manappuram Foundation (CSR arm of
+                Manappuram Finance Ltd). Established with a vision to bridge the skill gap in the automotive industry,
+                MAIAM has quickly become Kerala's leading institution for automotive and welding skills training.
+            </p>
+            <p style="margin-bottom:16px; font-size:1.05rem;">
+                As Kerala's 1st Central Government-approved, ASDC-accredited institution specializing in Automotive Body
+                Repair Technician, we are committed to delivering world-class training that meets national and
+                international standards.
+            </p>
+            <p style="font-size:1.05rem;">
+                Our focus extends beyond classroom education. We emphasize hands-on practical training, industry
+                internships, and placement support to ensure every student is job-ready from day one.
+            </p>
+        </div>
+        <div class="about-quicklinks">
+            <a class="btn-maiam btn-maiam-primary" asp-controller="About" asp-action="VisionMission">Vision &amp; Mission</a>
+            <a class="btn-maiam btn-maiam-outline" asp-controller="About" asp-action="Objectives">Our Objectives</a>
+        </div>
+    </div>
+</section>
+
+<!-- Strengths -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page">
+        <p class="section-tag">Strengths</p>
+        <h2 class="section-title">Why Choose MAIAM</h2>
+        <div class="grid-cards grid-cards-4" style="margin-top:40px;">
+            @foreach (var s in Model.Strengths)
+            {
+                <div class="card-maiam" data-reveal>
+                    <div class="card-icon">@await Html.PartialAsync("_IconSvg", s.IconKey)</div>
+                    <h3 style="font-size:1.05rem; margin-bottom:10px;">@s.Title</h3>
+                    <p>@s.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

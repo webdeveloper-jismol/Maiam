@@ -1,0 +1,49 @@
+@model FacultiesViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Team</p>
+        <h1>Our Faculty</h1>
+    </div>
+</section>
+
+<!-- Instructors -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Expert Trainers</p>
+        <h2 class="section-title">Meet Our Instructors</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">
+            Learn from industry veterans with decades of real-world experience in automotive repair and welding.
+        </p>
+        <div class="grid-cards grid-cards-4">
+            @foreach (var f in Model.Faculty)
+            {
+                <div class="faculty-card" data-reveal>
+                    <div class="faculty-card__avatar">@await Html.PartialAsync("_IconSvg", "trainer")</div>
+                    <h3>@f.Name</h3>
+                    <p class="faculty-card__role">@f.Role</p>
+                    <p class="faculty-card__meta">@f.Experience</p>
+                    <p class="faculty-card__meta">@f.Qualification</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+    <div class="container-page">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Learn From the Best</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Join Our Courses</h2>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Courses" asp-action="AutoBodyRepair">Join Our Courses</a>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/faculties.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

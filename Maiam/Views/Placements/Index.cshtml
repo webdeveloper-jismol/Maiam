@@ -1,0 +1,74 @@
+@model PlacementsViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Careers</p>
+        <h1>Placements</h1>
+        <div class="grid-cards grid-cards-4" style="margin-top:40px;">
+            @foreach (var stat in Model.Stats)
+            {
+                <div class="stats-band__item">
+                    <div class="stats-band__value" data-counter-target="@stat.Value" data-counter-suffix="@stat.Suffix">0@stat.Suffix</div>
+                    <p>@stat.Label</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Placed Students -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Success Stories</p>
+        <h2 class="section-title">Our Placed Students</h2>
+        <div class="grid-cards grid-cards-3" style="margin-top:40px;">
+            @foreach (var s in Model.PlacedStudents)
+            {
+                <div class="placed-student-card" data-reveal>
+                    <h3>@s.Name</h3>
+                    <p class="placed-student-card__batch">@s.Batch</p>
+                    <div class="placed-student-card__row">
+                        <span>Company</span>
+                        <strong>@s.Company</strong>
+                    </div>
+                    <div class="placed-student-card__row">
+                        <span>Package</span>
+                        <strong>@s.Package</strong>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Top Recruiters -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page">
+        <p class="section-tag">Partners</p>
+        <h2 class="section-title">Top Recruiters</h2>
+        <div class="recruiter-strip" style="margin-top:32px;">
+            @foreach (var r in Model.Recruiters)
+            {
+                <span class="recruiter-strip__item">@r</span>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+    <div class="container-page">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Start Your Career Journey</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Apply for Admission</h2>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Apply for Admission</a>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/placements.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

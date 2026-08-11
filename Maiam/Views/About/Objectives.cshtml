@@ -1,0 +1,46 @@
+@model ObjectivesViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">About Us</p>
+        <h1>Our Objectives</h1>
+    </div>
+</section>
+
+<!-- Goals -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Goals</p>
+        <h2 class="section-title">What We Strive For</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">
+            Every objective we set is designed to create a lasting impact on our students and the automotive industry.
+        </p>
+        <div class="grid-cards grid-cards-4">
+            @foreach (var g in Model.Goals)
+            {
+                <div class="card-maiam" data-reveal>
+                    <div class="card-icon">@await Html.PartialAsync("_IconSvg", g.IconKey)</div>
+                    <h3 style="font-size:1.05rem; margin-bottom:10px;">@g.Title</h3>
+                    <p>@g.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+    <div class="container-page">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Be Part of Our Journey</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Apply Now</h2>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Apply Now</a>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

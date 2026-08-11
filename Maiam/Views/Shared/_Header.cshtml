@@ -1,0 +1,64 @@
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    bool IsActive(string controller, string? action = null) =>
+        string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase) &&
+        (action == null || string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase));
+}
+<!-- Site Header -->
+<header class="site-header" id="siteHeader">
+    <div class="container-page">
+        <a class="site-header__brand" asp-controller="Home" asp-action="Index">
+            <img src="~/images/shared/logo.png" alt="MAIAM - Manappuram Institute of Automotive Skills" />
+        </a>
+
+        <ul class="site-header__nav">
+            <li>
+                <a class="site-header__link @(IsActive("Home") ? "active" : "")" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li>
+                <button class="site-header__dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                    About <span aria-hidden="true">&#9662;</span>
+                </button>
+                <ul class="site-header__dropdown-menu">
+                    <li><a asp-controller="About" asp-action="AboutMaiam">About MAIAM</a></li>
+                    <li><a asp-controller="About" asp-action="VisionMission">Vision &amp; Mission</a></li>
+                    <li><a asp-controller="About" asp-action="Objectives">Objectives</a></li>
+                    <li><a asp-controller="About" asp-action="Testimonials">Testimonials</a></li>
+                    <li><a asp-controller="About" asp-action="Certifications">Certifications</a></li>
+                </ul>
+            </li>
+            <li>
+                <button class="site-header__dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                    Courses <span aria-hidden="true">&#9662;</span>
+                </button>
+                <ul class="site-header__dropdown-menu">
+                    <li><a asp-controller="Courses" asp-action="AutoBodyRepair">Auto Body Repair</a></li>
+                    <li><a asp-controller="Courses" asp-action="AdvancedWelding">Advanced Welding</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="site-header__link @(IsActive("Placements") ? "active" : "")" asp-controller="Placements" asp-action="Index">Placements</a>
+            </li>
+            <li>
+                <a class="site-header__link @(IsActive("Faculties") ? "active" : "")" asp-controller="Faculties" asp-action="Index">Faculties</a>
+            </li>
+            <li>
+                <a class="site-header__link @(IsActive("Facilities") ? "active" : "")" asp-controller="Facilities" asp-action="Index">Facilities</a>
+            </li>
+            <li>
+                <a class="site-header__link @(IsActive("Gallery") ? "active" : "")" asp-controller="Gallery" asp-action="Index">Gallery</a>
+            </li>
+            <li>
+                <a class="site-header__link @(IsActive("Contact") ? "active" : "")" asp-controller="Contact" asp-action="Index">Contact</a>
+            </li>
+        </ul>
+
+        <div class="site-header__cta">
+            <a class="btn-maiam btn-maiam-outline btn-maiam-sm" asp-controller="Contact" asp-action="Index">Register Now</a>
+            <button class="site-header__toggle" type="button" id="mobileMenuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+                &#9776;
+            </button>
+        </div>
+    </div>
+</header>

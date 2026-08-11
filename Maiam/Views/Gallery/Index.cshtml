@@ -1,0 +1,35 @@
+@model GalleryViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Visuals</p>
+        <h1>Gallery</h1>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Memories</p>
+        <h2 class="section-title">Campus Moments</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">
+            Glimpses of our workshops, training sessions, student activities, and campus life.
+        </p>
+        <div class="gallery-page-grid">
+            @foreach (var img in Model.Images)
+            {
+                <div class="gallery-grid__item" data-reveal>
+                    <img src="@img" alt="MAIAM campus life" loading="lazy" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/gallery.css" asp-append-version="true" />
+}

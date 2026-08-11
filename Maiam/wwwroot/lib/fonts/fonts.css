@@ -1,0 +1,16 @@
+/* Self-hosted variable fonts (downloaded from Google Fonts) — no external font requests at runtime. */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('dm-sans.woff2') format('woff2-variations'), url('dm-sans.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('outfit.woff2') format('woff2-variations'), url('outfit.woff2') format('woff2');
+}

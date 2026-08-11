@@ -1,0 +1,37 @@
+/* ========================================
+   Placements - Student Cards & Recruiter Strip
+======================================== */
+.placed-student-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 28px;
+}
+
+.placed-student-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+}
+
+.placed-student-card__batch {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.placed-student-card__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.9rem;
+}
+
+.placed-student-card__row span {
+    color: var(--color-text-muted);
+}
+
+.placed-student-card__row strong {
+    color: var(--color-navy);
+}

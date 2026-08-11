@@ -1,0 +1,382 @@
+/* ========================================
+   Home - Hero Section
+======================================== */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    overflow: hidden;
+    background-color: var(--color-navy-950);
+}
+
+.hero__slides {
+    position: relative;
+    height: 100%;
+}
+
+.hero__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+}
+
+.hero__slide.is-active {
+    opacity: 1;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.55) 55%, rgba(2, 6, 23, 0.25) 100%);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+}
+
+.hero__content h1 {
+    color: #fff;
+    font-size: 4.2rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero__subheading {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+}
+
+.hero__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hero__controls {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.hero__counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+}
+
+.hero__arrows {
+    display: flex;
+    gap: 12px;
+}
+
+.hero__arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+}
+
+.hero__arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ========================================
+   Home - Scholarship Ticker
+======================================== */
+.ticker {
+    background-color: var(--color-primary);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+}
+
+.ticker__track {
+    display: inline-flex;
+    gap: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding-left: 24px;
+    animation: ticker-scroll 18s linear infinite;
+}
+
+.ticker__divider {
+    opacity: 0.6;
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ========================================
+   Home - Feature Cards / Stat card
+======================================== */
+.card-maiam--stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--color-navy);
+    border: none;
+    color: #fff;
+}
+
+.card-maiam--stat__value {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 8px;
+}
+
+.card-maiam--stat p {
+    color: var(--color-text-faint);
+}
+
+/* ========================================
+   Home - About Section
+======================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.about-grid__image img {
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
+
+/* ========================================
+   Home - Course Cards
+======================================== */
+.course-card {
+    background-color: var(--color-navy);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    color: #fff;
+    transition: transform var(--transition-base);
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+}
+
+.course-card__image {
+    position: relative;
+    height: 220px;
+}
+
+.course-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-card__duration {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(2, 6, 23, 0.7);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+}
+
+.course-card__body {
+    padding: 32px;
+}
+
+.course-card__tag {
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.course-card__body h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.course-card__desc {
+    color: var(--color-text-faint);
+    margin-bottom: 20px;
+}
+
+.course-card__highlights {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.course-card__highlights li {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    padding-left: 22px;
+    position: relative;
+}
+
+.course-card__highlights li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+@media (max-width: 560px) {
+    .course-card__highlights {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   Home - Stats Band
+======================================== */
+.stats-band {
+    background-color: var(--color-primary);
+    padding: 64px 0;
+}
+
+/* ========================================
+   Home - Testimonial Carousel
+======================================== */
+.testimonial-carousel {
+    max-width: 760px;
+}
+
+.testimonial-carousel__track {
+    position: relative;
+    min-height: 220px;
+}
+
+.testimonial-carousel__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    text-align: center;
+}
+
+.testimonial-carousel__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+.testimonial-carousel__slide blockquote {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin: 0 0 24px;
+    line-height: 1.6;
+}
+
+.testimonial-carousel__name {
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.testimonial-carousel__role {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.testimonial-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.testimonial-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transition-base), width var(--transition-base);
+}
+
+.testimonial-carousel__dot.is-active {
+    background: var(--color-primary);
+    width: 28px;
+    border-radius: var(--radius-pill);
+}
+
+/* ========================================
+   Home - Gallery Preview Grid
+======================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ========================================
+   Home - CTA Banner
+======================================== */
+.cta-banner {
+    background-color: var(--color-navy);
+    padding: 96px 0;
+}
+
+@media (max-width: 768px) {
+    .hero__content h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero__controls {
+        justify-content: center;
+        bottom: 24px;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
+}

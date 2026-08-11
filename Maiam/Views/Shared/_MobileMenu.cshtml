@@ -1,0 +1,39 @@
+<!-- Mobile Navigation Menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-menu__header">
+        <img src="~/images/shared/logo.png" alt="MAIAM" style="height:40px;" />
+        <button class="mobile-menu__close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-menu__nav">
+        <li><a class="mobile-menu__link" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li>
+            <button class="mobile-menu__group-toggle" type="button" data-target="mobileAboutSubmenu" aria-expanded="false">
+                About <span aria-hidden="true">&#9662;</span>
+            </button>
+            <ul class="mobile-menu__submenu" id="mobileAboutSubmenu">
+                <li><a asp-controller="About" asp-action="AboutMaiam">About MAIAM</a></li>
+                <li><a asp-controller="About" asp-action="VisionMission">Vision &amp; Mission</a></li>
+                <li><a asp-controller="About" asp-action="Objectives">Objectives</a></li>
+                <li><a asp-controller="About" asp-action="Testimonials">Testimonials</a></li>
+                <li><a asp-controller="About" asp-action="Certifications">Certifications</a></li>
+            </ul>
+        </li>
+        <li>
+            <button class="mobile-menu__group-toggle" type="button" data-target="mobileCoursesSubmenu" aria-expanded="false">
+                Courses <span aria-hidden="true">&#9662;</span>
+            </button>
+            <ul class="mobile-menu__submenu" id="mobileCoursesSubmenu">
+                <li><a asp-controller="Courses" asp-action="AutoBodyRepair">Auto Body Repair</a></li>
+                <li><a asp-controller="Courses" asp-action="AdvancedWelding">Advanced Welding</a></li>
+            </ul>
+        </li>
+        <li><a class="mobile-menu__link" asp-controller="Placements" asp-action="Index">Placements</a></li>
+        <li><a class="mobile-menu__link" asp-controller="Faculties" asp-action="Index">Faculties</a></li>
+        <li><a class="mobile-menu__link" asp-controller="Facilities" asp-action="Index">Facilities</a></li>
+        <li><a class="mobile-menu__link" asp-controller="Gallery" asp-action="Index">Gallery</a></li>
+        <li><a class="mobile-menu__link" asp-controller="Contact" asp-action="Index">Contact</a></li>
+    </ul>
+    <div class="mobile-menu__cta">
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Register Now</a>
+    </div>
+</div>

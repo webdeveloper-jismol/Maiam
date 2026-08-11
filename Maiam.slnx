@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Maiam/Maiam.csproj" />
+  <Project Path="Maiam_DAL/Maiam_DAL.csproj" />
+</Solution>

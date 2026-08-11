@@ -1,0 +1,60 @@
+@model FacilitiesViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Campus</p>
+        <h1>Our Facilities</h1>
+    </div>
+</section>
+
+<!-- Facility Cards -->
+<section class="section">
+    <div class="container-page">
+        <p class="section-tag">Infrastructure</p>
+        <h2 class="section-title">World-Class Training Environment</h2>
+        <p class="section-subtitle" style="margin-bottom:40px;">
+            Our campus is equipped with modern labs, workshops, and amenities to provide the best learning experience.
+        </p>
+        <div class="grid-cards grid-cards-3">
+            @foreach (var f in Model.Facilities)
+            {
+                <div class="card-maiam" data-reveal>
+                    <div class="card-icon">@await Html.PartialAsync("_IconSvg", f.IconKey)</div>
+                    <h3 style="font-size:1.15rem; margin-bottom:10px;">@f.Title</h3>
+                    <p>@f.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Amenities -->
+<section class="section" style="background-color:var(--color-bg-light);">
+    <div class="container-page">
+        <p class="section-tag">More</p>
+        <h2 class="section-title">Additional Amenities</h2>
+        <div class="recruiter-strip" style="margin-top:32px;">
+            @foreach (var a in Model.Amenities)
+            {
+                <span class="recruiter-strip__item">@a</span>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+    <div class="container-page">
+        <p class="section-tag" style="justify-content:center; color:#f87171;">Visit Our Campus</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Book a Visit</h2>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Contact" asp-action="Index">Book a Visit</a>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/about.css" asp-append-version="true" />
+}

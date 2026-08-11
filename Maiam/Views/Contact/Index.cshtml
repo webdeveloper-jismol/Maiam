@@ -1,0 +1,103 @@
+@model ContactViewModel
+@{
+    Layout = "_Layout";
+    var submitSuccess = ViewData["SubmitSuccess"] as bool? ?? false;
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">Connect</p>
+        <h1>Contact Us</h1>
+    </div>
+</section>
+
+<!-- Contact Info + Form -->
+<section class="section">
+    <div class="container-page contact-grid">
+        <div>
+            <p class="section-tag">Get in Touch</p>
+            <p style="font-size:1.05rem; margin-bottom:36px; max-width:420px;">
+                Have questions about our courses, admissions, or campus? We're here to help you take the first step
+                toward your automotive career.
+            </p>
+
+            <div class="contact-info-item">
+                <h3>Address</h3>
+                <p>Manappuram Agro Farms Painoor,<br />Valapad, Thrissur</p>
+                <p>Pin Code: 680567</p>
+            </div>
+            <div class="contact-info-item">
+                <h3>Phone</h3>
+                <p><a href="tel:+917594810851">+91 75948 10851</a></p>
+                <p><a href="tel:+919072623103">+91 90726 23103</a></p>
+                <p>Toll Free: 1800 123 6866</p>
+            </div>
+            <div class="contact-info-item">
+                <h3>Email</h3>
+                <p><a href="mailto:maiam@manappuramfoundation.org">maiam@manappuramfoundation.org</a></p>
+                <p><a href="mailto:mf@manappuramfoundation.org">mf@manappuramfoundation.org</a></p>
+            </div>
+            <div class="contact-info-item">
+                <h3>Office Hours</h3>
+                <p>Monday - Saturday</p>
+                <p>9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+
+        <div class="contact-form-card">
+            <h3 style="font-size:1.3rem; margin-bottom:24px;">Send a Message</h3>
+
+            @if (submitSuccess)
+            {
+                <div class="alert-success" role="status">
+                    Thank you — your message has been submitted successfully. Our team will get back to you shortly.
+                </div>
+            }
+
+            <form asp-controller="Contact" asp-action="Index" method="post" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="form-field">
+                    <label asp-for="FullName">Full Name</label>
+                    <input asp-for="FullName" class="form-input" placeholder="Enter your full name" />
+                    <span asp-validation-for="FullName" class="form-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Phone">Phone</label>
+                    <input asp-for="Phone" class="form-input" placeholder="Enter your phone number" />
+                    <span asp-validation-for="Phone" class="form-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" type="email" class="form-input" placeholder="Enter your email address" />
+                    <span asp-validation-for="Email" class="form-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="InterestedCourse">Interested Course</label>
+                    <select asp-for="InterestedCourse" class="form-input">
+                        <option value="">Select a course</option>
+                        <option value="Auto Body Repair Technician">Auto Body Repair Technician</option>
+                        <option value="Advanced Welding Technician">Advanced Welding Technician</option>
+                    </select>
+                    <span asp-validation-for="InterestedCourse" class="form-error"></span>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Message">Message</label>
+                    <textarea asp-for="Message" class="form-input" rows="4" placeholder="Write your message"></textarea>
+                    <span asp-validation-for="Message" class="form-error"></span>
+                </div>
+                <button type="submit" class="btn-maiam btn-maiam-primary" style="width:100%;">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/pages/contact.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
