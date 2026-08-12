@@ -1,0 +1,30 @@
+@{
+    Layout = "_Layout";
+    int statusCode = ViewBag.StatusCode ?? 404;
+    bool isNotFound = statusCode == 404;
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container-page">
+        <p class="section-tag">@statusCode</p>
+        <h1>@(isNotFound ? "Page Not Found" : "Something Went Wrong")</h1>
+    </div>
+</section>
+
+<!-- Message -->
+<section class="section" style="text-align:center;">
+    <div class="container-page">
+        <p class="section-subtitle" style="margin:0 auto 32px;">
+            @if (isNotFound)
+            {
+                <text>Sorry, the page you're looking for doesn't exist or may have been moved.</text>
+            }
+            else
+            {
+                <text>Sorry, something went wrong on our end. Please try again in a moment.</text>
+            }
+        </p>
+        <a class="btn-maiam btn-maiam-primary" asp-controller="Home" asp-action="Index">Back to Home</a>
+    </div>
+</section>

@@ -1,6 +1,107 @@
 # Project Development Log
 
-## 2026-08-10
+## 2026-08-12
+
+### Task: Branded 404 / Error Page
+
+**Objective**
+Fix a finding from a full-site regression pass: navigating to a non-existent URL (e.g. `/NonExistentPage123`, or `/Courses` with no sub-path) fell through to the browser's own generic error page instead of a branded page, because the app had no status-code handling middleware for non-exception 404s.
+
+**Completed Work**
+- Added `app.UseStatusCodePagesWithReExecute("/Error/{0}")` to `Program.cs`, re-executing the pipeline against a dedicated error route while preserving the real HTTP status code (confirmed `/NonExistentPage123` still returns `404`, not `200`).
+- Added `Controllers/ErrorController.cs` with a single `Index(int statusCode)` action at `Error/{statusCode:int}`.
+- Added `Views/Error/Index.cshtml` — reuses the existing `_Layout`/header/footer and the same `.page-hero`/`.section`/`.btn-maiam-primary` classes already used across the site, so it matches the design system with no new CSS. Shows "Page Not Found" for 404, a generic "Something Went Wrong" for any other status code, and a "Back to Home" button.
+- Verified during a full 13-page regression sweep (triggered by an external test report) that this was the only real issue found — a separately reported "14%/28+" Placements figure was investigated and confirmed to be a false alarm: the stat counters animate from 0 to their target (100%/200+) over ~1.4s, and 14/100 and 28/200 are both exactly the same 14% progress fraction, meaning the report's tooling read the DOM mid-animation rather than finding a real data bug. No change was needed there.
+
+**Files Created**
+- `Maiam/Controllers/ErrorController.cs`
+- `Maiam/Views/Error/Index.cshtml`
+
+**Files Modified**
+- `Maiam/Program.cs` — added `UseStatusCodePagesWithReExecute`
+
+**Testing Performed**
+- `dotnet build` — 0 errors, 0 warnings
+- `curl` status-code check: `/NonExistentPage123` → 404 (branded page), `/Courses` (no sub-path) → 404, all 13 real routes still → 200
+- Visual check at mobile width (375px) — header, page-hero, button all match the rest of the site
+
+**Status**
+Completed.
+
+**Known Issues / Limitations**
+None.
+
+**Manual Steps**
+None — takes effect automatically on next run.
+
+**Rollback**
+- Remove the `UseStatusCodePagesWithReExecute` line from `Program.cs`, delete `Controllers/ErrorController.cs` and `Views/Error/Index.cshtml`.
+
+## 2026-08-11
+
+### Task: Brevo Transactional Email Integration for Contact Form
+
+**Objective**
+Wire the existing Contact form to actually send enquiries by email via the Brevo Transactional Email API, without redesigning the page or touching unrelated code.
+
+**Completed Work**
+- Reused the existing `ContactViewModel` as-is (already had FullName/Phone/Email/InterestedCourse/Message with matching validation) — no duplicate model created.
+- Added `Models/EmailSettings.cs` (options class: BrevoApiKey, SenderEmail, SenderName, RecipientEmail).
+- Added `Services/IEmailService.cs` and `Services/BrevoEmailService.cs` — posts to `https://api.brevo.com/v3/smtp/email` via the already-registered `IHttpClientFactory`, HTML-encodes all user input before building the email body, sets `replyTo` to the visitor's own email/name (so replies go to them) while the actual sender stays the Brevo-verified address, and never throws past its own boundary — logs the real error server-side via `ILogger` and returns `false` on any failure.
+- Registered `EmailSettings` binding and `IEmailService` in `Program.cs`.
+- Updated `ContactController` to a Post/Redirect/Get flow: on success, sets `TempData["SuccessMessage"]` and redirects to the GET action (prevents duplicate sends on refresh); on failure, shows a generic "try again later" message via `ViewData["ErrorMessage"]` while preserving the user's entered data; invalid submissions still return the existing view with field-level validation errors untouched.
+- Updated `Views/Contact/Index.cshtml` minimally — swapped the old placeholder `ViewData["SubmitSuccess"]` flag for real `TempData["SuccessMessage"]`/`ViewData["ErrorMessage"]` checks, added one new `.alert-error` block reusing the existing `.alert-success` visual pattern. No layout, header, footer, navbar, colors, fonts, or spacing changes.
+- Added a small `.alert-error` rule to `wwwroot/css/pages/contact.css` (same shape as the existing `.alert-success`, just the red/primary palette).
+- Ran `dotnet user-secrets init` for the `Maiam` project (no secrets stored yet — that's a manual step for the project owner, see below).
+- Left `EmailSettings:BrevoApiKey` out of `appsettings.json` entirely; `SenderEmail` is blank in `appsettings.json` (only `SenderName` and the non-secret `RecipientEmail` are committed) — real values are supplied via User Secrets locally / environment variables or a secret store in production.
+
+**Files Created**
+- `Maiam/Models/EmailSettings.cs`
+- `Maiam/Services/IEmailService.cs`
+- `Maiam/Services/BrevoEmailService.cs`
+
+**Files Modified**
+- `Maiam/Program.cs` — registered `EmailSettings` options + `IEmailService`
+- `Maiam/appsettings.json` — added non-secret `EmailSettings` keys
+- `Maiam/Controllers/ContactController.cs` — PRG pattern, calls `IEmailService`
+- `Maiam/Views/Contact/Index.cshtml` — success/error message wiring only
+- `Maiam/wwwroot/css/pages/contact.css` — added `.alert-error`
+- `Maiam/Maiam.csproj` — `UserSecretsId` added by `dotnet user-secrets init` (not a secret itself)
+
+**NuGet Packages**
+None added — used the framework's built-in `HttpClient`/`System.Net.Http.Json` and `System.Net.WebUtility`, per the "no MailKit/SendGrid unless already required" restriction.
+
+**SQL / Database Changes**
+None. `Maiam_DAL` was not touched.
+
+**Testing Performed**
+- `dotnet build` — 0 errors, 0 warnings
+- Submitted the form with no Brevo credentials configured: confirmed no crash, server-side log captured the real diagnostic (`BrevoEmailService` logged the missing-config error), the visitor saw only the generic "Unable to send your enquiry..." message, and all entered field values were preserved (no retyping needed)
+- Submitted the form empty: confirmed all five field-level validation messages still appear via existing unobtrusive validation, unchanged from before
+- Verified the Contact page renders identically to before this change at mobile width (375px) — header, footer, colors, spacing all untouched
+- Did **not** test an actual successful Brevo send end-to-end, since that requires a real verified sender + API key that only the project owner can provide (see Manual Steps)
+
+**Status**
+Completed for everything that doesn't require real Brevo credentials. Awaiting the project owner to supply a verified sender email and API key to confirm live email delivery.
+
+**Known Issues / Limitations**
+- Untested: actual email delivery to `mafoundteamit@gmail.com` (needs real credentials — see Manual Steps)
+- The Brevo sender email must be a verified sender/domain in the Brevo account, or Brevo will reject the send even with a valid API key
+
+**Recommendations**
+- None beyond the manual steps below.
+
+**Manual Steps**
+Run from the `Maiam` project folder:
+```powershell
+cd Maiam
+dotnet user-secrets set "EmailSettings:BrevoApiKey" "YOUR_BREVO_API_KEY"
+dotnet user-secrets set "EmailSettings:SenderEmail" "YOUR_BREVO_VERIFIED_SENDER_EMAIL"
+```
+Then run the app and submit the Contact form with real data to confirm the email arrives at `mafoundteamit@gmail.com` with subject `Enquiry`.
+
+**Rollback**
+- Revert `Program.cs`, `Controllers/ContactController.cs`, `Views/Contact/Index.cshtml`, `appsettings.json`, and `wwwroot/css/pages/contact.css` to their prior versions, and delete `Models/EmailSettings.cs` and `Services/IEmailService.cs`/`BrevoEmailService.cs`.
 
 ### Task: Convert Readdy Reference Website (bfsysw.readdy.co) to ASP.NET Core MVC
 

@@ -76,6 +76,16 @@
     font-size: 0.9rem;
 }
 
+.alert-error {
+    background-color: var(--color-primary-tint);
+    border: 1px solid #fca5a5;
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 900px) {
     .contact-grid {
         grid-template-columns: 1fr;
