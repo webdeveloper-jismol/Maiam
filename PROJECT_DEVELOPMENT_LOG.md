@@ -1,5 +1,59 @@
 # Project Development Log
 
+## 2026-08-12 (2)
+
+### Task: Replicate Live MAIAM Gallery (maiam.co.in/gallery) in the Gallery Page
+
+**Objective**
+Replace the generic placeholder Gallery page content with the actual event-sectioned gallery from the live WordPress site at https://maiam.co.in/gallery/ — every heading, every image per section, correctly grouped, without hotlinking.
+
+**Completed Work**
+- Inspected the live reference page's real DOM structure (Elementor) rather than trusting visible/first images alone, per the task's explicit warning about carousels/lazy-loading/hidden slides. Walked the DOM from each `h2.elementor-heading-title` heading forward through sibling Elementor sections, collecting every `<img>` until the next heading, to correctly scope images to their true section.
+- This surfaced that "Appointment Letter Distribution Ceremony" and "TOYOTA PLANT VISIT" genuinely have only 1 image each on the live site (static `image.default` Elementor widgets, not a carousel with hidden slides), "Drug Awareness Section" has exactly 3, "Onam Celebrations 2024" has 10, and the last section ("Renovated Office Building, Workshop & Classroom Inauguration") has 68 spread across 6 separate `image-gallery` Elementor widgets plus 2 video widgets — verified no duplicates (83 unique URLs total, confirmed via `Set` dedup in-browser).
+- Downloaded all 83 images directly from maiam.co.in into `wwwroot/images/gallery/{appointment-letter, toyota-plant-visit, drug-awareness, onam-2024, inauguration}/` with sequential, meaningful filenames (e.g. `onam-2024-01.jpg`). No hotlinking — every image now ships from this project.
+- Found the 10 Onam images were unoptimized 6048x4024 PNGs at 17–29MB each (228MB total) — resized to 1600px width and re-encoded as JPEG (quality 85) using .NET's `System.Drawing`, cutting the folder to 2.6MB with no visible quality loss. Did the same for 12 oversized inauguration PNGs (0.9–2.9MB each). Total new gallery content is now 13MB across 83 images.
+- Rebuilt `GalleryViewModel` around a `Sections` list (`GallerySection { Heading, Images }`, `GalleryImage { Url, Alt }`) instead of a flat image list, and rewrote `GalleryController.Index()` to populate all 5 sections with the verified image sets and descriptive, non-generic alt text per the task's examples (e.g. "Toyota Plant Visit - MAIAM").
+- Rewrote `Views/Gallery/Index.cshtml` to loop sections, each rendering its exact heading and a responsive grid (3/2/1 columns desktop/tablet/mobile) using CSS Grid, preserving each image's natural aspect ratio (no forced `object-fit: cover` cropping, since several images — especially in the inauguration section — are portrait-oriented).
+- Added a lightweight vanilla-JS lightbox (`js/pages/gallery.js`, new — no framework) with click-to-open, prev/next arrows, close button, Escape key, backdrop-click-to-close, and left/right arrow-key navigation across all 83 images in page order.
+- Renamed the Razor `@foreach` loop variable from `section` to `gallerySection` after discovering `section` is a reserved Razor directive keyword that broke parsing of `@section.Heading` (RZ2005/RZ1011 errors) — a real Razor-specific pitfall, not caught by C# naming rules.
+- Reused the existing `_Layout`, header, footer, `.page-hero`, `.section`, `.container-page`, `.section-tag` classes and site color/font variables — no other page, controller, or shared component touched. Left the old `gallery-1.jpg`…`gallery-8.jpg` files in place since the Home page's "Campus Life" preview still references them.
+
+**Files Created**
+- `Maiam/wwwroot/images/gallery/appointment-letter/appointment-letter-01.webp` (1 file)
+- `Maiam/wwwroot/images/gallery/toyota-plant-visit/toyota-plant-01.webp` (1 file)
+- `Maiam/wwwroot/images/gallery/drug-awareness/drug-awareness-{01..03}.webp` (3 files)
+- `Maiam/wwwroot/images/gallery/onam-2024/onam-2024-{01..10}.jpg` (10 files)
+- `Maiam/wwwroot/images/gallery/inauguration/inauguration-{01..68}.{jpg,jpeg,png}` (68 files)
+- `Maiam/wwwroot/js/pages/gallery.js`
+
+**Files Modified**
+- `Maiam/Models/ViewModels/GalleryViewModel.cs` — restructured to sections
+- `Maiam/Controllers/GalleryController.cs` — populates all 5 real sections
+- `Maiam/Views/Gallery/Index.cshtml` — per-section headings/grids + lightbox markup
+- `Maiam/wwwroot/css/pages/gallery.css` — rewritten for sectioned grid + lightbox styles
+
+**Testing Performed**
+- `dotnet build` — 0 errors, 0 warnings (after fixing the Razor `section` keyword collision)
+- Verified in-browser: all 5 headings render with the exact live-site text, and image counts per section (1, 1, 3, 10, 68 = 83) match the verified DOM-walk data exactly
+- Checked all 83 image requests plus every other page asset — 100% return HTTP 200, none 404
+- Visually compared each section against the live reference (Appointment Letter photo, Toyota Plant Visit group photo, Drug Awareness screenshots, Onam Pookalam/staff photos, Inauguration event photos) — content and grouping match
+- Tested lightbox: click-to-open, next/prev arrow navigation, Escape-to-close, backdrop-click-to-close
+- Tested mobile width (375px) — single-column grid, no horizontal overflow, images display at full aspect ratio without cropping
+- Re-verified Home, About, Contact, and Gallery all still return 200 and Home's own gallery preview images are untouched
+
+**Status**
+Completed.
+
+**Known Issues / Limitations**
+- The live site's "Renovated Office Building, Workshop & Classroom Inauguration" section structurally contains a large number of images (including some generic/stock-looking automotive photos unrelated to the actual inauguration event, e.g. "Volvos-SPA-chassis-tech...", "Car-aerodynamics...") that appear to be leftover content from an older, unrelated gallery block on the same page. These were included as-is because the live page groups them under that heading with no other heading in between — per the task's own instruction that "the live reference website is the source of truth," they were not edited out. Worth flagging to whoever maintains the WordPress site.
+- One console message reading "Failed to load resource: 404" persisted across page navigations during testing; traced to leftover state from browsing the external maiam.co.in reference site during data collection, not from this project — every resource requested by this app confirmed 200 via both browser network inspection and direct `curl` checks.
+
+**Manual Steps**
+None.
+
+**Rollback**
+- Revert `Models/ViewModels/GalleryViewModel.cs`, `Controllers/GalleryController.cs`, `Views/Gallery/Index.cshtml`, and `wwwroot/css/pages/gallery.css` to their prior versions; delete `wwwroot/js/pages/gallery.js` and the five new image subfolders under `wwwroot/images/gallery/`.
+
 ## 2026-08-12
 
 ### Task: Branded 404 / Error Page

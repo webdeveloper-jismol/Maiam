@@ -11,25 +11,45 @@
     </div>
 </section>
 
-<!-- Gallery Grid -->
+<!-- Gallery Sections -->
 <section class="section">
     <div class="container-page">
         <p class="section-tag">Memories</p>
         <h2 class="section-title">Campus Moments</h2>
         <p class="section-subtitle" style="margin-bottom:40px;">
-            Glimpses of our workshops, training sessions, student activities, and campus life.
+            Glimpses of our events, workshops, training sessions, and campus life.
         </p>
-        <div class="gallery-page-grid">
-            @foreach (var img in Model.Images)
-            {
-                <div class="gallery-grid__item" data-reveal>
-                    <img src="@img" alt="MAIAM campus life" loading="lazy" />
+
+        @foreach (var gallerySection in Model.Sections)
+        {
+            <!-- Gallery section: @gallerySection.Heading -->
+            <div class="gallery-section" data-reveal>
+                <h3 class="gallery-section__heading">@gallerySection.Heading</h3>
+                <div class="gallery-section__grid">
+                    @foreach (var image in gallerySection.Images)
+                    {
+                        <button type="button" class="gallery-section__item" data-lightbox-src="@image.Url" data-lightbox-alt="@image.Alt">
+                            <img src="@image.Url" alt="@image.Alt" loading="lazy" />
+                        </button>
+                    }
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 </section>
 
+<!-- Lightbox overlay (shared across all gallery sections) -->
+<div class="lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Close preview">&times;</button>
+    <button type="button" class="lightbox__arrow lightbox__arrow--prev" id="lightboxPrev" aria-label="Previous image">&#8592;</button>
+    <img class="lightbox__image" id="lightboxImage" src="" alt="" />
+    <button type="button" class="lightbox__arrow lightbox__arrow--next" id="lightboxNext" aria-label="Next image">&#8594;</button>
+</div>
+
 @section Styles {
     <link rel="stylesheet" href="~/css/pages/gallery.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/pages/gallery.js" asp-append-version="true"></script>
 }
