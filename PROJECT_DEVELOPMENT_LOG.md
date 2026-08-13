@@ -1,5 +1,44 @@
 # Project Development Log
 
+## 2026-08-12 (3)
+
+### Task: Fix Gallery Images Invisible Until Clicked
+
+**Objective**
+Gallery images were present, clickable (lightbox opened correctly), and every URL returned HTTP 200, but most images were invisible on page load — large blank/white areas where thumbnails should appear. Find the real cause and fix it without touching layout, header, footer, or any other page.
+
+**Root Cause**
+`Views/Gallery/Index.cshtml` placed the `data-reveal` scroll-animation attribute (from `wwwroot/js/site.js` / `wwwroot/css/site.css`) on each **entire per-event section wrapper** (heading + full image grid together) rather than on individual thumbnails. `site.js`'s `IntersectionObserver` only adds the `.is-revealed` class (which flips the element from `opacity: 0` to `opacity: 1`) once 15% of *that element's own bounding box* is visible in the viewport. Small sections (1–3 images) are short enough to cross that 15% threshold almost immediately, but the "Onam Celebrations 2024" (10 images) and especially "Renovated Office Building..." (68 images) sections are single blocks thousands of pixels tall — no realistic viewport can ever show 15% of a block that tall, so the observer's callback never fired `isIntersecting: true`, and those entire sections (heading and every image inside) stayed permanently at `opacity: 0`. This matches every reported symptom: large blank areas, only short sections showing anything, and clicking still working (the DOM/JS was fully intact — only the CSS opacity was wrong).
+
+**Fix**
+1. `Views/Gallery/Index.cshtml` — moved `data-reveal` off the `.gallery-section` wrapper and onto each `.gallery-section__item` (each individual thumbnail button), matching the same per-card granularity already used correctly elsewhere in the codebase (Home's `.card-maiam`, About's value cards, etc.). Each thumbnail's bounding box is small, so the 15% threshold is satisfied as soon as any part of it scrolls into view.
+2. `wwwroot/js/site.js` — added a defensive fallback so no `[data-reveal]` element on *any* page can get stuck invisible again: if `IntersectionObserver` isn't supported, all reveal elements are shown immediately instead of staying hidden forever; and regardless of observer support, a 1.5s safety-net timer force-reveals anything not yet revealed. This is a global, low-risk addition (purely additive — it only ever makes hidden things visible, never hides anything) that guards against this exact class of bug recurring anywhere else.
+
+**Files Modified**
+- `Maiam/Views/Gallery/Index.cshtml`
+- `Maiam/wwwroot/js/site.js`
+
+**Testing Performed**
+- `dotnet build` — 0 errors, 0 warnings
+- Checked computed `opacity` on all 83 `.gallery-section__item` elements immediately after page load — 0 stuck at low opacity (previously the 10-image and 68-image sections would have been stuck)
+- Scrolled deep into the 68-image section and confirmed items past the fold still carry `is-revealed` and `opacity: 1` once scrolled near
+- Re-checked Home page's own `[data-reveal]` cards (16 elements) — all still reveal normally, confirming the shared `site.js` change didn't regress other pages
+- Verified lightbox still opens on click after the fix (unchanged functionality)
+- Checked mobile width (375px): all 83 items visible, no horizontal overflow, no console errors
+- No console errors on any page
+
+**Status**
+Completed.
+
+**Known Issues / Limitations**
+None.
+
+**Manual Steps**
+None — takes effect on next app restart (Razor/JS changes require restarting `dotnet run`, same as any other code change).
+
+**Rollback**
+- Revert `Views/Gallery/Index.cshtml` and `wwwroot/js/site.js` to their prior versions.
+
 ## 2026-08-12 (2)
 
 ### Task: Replicate Live MAIAM Gallery (maiam.co.in/gallery) in the Gallery Page

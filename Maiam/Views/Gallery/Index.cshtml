@@ -23,12 +23,15 @@
         @foreach (var gallerySection in Model.Sections)
         {
             <!-- Gallery section: @gallerySection.Heading -->
-            <div class="gallery-section" data-reveal>
+            <!-- data-reveal is applied per thumbnail (not on this whole, possibly very tall, section wrapper) -->
+            <!-- so the scroll-reveal threshold is met immediately instead of requiring 15% of an entire -->
+            <!-- multi-image section to be on-screen at once, which large sections could never satisfy. -->
+            <div class="gallery-section">
                 <h3 class="gallery-section__heading">@gallerySection.Heading</h3>
                 <div class="gallery-section__grid">
                     @foreach (var image in gallerySection.Images)
                     {
-                        <button type="button" class="gallery-section__item" data-lightbox-src="@image.Url" data-lightbox-alt="@image.Alt">
+                        <button type="button" class="gallery-section__item" data-reveal data-lightbox-src="@image.Url" data-lightbox-alt="@image.Alt">
                             <img src="@image.Url" alt="@image.Alt" loading="lazy" />
                         </button>
                     }

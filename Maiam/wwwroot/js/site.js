@@ -108,15 +108,29 @@
 
     // Scroll-reveal for elements with [data-reveal]
     var revealEls = document.querySelectorAll('[data-reveal]');
-    if (revealEls.length && 'IntersectionObserver' in window) {
-        var revealObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
-                    revealObserver.unobserve(entry.target);
-                }
+    if (revealEls.length) {
+        if ('IntersectionObserver' in window) {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            revealEls.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            // No IntersectionObserver support: reveal immediately rather than leaving elements at opacity:0 forever.
+            revealEls.forEach(function (el) { el.classList.add('is-revealed'); });
+        }
+
+        // Safety net: an element whose own bounding box is much taller than the viewport (e.g. a very
+        // long content section) may never satisfy the observer's visibility threshold. Force-reveal
+        // anything still hidden after a short delay so content can never get stuck invisible.
+        setTimeout(function () {
+            document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach(function (el) {
+                el.classList.add('is-revealed');
             });
-        }, { threshold: 0.15 });
-        revealEls.forEach(function (el) { revealObserver.observe(el); });
+        }, 1500);
     }
 })();
