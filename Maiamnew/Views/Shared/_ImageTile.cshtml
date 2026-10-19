@@ -1,0 +1,11 @@
+@model ImageTileModel
+@* Clickable image tile that opens the full-size image in the shared lightbox. *@
+@{
+    var image = ImageCatalog.Get(Model.Key);
+    // A null value bound through alt="@…" arrives as "", which would mark the image decorative.
+    var alt = Model.Alt ?? image.Alt;
+}
+<a class="image-tile@(Model.CssClass is null ? "" : " " + Model.CssClass)" href="@image.LargestUrl" data-lightbox="@Model.Group" data-caption="@(Model.Caption ?? alt)">
+    <maiam-img key="@Model.Key" alt="@alt" sizes="@Model.Sizes" />
+    <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+</a>

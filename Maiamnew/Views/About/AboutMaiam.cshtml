@@ -1,0 +1,159 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("About MAIAM") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "About Manappuram Institute of Automotive Skills",
+        Description = "MAIAM, established in 2019, is part of Manappuram Foundation and Kerala’s 1st central government approved, ASDC accredited Automotive Body Repair institution.",
+        Path = "/about-maiam/",
+        OgImage = "/assets/images/og/about.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-about";
+    var hero = new PageHeroModel(
+        Title: "About MAIAM",
+        Lead: "Manappuram Institute of Automotive Skills – an initiative of Manappuram Foundation, the CSR body of Manappuram Finance Ltd.",
+        ImageKey: "campus/campus-pathway",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Established in 2019");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/about-maiam.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Introduction -->
+<section class="section" aria-labelledby="about-intro-title">
+    <div class="container split split--wide-text">
+        <div data-reveal>
+            <p class="eyebrow">MAIAM established in 2019</p>
+            <h2 id="about-intro-title">Training entry-level technicians for the automotive body repair industry</h2>
+            <div class="prose">
+                <p>
+                    Manappuram Institute of Automotive Skills (MAIAM) is a part of Manappuram Foundation, and Manappuram
+                    Foundation is the CSR Body of Manappuram Finance Ltd. We are the 1st central government approved ASDC
+                    accredited institution in Kerala to conduct the training in Automotive Body Repair.
+                </p>
+                <p>
+                    The automotive industry (automotive body repair) is facing a critical shortage of quality entry-level
+                    technicians. MAIAM is organised to supply entry-level technicians to automotive body repair companies.
+                </p>
+                <p>
+                    MAIAM is equipped with state-of-the-art training facilities and is willing to work with the automotive
+                    industry to supply a steady number of trained technicians. MAIAM is equipped with well-designed training
+                    procedures, the latest facilities and well-experienced trainers. Facilities and trainers are experienced
+                    in both teaching and training.
+                </p>
+            </div>
+        </div>
+        <div class="about-intro__media" data-reveal>
+            <div class="media-frame">
+                <maiam-img key="campus/campus-entrance-building" sizes="(min-width: 960px) 42vw, 92vw" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Key facts -->
+<section class="about-facts" aria-label="MAIAM at a glance">
+    <div class="container">
+        <dl class="about-facts__grid">
+            <div class="about-fact">
+                <dt>Established</dt>
+                <dd><strong>@SiteInfo.EstablishedYear</strong></dd>
+            </div>
+            <div class="about-fact">
+                <dt>Managed by</dt>
+                <dd><strong>Manappuram Foundation</strong> CSR Body of Manappuram Finance Ltd.</dd>
+            </div>
+            <div class="about-fact">
+                <dt>Recognition</dt>
+                <dd><strong>1st in Kerala</strong> Central government approved, ASDC accredited – Automotive Body Repair</dd>
+            </div>
+            <div class="about-fact">
+                <dt>Campus</dt>
+                <dd><strong>Painoor, Valapad</strong> Thrissur, Kerala – near Kanoli Canal</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<!-- Who we are (merged from the original /who-we-are/ page) -->
+<section class="section section--light" id="who-we-are" aria-labelledby="who-we-are-title">
+    <div class="container split split--reverse">
+        <div data-reveal>
+            <p class="eyebrow">Who We Are</p>
+            <h2 id="who-we-are-title">We help your dreams come true</h2>
+            <div class="prose">
+                <p>
+                    Manappuram Institute of Automotive Skills (MAIAM) is an initiative of Manappuram Foundation (a CSR body
+                    of Manappuram Finance Ltd.). We are the 1st institution in Kerala to conduct training in auto body repairing.
+                </p>
+                <p>
+                    This training is high-tech in nature, and it offers exciting, rewarding and worthy career opportunities.
+                    Our aim is to continually develop and upgrade automotive skills for higher value addition – higher value
+                    addition through skilling facilitates capital creation, leading to more economic activity and consequent
+                    additional jobs.
+                </p>
+                <p>
+                    MAIAM has been equipped with a well-designed training procedure, the latest technology and well-experienced
+                    trainers to work with the automotive industry and supply a steady number of trained and qualified
+                    technicians to the industries.
+                </p>
+            </div>
+        </div>
+        <div class="about-duo" data-reveal>
+            <maiam-img key="workshops/students-tool-selection" class="about-duo__a" sizes="(min-width: 960px) 22vw, 46vw" />
+            <maiam-img key="workshops/student-workbench" class="about-duo__b" sizes="(min-width: 960px) 22vw, 46vw" />
+        </div>
+    </div>
+</section>
+
+<!-- Director's message teaser -->
+<section class="section" aria-labelledby="about-director-title">
+    <div class="container">
+        <div class="director-teaser" data-reveal>
+            <maiam-img key="about/director-sivadas-aniyan" class="director-teaser__photo" sizes="200px" />
+            <div class="director-teaser__body">
+                <p class="eyebrow">Director’s Message</p>
+                <h2 id="about-director-title" class="director-teaser__title">“With the co-operation of trainers, teachers and expert people from the industries, we can do excellent training and make the trainees employable.”</h2>
+                <p class="director-teaser__name"><strong>Dr. Sivadas Aniyan T.S</strong> Director, MAIAM</p>
+                <a class="link-arrow" href="/directors-message/">Read the Director’s message <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Explore -->
+<section class="section section--dark" aria-labelledby="about-explore-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow eyebrow--light">Explore MAIAM</p>
+            <h2 id="about-explore-title">More about the institute</h2>
+        </div>
+        <div class="grid grid--4">
+            <a class="about-link" href="/objectives/">
+                <svg class="icon" aria-hidden="true"><use href="#i-target"></use></svg>
+                <span>Objectives</span>
+            </a>
+            <a class="about-link" href="/vision-and-mission/">
+                <svg class="icon" aria-hidden="true"><use href="#i-eye"></use></svg>
+                <span>Vision and Mission</span>
+            </a>
+            <a class="about-link" href="/our-facilities/">
+                <svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg>
+                <span>Our Facilities</span>
+            </a>
+            <a class="about-link" href="/faculties/">
+                <svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg>
+                <span>Faculties</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/about-maiam.js" asp-append-version="true" defer></script>
+}

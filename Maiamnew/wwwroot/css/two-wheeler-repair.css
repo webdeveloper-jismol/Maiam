@@ -1,0 +1,37 @@
+/* MAIAM – two-wheeler-repair.css
+   Shared course components (facts strip, related courses) live in common.css. */
+.tw-availability {
+    margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.tw-skills {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+}
+
+.tw-skills li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.tw-skills .icon-badge {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+}
+
+.tw-skills .icon-badge .icon {
+    width: 22px;
+    height: 22px;
+}

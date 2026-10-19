@@ -1,0 +1,109 @@
+/* MAIAM – faculties.css */
+.faculty-list {
+    display: grid;
+    gap: 24px;
+}
+
+.faculty-card {
+    display: grid;
+    gap: 24px;
+    padding: clamp(24px, 3vw, 40px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 768px) {
+    .faculty-card {
+        grid-template-columns: 200px 1fr;
+        gap: 40px;
+        align-items: start;
+    }
+}
+
+.faculty-card__photo {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.faculty-card__photo::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px dashed var(--accent-orange);
+    opacity: 0.6;
+}
+
+.faculty-card__photo img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--background-blue);
+}
+
+@media (min-width: 768px) {
+    .faculty-card__photo { width: 200px; height: 200px; }
+}
+
+.faculty-card__name {
+    margin-bottom: 4px;
+    font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.75rem);
+}
+
+.faculty-card__role {
+    margin-bottom: 16px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--accent-orange-text);
+}
+
+.faculty-card__experience {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+.faculty-card__subtitle {
+    margin: 22px 0 12px;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.faculty-card__achievements {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.faculty-card__achievements li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--background-blue);
+    color: var(--primary-navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.faculty-card__achievements .icon { color: var(--automotive-blue); }
+
+.faculty-explore {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 40px;
+}
+
+.faculty-explore h2 { margin-bottom: 0.2em; }
+.faculty-explore p { margin: 0; }

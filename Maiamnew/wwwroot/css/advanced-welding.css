@@ -1,0 +1,52 @@
+/* MAIAM – advanced-welding.css
+   Shared course components (facts strip, module list, photo grid) live in common.css. */
+.welding-processes__title {
+    margin-top: 28px;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.welding-processes {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.welding-processes li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 999px;
+    background: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.welding-processes .icon { color: var(--accent-orange); }
+
+.welding-about__media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.welding-about__tall {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.welding-about__offset { margin-top: 56px; }
+
+/* Welding pages use the orange accent for module numbers */
+.page-welding .module::before {
+    -webkit-text-stroke-color: var(--accent-orange);
+}

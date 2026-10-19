@@ -1,0 +1,111 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Vision and Mission") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Vision and Mission",
+        Description = "MAIAM’s vision and mission: world-class automotive skills, industry-oriented education and hands-on training for future-ready automotive professionals.",
+        Path = "/vision-and-mission/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-vision";
+    var hero = new PageHeroModel(
+        Title: "Vision and Mission",
+        Lead: "The purpose that guides Manappuram Institute of Automotive Skills.",
+        ImageKey: "workshops/students-group-workshop",
+        Breadcrumbs: crumbs,
+        Eyebrow: "About Us");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/vision-and-mission.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Vision -->
+<section class="section vision" aria-labelledby="vision-title">
+    <div class="container vision__inner">
+        <div class="vision__label">
+            <span class="vision__icon"><svg class="icon" aria-hidden="true"><use href="#i-eye"></use></svg></span>
+            <h2 id="vision-title" class="vision__title">Our Vision</h2>
+        </div>
+        <blockquote class="vision__statement">
+            <p>
+                To be a transformative institution in the automotive field, inspiring excellence, innovation, and leadership
+                by empowering individuals with world-class skills, practical knowledge, and the confidence to succeed in the
+                evolving global automotive industry.
+            </p>
+            <p>
+                We envision creating a future where talent is transformed into expertise, ambition into achievement, and
+                education into meaningful careers that drive progress in the automotive sector and beyond.
+            </p>
+        </blockquote>
+    </div>
+</section>
+
+<!-- Image band -->
+<div class="vision-band" aria-hidden="true">
+    <maiam-img key="workshops/students-repair-bay" alt="" sizes="34vw" />
+    <maiam-img key="advanced-welding/instructor-guided-practice" alt="" sizes="33vw" />
+    <maiam-img key="facilities/classroom-address" alt="" sizes="33vw" />
+</div>
+
+<!-- Mission -->
+<section class="section section--light" aria-labelledby="mission-title">
+    <div class="container">
+        <div class="mission__head">
+            <span class="vision__icon vision__icon--accent"><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
+            <h2 id="mission-title">Our Mission</h2>
+        </div>
+        <ol class="mission-list">
+            <li class="mission-pillar" data-reveal>
+                <span class="mission-pillar__number" aria-hidden="true">01</span>
+                <h3 class="mission-pillar__title">Industry-oriented education</h3>
+                <p>
+                    To provide industry-oriented education and hands-on training in the automotive field that develops
+                    skilled, confident, and future-ready professionals capable of meeting global industry standards and
+                    technological advancements.
+                </p>
+            </li>
+            <li class="mission-pillar" data-reveal>
+                <span class="mission-pillar__number" aria-hidden="true">02</span>
+                <h3 class="mission-pillar__title">A culture of continuous learning</h3>
+                <p>
+                    To foster a culture of innovation, discipline, professionalism, safety, and continuous learning while
+                    preparing students for successful careers in the modern automotive industry.
+                </p>
+            </li>
+            <li class="mission-pillar" data-reveal>
+                <span class="mission-pillar__number" aria-hidden="true">03</span>
+                <h3 class="mission-pillar__title">Bridging education and employment</h3>
+                <p>
+                    To strengthen industry collaboration and practical exposure that bridges the gap between education and
+                    employment, enabling students to excel in the automotive sector with competence and confidence.
+                </p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container split">
+        <div class="media-frame">
+            <maiam-img key="gallery/appointment-letter-ceremony/appointment-letter-ceremony-01" sizes="(min-width: 960px) 46vw, 92vw" />
+        </div>
+        <div>
+            <p class="eyebrow">From training to careers</p>
+            <h2>See the mission in practice</h2>
+            <p class="lead">Practical training, dealership internships, campus interviews and industry visits connect MAIAM students with the automotive industry.</p>
+            <div class="btn-row vision__actions">
+                <a class="btn btn--primary" href="/our-placements/">View placements</a>
+                <a class="btn btn--outline" href="/objectives/">Our objectives</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/vision-and-mission.js" asp-append-version="true" defer></script>
+}

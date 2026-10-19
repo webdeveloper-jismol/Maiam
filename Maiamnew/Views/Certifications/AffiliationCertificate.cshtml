@@ -1,0 +1,103 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Certifications"), new Breadcrumb("ASDC, NCVET Affiliation Certificate") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "ASDC, NCVET Affiliation Certificate",
+        Description = "Manappuram Foundation is an affiliated Skill Development Centre of the Automotive Skills Development Council (ASDC). View the ASDC, NCVET certificate.",
+        Path = "/certificate-of-affiliation/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-certificate page-affiliation";
+    var hero = new PageHeroModel(
+        Title: "ASDC, NCVET Affiliation Certificate",
+        Lead: "Manappuram Foundation is an affiliated Skill Development Centre of the Automotive Skills Development Council (ASDC).",
+        ImageKey: null,
+        Breadcrumbs: crumbs,
+        Eyebrow: "Certifications");
+    var certificate = ImageCatalog.Get("certificates/asdc-certificate-of-affiliation");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/certificate-of-affiliation.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section">
+    <div class="container certificate-layout certificate-layout--portrait">
+        <figure class="certificate-figure">
+            <a href="@certificate.LargestUrl" data-lightbox="asdc" data-caption="ASDC Certificate of Affiliation – Manappuram Foundation">
+                <maiam-img key="certificates/asdc-certificate-of-affiliation" eager="true" sizes="(min-width: 1024px) 520px, 92vw" />
+            </a>
+            <figcaption>
+                <span>ASDC Certificate of Affiliation</span>
+                <a class="link-arrow" href="@certificate.LargestUrl" target="_blank" rel="noopener">
+                    View full size <svg class="icon" aria-hidden="true"><use href="#i-expand"></use></svg>
+                </a>
+            </figcaption>
+        </figure>
+
+        <div class="certificate-details">
+            <h2>Certificate details</h2>
+            <p class="text-muted">As printed on the certificate issued by the Automotive Skills Development Council.</p>
+            <dl class="detail-list">
+                <div><dt>Certificate</dt><dd>Certificate of Affiliation</dd></div>
+                <div><dt>Issued by</dt><dd>Automotive Skills Development Council (ASDC), with Skill India and NCVET</dd></div>
+                <div><dt>Issued to</dt><dd>Manappuram Foundation</dd></div>
+                <div><dt>Status</dt><dd>Affiliated Skill Development Centre, registered with the Automotive Skills Development Council</dd></div>
+                <div>
+                    <dt>Certificate No.</dt>
+                    <dd class="certificate-number">
+                        <span id="asdc-certificate-number">ASC/SDC/32/008/08</span>
+                        <button type="button" class="copy-btn" data-copy="#asdc-certificate-number" aria-label="Copy certificate number" hidden>Copy</button>
+                    </dd>
+                </div>
+                <div><dt>Certificate expiry</dt><dd>16 May 2027</dd></div>
+                <div><dt>Signed by</dt><dd>Arindam Lahiri, Chief Executive Officer, ASDC</dd></div>
+            </dl>
+            <div class="notice certificate-notice">
+                <svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>
+                <p>Scan the QR code on the certificate to view its details.</p>
+            </div>
+            <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+        </div>
+    </div>
+</section>
+
+<!-- About ASDC (from the original Automotive Body Repair Technician page) -->
+<section class="section section--light" aria-labelledby="about-asdc-title">
+    <div class="container split split--wide-text">
+        <div>
+            <p class="eyebrow">About ASDC</p>
+            <h2 id="about-asdc-title">Automotive Skill Development Council</h2>
+            <div class="prose">
+                <p>
+                    ASDC (Automotive Skill Development Council) is promoted by the automobile industry through the Society of
+                    Indian Automobile Manufacturers (SIAM), the Automotive Component Manufacturers Association (ACMA) and the
+                    Federation of Automobile Dealers Association (FADA), and by the Government of India, represented by the
+                    Department of Heavy Industry and the National Skill Development Corporation (NSDC).
+                </p>
+                <p>
+                    Currently, there is a mismatch in certain areas between the skills that the industry requires and those
+                    possessed by the youth in the country. ASDC is initiating structured reforms to bridge the demand–supply
+                    mismatch of the skilled workforce.
+                </p>
+            </div>
+        </div>
+        <div class="affiliation-course">
+            <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg></span>
+            <h3>Automotive Body Repair Technician</h3>
+            <p>ASDC, NSDC &amp; NCVET certification. Model curriculum: Automotive Body Technician Level 4.</p>
+            <a class="btn btn--primary" href="/courses/">View the course</a>
+        </div>
+    </div>
+    <div class="container">
+        <p class="certificate-related">Also see the <a href="/nsdc/">NSDC Certificate of Partnership</a>.</p>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/certificate-of-affiliation.js" asp-append-version="true" defer></script>
+}

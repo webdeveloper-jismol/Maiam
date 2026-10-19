@@ -1,0 +1,23 @@
+@model PageHeroModel
+<section class="page-hero@(Model.ImageKey is null ? " page-hero--plain" : "")">
+    <div class="container page-hero__inner">
+        <div class="page-hero__text">
+            <partial name="_Breadcrumb" model="Model.Breadcrumbs" />
+            @if (Model.Eyebrow is not null)
+            {
+                <p class="eyebrow eyebrow--light">@Model.Eyebrow</p>
+            }
+            <h1 class="page-hero__title">@Model.Title</h1>
+            @if (Model.Lead is not null)
+            {
+                <p class="page-hero__lead">@Model.Lead</p>
+            }
+        </div>
+        @if (Model.ImageKey is not null)
+        {
+            <div class="page-hero__media">
+                <maiam-img key="@Model.ImageKey" alt="@(Model.ImageAlt ?? ImageCatalog.Get(Model.ImageKey).Alt)" eager="true" sizes="(min-width: 1024px) 45vw, 100vw" />
+            </div>
+        }
+    </div>
+</section>

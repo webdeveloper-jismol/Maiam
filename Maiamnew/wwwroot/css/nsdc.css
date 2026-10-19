@@ -1,0 +1,5 @@
+/* MAIAM – nsdc.css (NSDC certificate page)
+   Shared certificate layout, details list and copy button live in common.css. */
+.page-nsdc .certificate-figure {
+    border-top: 4px solid #1F8FD6; /* echoes the blue frame of the NSDC certificate */
+}

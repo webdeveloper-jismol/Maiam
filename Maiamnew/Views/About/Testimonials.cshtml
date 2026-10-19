@@ -1,0 +1,101 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Testimonials") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Student Testimonials",
+        Description = "Watch and read what MAIAM students say about training at Manappuram Institute of Automotive Skills, Valapad, Thrissur.",
+        Path = "/testimonials/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-testimonials";
+    var hero = new PageHeroModel(
+        Title: "Testimonials",
+        Lead: "Students share their experience of learning at MAIAM.",
+        ImageKey: "gallery/students-and-faculty/students-and-faculty-02",
+        Breadcrumbs: crumbs,
+        Eyebrow: "About Us");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/testimonials.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Video testimonials (embedded on the original Testimonials page) -->
+<section class="section" aria-labelledby="video-testimonials-title">
+    <div class="container">
+        <div class="section-head section-head--row">
+            <div>
+                <p class="eyebrow">Video testimonials</p>
+                <h2 id="video-testimonials-title">A moment of pride for MAIAM</h2>
+                <p class="lead">Short films from the MAIAM YouTube channel. Videos load from YouTube only when you press play.</p>
+            </div>
+            <a class="btn btn--outline" href="@SiteInfo.YouTubeUrl" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg>
+                MAIAM on YouTube
+            </a>
+        </div>
+        <div class="testimonial-videos">
+            @for (var i = 0; i < SiteContent.TestimonialVideos.Count; i++)
+            {
+                var video = SiteContent.TestimonialVideos[i];
+                // The five films share one YouTube title, so each gets a number to tell them apart.
+                var title = $"{video.Title} – Video {i + 1}";
+                <partial name="_VideoEmbed" model="new VideoEmbedModel(video.YouTubeId, title, Compact: true)" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Featured student film (self-hosted) -->
+<section class="section section--dark" aria-labelledby="student-film-title">
+    <div class="container split split--wide-media">
+        <div class="native-video">
+            <video controls preload="none" playsinline poster="/assets/images/posters/student-testimonial.webp" aria-label="MAIAM student testimonial video">
+                <source src="/assets/videos/student-testimonial.mp4" type="video/mp4" />
+                <a href="/assets/videos/student-testimonial.mp4">Download the student testimonial video</a>
+            </video>
+        </div>
+        <div>
+            <p class="eyebrow eyebrow--light">Student story</p>
+            <h2 id="student-film-title">Hear it from a MAIAM student</h2>
+            <p class="lead">A MAIAM student shares his experience of training at the institute.</p>
+            <a class="btn btn--accent" href="/register-now/">Enquire Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Written testimonials (from the original home page) -->
+<section class="section section--light" aria-labelledby="written-testimonials-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Students’ Feedback</p>
+            <h2 id="written-testimonials-title">In our students’ words</h2>
+        </div>
+        <ul class="testimonial-wall">
+            @foreach (var t in SiteContent.Testimonials)
+            {
+                <li data-reveal>
+                    <figure class="testimonial-card">
+                        <svg class="icon testimonial-card__quote-icon" aria-hidden="true"><use href="#i-quote"></use></svg>
+                        <blockquote><p>@t.Quote</p></blockquote>
+                        <figcaption>
+                            <maiam-img key="@t.ImageKey" alt="" sizes="56px" />
+                            <span>
+                                <span class="testimonial-card__name">@t.Name</span>
+                                <span class="testimonial-card__role">@t.Role</span>
+                            </span>
+                        </figcaption>
+                    </figure>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/testimonials.js" asp-append-version="true" defer></script>
+}

@@ -1,0 +1,206 @@
+/* MAIAM – automotive-body-repair.css
+   Shared course components (facts strip, photo grid, module list) live in common.css. */
+
+/* Course structure timeline */
+.course-timeline {
+    list-style: none;
+    display: grid;
+    gap: 20px;
+    counter-reset: step;
+}
+
+@media (min-width: 900px) {
+    .course-timeline {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+    }
+}
+
+.course-step {
+    position: relative;
+    padding: 28px 24px;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 900px) {
+    .course-step {
+        border-radius: 0;
+        border-right-width: 0;
+    }
+
+    .course-step:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .course-step:last-child { border-right-width: 1px; border-radius: 0 var(--radius) var(--radius) 0; }
+
+    /* connector arrow between steps */
+    .course-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 50px;
+        right: -9px;
+        width: 16px;
+        height: 16px;
+        border-top: 1px solid var(--border-dark);
+        border-right: 1px solid var(--border-dark);
+        background: var(--primary-navy);
+        transform: rotate(45deg);
+    }
+}
+
+.course-step__marker {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    min-width: 64px;
+    height: 56px;
+    margin-bottom: 18px;
+    padding: 0 12px;
+    align-content: center;
+    border-radius: 12px;
+    background: var(--accent-orange);
+    color: var(--primary-navy);
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 56px;
+}
+
+.course-step__marker small {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.course-step__marker .icon {
+    width: 28px;
+    height: 28px;
+    align-self: center;
+}
+
+.course-step h3 { color: #fff; }
+
+.course-step p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-on-dark-muted);
+}
+
+/* Qualification pack download */
+.qp-card {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+    padding: clamp(24px, 3.5vw, 40px);
+    border: 1px solid var(--border-light);
+    border-left: 6px solid var(--automotive-blue);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow);
+}
+
+@media (min-width: 900px) {
+    .qp-card { grid-template-columns: auto 1fr auto; gap: 32px; }
+}
+
+.qp-card__icon {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 16px;
+    background: var(--background-blue);
+    color: var(--automotive-blue);
+}
+
+.qp-card__icon .icon { width: 36px; height: 36px; }
+
+.qp-card__title {
+    margin-bottom: 0.35em;
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
+}
+
+.qp-card__text p:last-child {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.qp-card__size {
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* ASDC aside */
+.abr-asdc {
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: var(--radius-lg);
+    background: var(--background-light);
+    border: 1px solid var(--border-light);
+}
+
+.abr-asdc p { color: var(--text-secondary); }
+
+/* Scholarships */
+.abr-scholarship {
+    display: grid;
+    gap: 24px;
+    align-items: center;
+}
+
+@media (min-width: 960px) {
+    .abr-scholarship { grid-template-columns: 1fr 1.2fr; gap: 24px 56px; }
+    .abr-scholarship__notice { grid-column: 1 / -1; }
+}
+
+.abr-scholarship h2 { margin-bottom: 0.3em; }
+
+.abr-scholarship__list {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.abr-scholarship__list li {
+    padding: 22px 24px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.abr-scholarship__list strong {
+    display: block;
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--accent-orange-text);
+}
+
+/* Course videos */
+.abr-videos {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.abr-videos__main {
+    margin: 0;
+    grid-column: 1 / -1;
+}
+
+.abr-videos__intro {
+    grid-column: 1 / -1;
+    color: var(--text-on-dark-muted);
+}
+
+@media (min-width: 1024px) {
+    .abr-videos { grid-template-columns: repeat(3, 1fr); }
+    .abr-videos__main { grid-column: span 2; }
+    .abr-videos__intro { grid-column: auto; align-self: center; }
+}

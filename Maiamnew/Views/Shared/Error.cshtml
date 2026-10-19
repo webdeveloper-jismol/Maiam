@@ -1,0 +1,37 @@
+@model ErrorViewModel
+@{
+    var tooMany = ViewData["StatusCode"] is 429;
+    ViewData["Title"] = tooMany ? "Too many attempts" : "Something went wrong";
+    ViewData["BodyClass"] = "page-error";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/error.css" asp-append-version="true" />
+}
+
+<section class="error-page">
+    <div class="container error-page__inner">
+        <p class="error-page__code" aria-hidden="true">@(tooMany ? "429" : "500")</p>
+        @if (tooMany)
+        {
+            <h1>Too many attempts</h1>
+            <p class="lead">Please wait a few minutes before submitting the form again, or contact MAIAM directly on <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a>.</p>
+        }
+        else
+        {
+            <h1>Something went wrong</h1>
+            <p class="lead">An error occurred while processing your request. Please try again in a moment, or contact MAIAM directly.</p>
+        }
+        @if (Model?.ShowRequestId == true)
+        {
+            <p class="error-page__ref">Reference: <code>@Model.RequestId</code></p>
+        }
+        <div class="btn-row error-page__actions">
+            <a class="btn btn--accent" href="/">Go to the home page</a>
+            <a class="btn btn--outline" href="/contact-us/">Contact MAIAM</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/error.js" asp-append-version="true" defer></script>
+}

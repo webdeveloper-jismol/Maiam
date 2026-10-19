@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Maiamnew",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "Maiamnew/Maiamnew.csproj", "--launch-profile", "http", "--", "--urls", "http://localhost:5180"],
+      "port": 5180
+    }
+  ]
+}

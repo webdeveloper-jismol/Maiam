@@ -1,0 +1,470 @@
+@{
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "MAIAM – Manappuram Institute of Automotive Skills, Thrissur",
+        Description = "MAIAM, Valapad, Thrissur: ASDC, NSDC & NCVET certified Automotive Body Repair Technician and Advanced Welding Technician training by Manappuram Foundation.",
+        Path = "/",
+        OgImage = "/assets/images/og/home.jpg",
+    });
+    ViewData["BodyClass"] = "page-home";
+
+    var highlights = new (string Icon, string Text)[]
+    {
+        ("i-award", "Kerala’s 1st Central Government-approved, ASDC-accredited institution in Automotive Body Repair course"),
+        ("i-users", "25 years experienced trainers"),
+        ("i-briefcase", "100% placement support"),
+        ("i-building", "All India based dealerships"),
+        ("i-gear", "Fully mechanized practical lab"),
+        ("i-heart", "BPL/APL scholarship"),
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<!-- ===== Hero ===== -->
+<section class="home-hero" aria-labelledby="home-hero-title">
+    <div class="container home-hero__inner">
+        <div class="home-hero__text">
+            <p class="eyebrow eyebrow--light">Manappuram Institute of Automotive Skills · Est. @SiteInfo.EstablishedYear</p>
+            <h1 id="home-hero-title" class="home-hero__title">Empowering Dreams, Shaping the Future of <span>Automotive Careers</span></h1>
+            <p class="home-hero__lead">
+                MAIAM is an initiative of Manappuram Foundation (CSR arm of Manappuram Finance Ltd.), focused on
+                continually developing and upgrading Automotive &amp; Welding skills, fostering economic growth and
+                creating more job opportunities.
+            </p>
+            <div class="btn-row">
+                <a class="btn btn--accent btn--lg" href="#courses">
+                    Explore Courses
+                    <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </a>
+                <a class="btn btn--ghost-light btn--lg" href="/register-now/">Enquire Now</a>
+            </div>
+            <dl class="home-hero__certs">
+                <dt>Certification</dt>
+                <dd><span>ASDC</span><span>NSDC</span><span>NCVET</span></dd>
+            </dl>
+        </div>
+
+        <div class="home-hero__media">
+            <div class="home-hero__main">
+                <maiam-img key="automotive-body-repair/students-door-panel" eager="true"
+                           sizes="(min-width: 1024px) 40vw, 92vw" />
+            </div>
+            <div class="home-hero__secondary">
+                <maiam-img key="advanced-welding/student-welding" sizes="(min-width: 1024px) 16vw, 40vw" />
+            </div>
+            <div class="home-hero__badge">
+                <svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>
+                <p><strong>Central Government certification</strong>ASDC, NSDC &amp; NCVET – Automotive Body Repair</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Highlights ===== -->
+<section class="home-highlights" aria-label="Why MAIAM at a glance">
+    <div class="container">
+        <ul class="home-highlights__list">
+            @foreach (var item in highlights)
+            {
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#@item.Icon"></use></svg>
+                    <span>@item.Text</span>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<!-- ===== About ===== -->
+<section class="section" aria-labelledby="home-about-title">
+    <div class="container split split--wide-media">
+        <div class="home-about__media" data-reveal>
+            <div class="media-frame">
+                <maiam-img key="campus/campus-entrance-building" sizes="(min-width: 960px) 50vw, 92vw" />
+            </div>
+            <p class="home-about__since"><strong>@SiteInfo.EstablishedYear</strong> Established at Painoor, Valapad</p>
+        </div>
+        <div data-reveal>
+            <p class="eyebrow">About MAIAM</p>
+            <h2 id="home-about-title">An initiative of Manappuram Foundation</h2>
+            <div class="prose">
+                <p>
+                    MAIAM – Manappuram Institute of Automotive Skills is an initiative of Manappuram Foundation
+                    (CSR arm of Manappuram Finance Ltd).
+                </p>
+                <p>
+                    Kerala’s 1st Central Government-approved, ASDC-accredited institution specialising in
+                    Automotive Body Repair Technician training.
+                </p>
+                <p>
+                    Focused on continually developing and upgrading Automotive &amp; Welding skills, fostering economic
+                    growth and creating more job opportunities.
+                </p>
+            </div>
+            <div class="btn-row home-about__actions">
+                <a class="btn btn--primary" href="/about-maiam/">About MAIAM</a>
+                <a class="link-arrow" href="/vision-and-mission/">Our vision &amp; mission <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Courses ===== -->
+<section class="section section--light defer-render" id="courses" aria-labelledby="home-courses-title">
+    <div class="container">
+        <div class="section-head section-head--row" data-reveal>
+            <div>
+                <p class="eyebrow">Courses Offered</p>
+                <h2 id="home-courses-title">Industry-oriented automotive and welding programmes</h2>
+                <p class="lead">Practical, hands-on training with recognised certification and placement assistance.</p>
+            </div>
+            <a class="link-arrow" href="/register-now/">Enquire about a course <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+
+        <div class="grid grid--2">
+            @foreach (var course in SiteContent.MainCourses)
+            {
+                <article class="course-card" data-reveal>
+                    <div class="course-card__media">
+                        <maiam-img key="@course.ImageKey" sizes="(min-width: 960px) 600px, 92vw" />
+                        <span class="course-card__tag">@course.Certification Certification</span>
+                    </div>
+                    <div class="course-card__body">
+                        <h3><a href="@course.Path">@course.Name</a></h3>
+                        <p>@course.Summary</p>
+                        <dl class="course-card__facts">
+                            <div>
+                                <dt><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg><span class="visually-hidden">Duration</span></dt>
+                                <dd><strong>Duration:</strong> @course.Duration</dd>
+                            </div>
+                            <div>
+                                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg><span class="visually-hidden">Qualification</span></dt>
+                                <dd><strong>Qualification:</strong> @course.Qualification</dd>
+                            </div>
+                        </dl>
+                        <span class="link-arrow" aria-hidden="true">View course details <svg class="icon"><use href="#i-arrow-right"></use></svg></span>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===== Practical training ===== -->
+<section class="section section--dark defer-render" aria-labelledby="home-training-title">
+    <div class="container">
+        <div class="section-head section-head--row" data-reveal>
+            <div>
+                <p class="eyebrow eyebrow--light">Practical Training</p>
+                <h2 id="home-training-title">Real training. Real practice. Real progress.</h2>
+                <p class="lead">During training, students are exposed to pneumatics, electric tools and the latest equipment in MAIAM’s fully mechanized practical lab.</p>
+            </div>
+            <a class="link-arrow" href="/our-facilities/">Explore our facilities <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+
+        <div class="training-grid">
+            <figure class="training-grid__item training-grid__item--large" data-reveal>
+                <maiam-img key="workshops/students-repair-bay" sizes="(min-width: 960px) 50vw, 92vw" />
+                <figcaption>Students working on a car in the repair bay</figcaption>
+            </figure>
+            <figure class="training-grid__item" data-reveal>
+                <maiam-img key="advanced-welding/instructor-guided-practice" sizes="(min-width: 960px) 25vw, 92vw" />
+                <figcaption>Instructor-guided welding practice</figcaption>
+            </figure>
+            <figure class="training-grid__item" data-reveal>
+                <maiam-img key="workshops/student-workbench" sizes="(min-width: 960px) 25vw, 92vw" />
+                <figcaption>Metalwork at the bench</figcaption>
+            </figure>
+            <figure class="training-grid__item" data-reveal>
+                <maiam-img key="workshops/paint-drying-equipment" sizes="(min-width: 960px) 25vw, 92vw" />
+                <figcaption>Body repair and paint equipment</figcaption>
+            </figure>
+            <figure class="training-grid__item" data-reveal>
+                <maiam-img key="workshops/tool-board" sizes="(min-width: 960px) 25vw, 92vw" />
+                <figcaption>Organised tools for every task</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why MAIAM ===== -->
+<section class="section defer-render" aria-labelledby="home-why-title">
+    <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+            <p class="eyebrow">Why Choose MAIAM</p>
+            <h2 id="home-why-title">Skills that are built by doing</h2>
+        </div>
+        <div class="grid grid--3">
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+                <h3>Hands-on technical training</h3>
+                <p>Students are exposed to pneumatics, electric tools and the latest equipment in a fully mechanized practical lab.</p>
+            </article>
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span>
+                <h3>Experienced instructors</h3>
+                <p>Trainers with 20+ years of automotive experience abroad, including Toyota, Lexus and GM, and national skill contest champions.</p>
+            </article>
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                <h3>Industry-oriented learning</h3>
+                <p>All Automotive Body Repair students undergo internship training in dealership workshops.</p>
+            </article>
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg></span>
+                <h3>Recognised certification</h3>
+                <p>ASDC, NSDC &amp; NCVET certification for Automotive Body Repair Technician and NSDC certification for Advanced Welding Technician.</p>
+            </article>
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                <h3>Placement assistance</h3>
+                <p>100% placement support with all India based dealerships, campus interviews and industry visits.</p>
+            </article>
+            <article class="card card--hover" data-reveal>
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-heart"></use></svg></span>
+                <h3>Support for students</h3>
+                <p>BPL/APL scholarships, free hostel accommodation and free transportation from the nearest bus stop.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Scholarships ===== -->
+<section class="home-scholarship defer-render" aria-labelledby="home-scholarship-title">
+    <div class="container home-scholarship__inner" data-reveal>
+        <div class="home-scholarship__intro">
+            <p class="eyebrow">Scholarships</p>
+            <h2 id="home-scholarship-title">Scholarship support for eligible students</h2>
+            <p>* Only for the Automotive Body Repair Technician course.</p>
+        </div>
+        <div class="home-scholarship__offers">
+            <div class="scholarship-offer">
+                <p class="scholarship-offer__value">10<span>%</span></p>
+                <p class="scholarship-offer__label">Scholarship for BPL students</p>
+            </div>
+            <div class="scholarship-offer">
+                <p class="scholarship-offer__value">5<span>%</span></p>
+                <p class="scholarship-offer__label">Scholarship for APL backward students</p>
+            </div>
+        </div>
+        <div class="notice home-scholarship__notice">
+            <svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg>
+            <p>Eligibility conditions apply. Please contact MAIAM to confirm current scholarship availability before applying.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Facilities ===== -->
+<section class="section section--light defer-render" aria-labelledby="home-facilities-title">
+    <div class="container split split--wide-text">
+        <div data-reveal>
+            <p class="eyebrow">Our Facilities</p>
+            <h2 id="home-facilities-title">A campus designed around practical learning</h2>
+            <ul class="home-facilities__list">
+                @foreach (var facility in SiteContent.Facilities.Take(4))
+                {
+                    <li>
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-@facility.Icon"></use></svg></span>
+                        <div>
+                            <h3>@facility.Title</h3>
+                            <p>@facility.Description</p>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <a class="btn btn--primary" href="/our-facilities/">View all facilities</a>
+        </div>
+        <div class="home-facilities__media" data-reveal>
+            <div class="media-frame">
+                <maiam-img key="facilities/computer-lab" sizes="(min-width: 960px) 40vw, 92vw" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Faculty ===== -->
+<section class="section defer-render" aria-labelledby="home-faculty-title">
+    <div class="container">
+        <div class="section-head section-head--row" data-reveal>
+            <div>
+                <p class="eyebrow">Our Faculty</p>
+                <h2 id="home-faculty-title">Learn from experienced automotive professionals</h2>
+            </div>
+            <a class="link-arrow" href="/faculties/">Meet our trainers <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+        <div class="grid grid--3">
+            @foreach (var member in SiteContent.Faculty)
+            {
+                <article class="faculty-mini" data-reveal>
+                    <maiam-img key="@member.ImageKey" sizes="120px" class="faculty-mini__photo" />
+                    <div>
+                        <h3>@member.Name</h3>
+                        <p class="faculty-mini__role">@member.Designation</p>
+                        <p>@member.Experience</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===== Placements ===== -->
+<section class="section section--blue defer-render" aria-labelledby="home-placements-title">
+    <div class="container split split--wide-media">
+        <div class="placements-mosaic" data-reveal>
+            <a class="image-tile placements-mosaic__a" href="@ImageCatalog.Get("placements/annamalais-toyota-campus-interview").LargestUrl" data-lightbox="home-placements" data-caption="Campus interview conducted by Annamalai's Toyota">
+                <maiam-img key="placements/annamalais-toyota-campus-interview" sizes="(min-width: 960px) 30vw, 60vw" />
+                <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+            </a>
+            <a class="image-tile placements-mosaic__b" href="@ImageCatalog.Get("placements/mahindra-factory-visit").LargestUrl" data-lightbox="home-placements" data-caption="Mahindra Factory Visit – Coimbatore">
+                <maiam-img key="placements/mahindra-factory-visit" sizes="(min-width: 960px) 22vw, 40vw" />
+                <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+            </a>
+            <a class="image-tile placements-mosaic__c" href="@ImageCatalog.Get("gallery/appointment-letter-ceremony/appointment-letter-ceremony-01").LargestUrl" data-lightbox="home-placements" data-caption="Appointment Letter Distribution Ceremony">
+                <maiam-img key="gallery/appointment-letter-ceremony/appointment-letter-ceremony-01" sizes="(min-width: 960px) 30vw, 60vw" />
+                <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+            </a>
+        </div>
+        <div data-reveal>
+            <p class="eyebrow">Placements</p>
+            <h2 id="home-placements-title">Placement support and industry exposure</h2>
+            <p class="lead">MAIAM supports students with placement assistance, campus interviews and industry visits to connect training with employment.</p>
+            <ul class="check-list home-placements__list">
+                <li>Mahindra Factory Visit – Coimbatore</li>
+                <li>Campus interview conducted by Annamalai’s Toyota</li>
+                <li>Toyota plant visit</li>
+                <li>Appointment letter distribution ceremony</li>
+            </ul>
+            <a class="btn btn--primary" href="/our-placements/">View placements</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section class="section defer-render" aria-labelledby="home-testimonials-title">
+    <div class="container">
+        <div class="section-head section-head--row" data-reveal>
+            <div>
+                <p class="eyebrow">Students’ Feedback</p>
+                <h2 id="home-testimonials-title">In our students’ words</h2>
+            </div>
+            <div class="slider-controls">
+                <button type="button" class="slider-btn" data-slider-prev aria-controls="testimonial-track" aria-label="Previous testimonials">
+                    <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                </button>
+                <button type="button" class="slider-btn" data-slider-next aria-controls="testimonial-track" aria-label="Next testimonials">
+                    <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+                </button>
+            </div>
+        </div>
+
+        <ul class="testimonial-track" id="testimonial-track" data-slider-track tabindex="0" aria-label="Student testimonials">
+            @foreach (var t in SiteContent.Testimonials)
+            {
+                <li class="testimonial-track__item">
+                    <figure class="testimonial-card">
+                        <svg class="icon testimonial-card__quote-icon" aria-hidden="true"><use href="#i-quote"></use></svg>
+                        <blockquote><p>@t.Quote</p></blockquote>
+                        <figcaption>
+                            <maiam-img key="@t.ImageKey" alt="" sizes="56px" />
+                            <span>
+                                <span class="testimonial-card__name">@t.Name</span>
+                                <span class="testimonial-card__role">@t.Role</span>
+                            </span>
+                        </figcaption>
+                    </figure>
+                </li>
+            }
+        </ul>
+        <p class="home-testimonials__more"><a class="link-arrow" href="/testimonials/">Watch video testimonials <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></p>
+    </div>
+</section>
+
+<!-- ===== Discover MAIAM (films) ===== -->
+<section class="section section--dark defer-render" aria-labelledby="home-films-title">
+    <div class="container">
+        <div class="section-head" data-reveal>
+            <p class="eyebrow eyebrow--light">Discover MAIAM</p>
+            <h2 id="home-films-title">See MAIAM in motion</h2>
+        </div>
+        <div class="grid grid--2">
+            <figure class="home-film" data-reveal>
+                <div class="native-video">
+                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician Level 4 course film">
+                        <source src="/assets/videos/maiam-brand-film.mp4" type="video/mp4" />
+                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician Level 4 course film</a>
+                    </video>
+                </div>
+                <figcaption>Auto Body Technician Level 4 at MAIAM</figcaption>
+            </figure>
+            <figure class="home-film" data-reveal>
+                <div class="native-video">
+                    <video controls preload="none" playsinline poster="/assets/images/posters/student-testimonial.webp" aria-label="MAIAM student testimonial video">
+                        <source src="/assets/videos/student-testimonial.mp4" type="video/mp4" />
+                        <a href="/assets/videos/student-testimonial.mp4">Download the student testimonial video</a>
+                    </video>
+                </div>
+                <figcaption>A MAIAM student shares his experience</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Gallery preview ===== -->
+<section class="section defer-render" aria-labelledby="home-gallery-title">
+    <div class="container">
+        <div class="section-head section-head--row" data-reveal>
+            <div>
+                <p class="eyebrow">Gallery</p>
+                <h2 id="home-gallery-title">Life at MAIAM</h2>
+            </div>
+            <div class="btn-row">
+                <a class="btn btn--outline" href="@SiteInfo.InstagramUrl" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg>
+                    Follow on Instagram
+                </a>
+                <a class="btn btn--primary" href="/gallery/">View full gallery</a>
+            </div>
+        </div>
+        @{
+            var galleryPreview = new[]
+            {
+                "gallery/onam-2024/onam-2024-05",
+                "gallery/building-inauguration/building-inauguration-02",
+                "gallery/toyota-plant-visit/toyota-plant-visit-01",
+                "gallery/festive-celebrations/festive-celebrations-01",
+                "gallery/students-and-faculty/students-and-faculty-02",
+            };
+        }
+        <div class="gallery-preview">
+            @foreach (var key in galleryPreview)
+            {
+                var image = ImageCatalog.Get(key);
+                <a class="image-tile" href="@image.LargestUrl" data-lightbox="home-gallery" data-reveal>
+                    <maiam-img key="@key" sizes="(min-width: 960px) 30vw, 46vw" />
+                    <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+<!-- ===== Managed by ===== -->
+<section class="home-managed" aria-labelledby="home-managed-title">
+    <div class="container home-managed__inner">
+        <img src="~/assets/images/branding/manappuram-foundation-logo.png" width="200" height="90" loading="lazy"
+             alt="Manappuram Foundation logo" />
+        <div>
+            <h2 id="home-managed-title" class="home-managed__title">Managed by Manappuram Foundation</h2>
+            <p>The CSR Body of Manappuram Finance Ltd. — @SiteInfo.FoundationAddress. Call <a href="tel:@SiteInfo.FoundationTollFreeTel">@SiteInfo.FoundationTollFreeDisplay</a></p>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/index.js" asp-append-version="true" defer></script>
+}

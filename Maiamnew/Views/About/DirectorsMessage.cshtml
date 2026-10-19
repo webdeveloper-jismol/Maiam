@@ -1,0 +1,86 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Director’s Message") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Director’s Message",
+        Description = "A message from Dr. Sivadas Aniyan T.S, Director of Manappuram Institute of Automotive Skills (MAIAM), Painoor, Valapad, Thrissur.",
+        Path = "/directors-message/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-director";
+    var hero = new PageHeroModel(
+        Title: "Director’s Message",
+        Lead: "Dr. Sivadas Aniyan T.S, Director – MAIAM",
+        ImageKey: null,
+        Breadcrumbs: crumbs,
+        Eyebrow: "About Us");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/directors-message.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section">
+    <div class="container director">
+        <aside class="director__profile">
+            <maiam-img key="about/director-sivadas-aniyan" class="director__photo" sizes="(min-width: 1024px) 320px, 70vw" />
+            <div class="director__card">
+                <p class="director__name">Dr. Sivadas Aniyan T.S</p>
+                <p class="director__role">Director – MAIAM</p>
+                <p class="director__org">Manappuram Institute of Automotive Skills</p>
+            </div>
+        </aside>
+
+        <article class="director__message">
+            <svg class="icon director__quote" aria-hidden="true"><use href="#i-quote"></use></svg>
+            <p class="director__lead">
+                Manappuram Institute of Automotive Skills is in the path of growth and development. It’s part of the
+                Manappuram Foundation, the CSR body of Manappuram Finance Ltd.
+            </p>
+            <p>
+                The Institute is established in Painoor, Valapad, near Kanoli Canal. At present we are offering training in
+                the Auto Body Repair trade.
+            </p>
+            <p>
+                An excellent team of trainers and teachers is associated with the Institute. Our workshop is equipped with
+                basic as well as advanced facilities to train the trainees.
+            </p>
+            <p>
+                The Institute has tie-ups with Auto Body Repair dealerships, Automotive Service machinery suppliers and Coach
+                Builders. With the co-operation of trainers, teachers and expert people from the industries, we can do
+                excellent training and make the trainees employable.
+            </p>
+            <p class="director__sign">— Dr. Sivadas Aniyan T.S, Director</p>
+        </article>
+    </div>
+</section>
+
+<section class="section section--light">
+    <div class="container">
+        <div class="grid grid--3">
+            <a class="card card--hover director-link" href="/about-maiam/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                <h2 class="director-link__title">About MAIAM</h2>
+                <p>Established in 2019 by Manappuram Foundation.</p>
+            </a>
+            <a class="card card--hover director-link" href="/faculties/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span>
+                <h2 class="director-link__title">Our Faculty</h2>
+                <p>Trainers with international automotive experience.</p>
+            </a>
+            <a class="card card--hover director-link" href="/our-facilities/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+                <h2 class="director-link__title">Our Facilities</h2>
+                <p>Workshop, classrooms, computer lab, hostel and transport.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/directors-message.js" asp-append-version="true" defer></script>
+}

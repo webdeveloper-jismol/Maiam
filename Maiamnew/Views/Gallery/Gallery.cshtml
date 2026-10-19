@@ -1,0 +1,118 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Gallery") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Gallery – Events, Training & Campus Life",
+        Description = "Photos and videos from MAIAM: appointment letter ceremony, Toyota and Mahindra visits, Onam 2024, building inauguration, practical training and campus life.",
+        Path = "/gallery/",
+        OgImage = "/assets/images/og/gallery.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-gallery";
+    var hero = new PageHeroModel(
+        Title: "Gallery",
+        Lead: "Events, industry visits, celebrations and everyday training at Manappuram Institute of Automotive Skills.",
+        ImageKey: "gallery/onam-2024/onam-2024-05",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Life at MAIAM");
+    const int previewCount = 8; // larger albums show this many photos until expanded
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/gallery.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Album navigation -->
+<nav class="album-nav" aria-label="Gallery albums" data-album-nav>
+    <div class="container">
+        <ul class="album-nav__list">
+            @foreach (var album in SiteContent.GalleryAlbums)
+            {
+                <li><a href="#@album.Id">@album.Title <span class="album-nav__count">@album.ImageKeys.Count</span></a></li>
+            }
+            <li><a href="#videos">Videos <span class="album-nav__count">@SiteContent.GalleryVideos.Count</span></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="gallery-albums">
+    @foreach (var album in SiteContent.GalleryAlbums)
+    {
+        var count = album.ImageKeys.Count;
+        var collapsible = count > previewCount + 2;
+        <section class="album defer-render" id="@album.Id" aria-labelledby="@album.Id-title" data-album>
+            <div class="container">
+                <header class="album__head">
+                    <h2 id="@album.Id-title" class="album__title">@album.Title</h2>
+                    <p class="album__count">@count @(count == 1 ? "photo" : "photos")</p>
+                </header>
+                <ul class="album__grid album__grid--@(count switch { 1 => "single", 2 => "pair", _ => "many" })" data-album-grid data-preview="@(collapsible ? previewCount : 0)">
+                    @for (var i = 0; i < count; i++)
+                    {
+                        var image = ImageCatalog.Get(album.ImageKeys[i]);
+                        <li>
+                            <a class="image-tile" href="@image.LargestUrl" data-lightbox="@album.Id" data-caption="@album.Title – @image.Alt">
+                                <maiam-img key="@image.Key" sizes="@(count == 1 ? "(min-width: 960px) 900px, 92vw" : "(min-width: 960px) 25vw, 46vw")" />
+                                <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                @if (collapsible)
+                {
+                    <button type="button" class="btn btn--outline album__more" data-album-more aria-controls="@album.Id" hidden>
+                        Show all @count photos
+                    </button>
+                }
+            </div>
+        </section>
+    }
+</div>
+
+<!-- Videos (from the original Gallery and Video Gallery pages) -->
+<section class="section section--dark" id="videos" aria-labelledby="videos-title">
+    <div class="container">
+        <div class="section-head section-head--row">
+            <div>
+                <p class="eyebrow eyebrow--light">Video gallery</p>
+                <h2 id="videos-title">Videos</h2>
+                <p class="lead">Videos load from YouTube only when you press play.</p>
+            </div>
+            <a class="btn btn--ghost-light" href="@SiteInfo.YouTubeUrl" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg>
+                MAIAM on YouTube
+            </a>
+        </div>
+        <div class="gallery-videos">
+            @{
+                var videos = SiteContent.GalleryVideos;
+            }
+            @foreach (var video in videos)
+            {
+                // Two films share one YouTube title; number them so each has a distinct name.
+                var sameTitle = videos.Where(v => v.Title == video.Title).ToList();
+                var title = sameTitle.Count > 1 ? $"{video.Title} – Part {sameTitle.IndexOf(video) + 1}" : video.Title;
+                <partial name="_VideoEmbed" model="new VideoEmbedModel(video.YouTubeId, title, Compact: true)" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Instagram -->
+<section class="section section--tight" aria-labelledby="instagram-title">
+    <div class="container gallery-instagram">
+        <span class="gallery-instagram__icon"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></span>
+        <div>
+            <h2 id="instagram-title" class="gallery-instagram__title">More on Instagram</h2>
+            <p>Follow <strong>maiam_institute</strong> for the latest photos and reels from MAIAM.</p>
+        </div>
+        <a class="btn btn--primary" href="@SiteInfo.InstagramUrl" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/gallery.js" asp-append-version="true" defer></script>
+}

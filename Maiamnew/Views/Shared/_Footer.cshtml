@@ -1,0 +1,82 @@
+<footer class="site-footer">
+    <div class="container site-footer__grid">
+        <div class="footer-brand">
+            <a class="footer-brand__logo" href="/">
+                <img src="~/assets/images/branding/maiam-logo-light.png" width="300" height="90" loading="lazy"
+                     alt="MAIAM – Manappuram Institute of Automotive Skills" />
+            </a>
+            <p>@SiteInfo.Name is an initiative of @SiteInfo.FoundationName (CSR arm of Manappuram Finance Ltd).</p>
+            <ul class="social-links" aria-label="MAIAM on social media">
+                <li><a href="@SiteInfo.FacebookUrl" target="_blank" rel="noopener noreferrer" aria-label="MAIAM on Facebook"><svg class="icon" aria-hidden="true"><use href="#i-facebook"></use></svg></a></li>
+                <li><a href="@SiteInfo.InstagramUrl" target="_blank" rel="noopener noreferrer" aria-label="MAIAM on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a></li>
+                <li><a href="@SiteInfo.YouTubeUrl" target="_blank" rel="noopener noreferrer" aria-label="MAIAM on YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg></a></li>
+                <li><a href="@SiteInfo.TwitterUrl" target="_blank" rel="noopener noreferrer" aria-label="MAIAM on X (Twitter)"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg></a></li>
+                <li><a href="@SiteInfo.WhatsAppUrl" target="_blank" rel="noopener noreferrer" aria-label="Chat with MAIAM on WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg></a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">Contact Us</h2>
+            <address class="footer-contact">
+                <p>
+                    <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                    <span>@SiteInfo.AddressLine1,<br />@SiteInfo.AddressLine2<br />Pin Code: @SiteInfo.PostalCode</span>
+                </p>
+                <p>
+                    <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                    <span>
+                        <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a><br />
+                        <a href="tel:@SiteInfo.Phone2Tel">@SiteInfo.Phone2Display</a>
+                    </span>
+                </p>
+                <p>
+                    <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                    <a href="mailto:@SiteInfo.Email">@SiteInfo.Email</a>
+                </p>
+            </address>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">Managed By</h2>
+            <div class="footer-managed">
+                <img src="~/assets/images/branding/manappuram-foundation-logo.png" width="200" height="90" loading="lazy"
+                     alt="Manappuram Foundation, CSR Body of Manappuram Finance Ltd." />
+                <p><strong>@SiteInfo.FoundationName</strong><br />(@SiteInfo.FoundationDescriptor)<br />@SiteInfo.FoundationAddress</p>
+                <p>
+                    <a href="tel:@SiteInfo.FoundationTollFreeTel">Call: @SiteInfo.FoundationTollFreeDisplay</a><br />
+                    <a href="mailto:@SiteInfo.FoundationEmail">@SiteInfo.FoundationEmail</a>
+                </p>
+                <ul class="social-links social-links--small" aria-label="Manappuram Foundation on social media">
+                    <li><a href="@SiteInfo.FoundationFacebookUrl" target="_blank" rel="noopener noreferrer" aria-label="Manappuram Foundation on Facebook"><svg class="icon" aria-hidden="true"><use href="#i-facebook"></use></svg></a></li>
+                    <li><a href="@SiteInfo.FoundationInstagramUrl" target="_blank" rel="noopener noreferrer" aria-label="Manappuram Foundation on Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"></use></svg></a></li>
+                    <li><a href="@SiteInfo.FoundationTwitterUrl" target="_blank" rel="noopener noreferrer" aria-label="Manappuram Foundation on X (Twitter)"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg></a></li>
+                    <li><a href="@SiteInfo.FoundationYouTubeUrl" target="_blank" rel="noopener noreferrer" aria-label="Manappuram Foundation on YouTube"><svg class="icon" aria-hidden="true"><use href="#i-youtube"></use></svg></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <nav class="footer-col" aria-label="Quick links">
+            <h2 class="footer-title">Quick Links</h2>
+            <ul class="footer-links">
+                @foreach (var link in SiteNavigation.QuickLinks)
+                {
+                    <li><a href="@link.Path">@link.Label</a></li>
+                }
+            </ul>
+            <h2 class="footer-title footer-title--spaced">Our Courses</h2>
+            <ul class="footer-links">
+                @foreach (var course in SiteNavigation.Courses)
+                {
+                    <li><a href="@course.Path">@course.Label</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+        <div class="container site-footer__bottom-inner">
+            <p>Copyright &copy; MAIAM All Rights Reserved @DateTime.Now.Year</p>
+            <p><a href="/sitemap.xml">Sitemap</a></p>
+        </div>
+    </div>
+</footer>

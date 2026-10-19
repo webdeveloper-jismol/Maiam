@@ -1,0 +1,140 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Welding Technician") };
+    const string summary = "Welding Technician course at MAIAM, Thrissur: 1 month of TIG, MIG, spot, electric and gas welding training with MAIAM & NSDC certification.";
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Welding Technician Course (1 Month)",
+        Description = summary,
+        Path = "/welding-technician/",
+        OgImage = "/assets/images/og/advanced-welding.jpg",
+        Breadcrumbs = crumbs,
+        StructuredData = [StructuredData.Course("Welding Technician", summary, "/welding-technician/", "P1M", "MAIAM & NSDC certification")],
+    });
+    ViewData["BodyClass"] = "page-course page-welding page-welding-technician";
+    var hero = new PageHeroModel(
+        Title: "Welding Technician",
+        Lead: "One month of training in TIG, MIG, spot, electric and gas welding.",
+        ImageKey: "advanced-welding/arc-closeup-wide",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Course · MAIAM & NSDC certification");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/welding-technician.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="course-facts" aria-label="Course facts">
+    <div class="container">
+        <dl class="fact-grid">
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>Certification</dt>
+                <dd>MAIAM, NSDC Certification</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>Duration</dt>
+                <dd>1 Month</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg>Training</dt>
+                <dd>TIG, MIG, Spot, Electric &amp; Gas welding</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg>Qualification</dt>
+                <dd>SSLC or Plus Two</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="wt-modules-title">
+    <div class="container">
+        <div class="notice wt-availability">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
+            <p>
+                MAIAM currently lists the 3-month <a href="/advanced-welding-technician/">Advanced Welding Technician</a>
+                course in its menu. Please contact MAIAM to confirm whether this 1-month course is available.
+            </p>
+        </div>
+
+        <div class="section-head">
+            <p class="eyebrow">Courses</p>
+            <h2 id="wt-modules-title">Five welding processes</h2>
+        </div>
+        <ol class="module-list">
+            <li class="module">
+                <h3>TIG (Tungsten Inert Gas)</h3>
+                <p>
+                    The TIG welding course introduces learners to Gas Tungsten Arc Welding (GTAW) fundamentals. Participants
+                    gain proficiency in operating TIG welding equipment, selecting appropriate electrodes and shielding gases,
+                    and mastering welding techniques to join metals like stainless steel, aluminium, and titanium. The
+                    curriculum covers safety protocols, electrode preparation, joint configurations, and heat control to ensure
+                    strong, precise welds. Practical sessions emphasise hands-on application, troubleshooting welding defects,
+                    and understanding metallurgical principles affecting weld quality. This foundational course is ideal for
+                    beginners and welders seeking to expand their skills in high-quality welding for applications across
+                    various industries.
+                </p>
+            </li>
+            <li class="module">
+                <h3>MIG (Metal Inert Gas)</h3>
+                <p>
+                    The MIG welding course focuses on Gas Metal Arc Welding (GMAW) fundamentals, providing essential skills and
+                    knowledge for beginners. Participants learn to set up and operate MIG welding equipment, adjust welding
+                    parameters such as voltage and wire feed speed, and select appropriate shielding gases and electrodes for
+                    welding steel, aluminium, and stainless steel. The curriculum covers safety practices, joint preparation
+                    techniques, welding positions, and troubleshooting common welding defects. Hands-on training emphasises
+                    practical welding exercises to develop proficiency in creating strong and consistent welds. This
+                    introductory course prepares individuals for entry-level positions in the manufacturing, construction, and
+                    fabrication industries.
+                </p>
+            </li>
+            <li class="module">
+                <h3>Spot</h3>
+                <p>
+                    The spot welding course introduces learners to the fundamentals of resistance spot welding, a process
+                    commonly used for joining sheet metal components in manufacturing. Participants learn how to set up spot
+                    welding equipment, including how to adjust welding parameters like current, time, and pressure. The
+                    curriculum covers safety precautions, electrode selection, and techniques for achieving strong welds with
+                    minimal distortion. Practical sessions focus on hands-on practice in positioning electrodes, preparing work
+                    pieces, and troubleshooting common welding issues like nugget size variation. This foundational course
+                    equips individuals with the skills needed for entry-level positions in automotive, aerospace, and
+                    electronics industries where spot welding is prevalent.
+                </p>
+            </li>
+            <li class="module">
+                <h3>Electric</h3>
+                <p>
+                    Electric welding encompasses various welding processes powered by electricity, such as arc welding (e.g.,
+                    stick, MIG/MAG, TIG), resistance welding (e.g., spot welding), and electron beam welding. Participants in a
+                    basic electric welding course learn fundamental skills including equipment setup, electrode selection,
+                    welding techniques for different materials (e.g., steel, aluminium), and safety protocols. The curriculum
+                    typically covers the principles of electrical welding, heat management, joint preparation, and
+                    troubleshooting welding defects. Hands-on training focuses on practical application, ensuring learners
+                    develop proficiency in creating strong, durable welds suitable for diverse industrial applications in the
+                    manufacturing, construction, and repair sectors.
+                </p>
+            </li>
+            <li class="module">
+                <h3>Gas Welding</h3>
+                <p>
+                    Gas welding, specifically oxy-fuel welding, involves using a mixture of fuel gas (such as acetylene or
+                    propane) and oxygen to generate a flame capable of melting metals for joining. Participants in a basic gas
+                    welding course learn essential skills, including setting up and handling oxy-fuel equipment, adjusting
+                    flame characteristics, selecting appropriate filler materials, and understanding safety procedures. The
+                    curriculum covers joint preparation techniques, metallurgical principles related to heat input, and basic
+                    welding positions. Practical sessions emphasise hands-on practice in controlling the torch, managing heat,
+                    and achieving strong welds on materials like steel, copper, and aluminium, preparing individuals for
+                    applications in fabrication, repair, and artistic welding.
+                </p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<partial name="_RelatedCourses" model="@("/welding-technician/")" />
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/welding-technician.js" asp-append-version="true" defer></script>
+}

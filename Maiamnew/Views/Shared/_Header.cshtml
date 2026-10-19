@@ -1,0 +1,92 @@
+@{
+    var currentPath = Context.Request.Path.Value ?? "/";
+    var menuIndex = 0;
+
+    void RenderItems(IReadOnlyList<NavItem> items, int depth)
+    {
+        foreach (var item in items)
+        {
+            var active = item.IsActive(currentPath);
+            if (item.HasChildren)
+            {
+                var id = $"submenu-{menuIndex++}";
+                <li class="nav-item has-dropdown@(depth > 0 ? " nav-item--nested" : "")@(active ? " is-active" : "")">
+                    <button type="button" class="nav-link nav-toggle" aria-expanded="false" aria-controls="@id">
+                        <span>@item.Label</span>
+                        <svg class="icon nav-toggle__icon" aria-hidden="true"><use href="#@(depth > 0 ? "i-chevron-right" : "i-chevron-down")"></use></svg>
+                    </button>
+                    <ul class="dropdown@(depth > 0 ? " dropdown--nested" : "")" id="@id">
+                        @{ RenderItems(item.Children!, depth + 1); }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item@(active ? " is-active" : "")">
+                    <a class="nav-link" href="@item.Path" aria-current="@(active ? "page" : null)">@item.Label</a>
+                </li>
+            }
+        }
+    }
+}
+<header class="site-header" data-site-header>
+    <div class="topbar">
+        <div class="container topbar__inner">
+            <p class="topbar__note">An initiative of <strong>@SiteInfo.FoundationName</strong> (@SiteInfo.FoundationDescriptor)</p>
+            <ul class="topbar__contact">
+                <li>
+                    <a href="tel:@SiteInfo.Phone1Tel">
+                        <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>@SiteInfo.Phone1Display
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:@SiteInfo.Email">
+                        <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>@SiteInfo.Email
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="container navbar__inner">
+            <a class="brand" href="/">
+                <img src="~/assets/images/branding/maiam-logo.png" width="300" height="90"
+                     alt="MAIAM – Manappuram Institute of Automotive Skills, home" />
+            </a>
+
+            <nav class="primary-nav" id="primary-nav" aria-label="Main" data-primary-nav>
+                <div class="primary-nav__head">
+                    <span class="primary-nav__title">Menu</span>
+                    <button type="button" class="nav-close" data-nav-close aria-label="Close menu">
+                        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+                    </button>
+                </div>
+                <ul class="nav-list">
+                    @{ RenderItems(SiteNavigation.Main, 0); }
+                </ul>
+                <div class="primary-nav__extra">
+                    <a class="btn btn--accent btn--block" href="/register-now/">Enquire Now</a>
+                    <a class="primary-nav__contact" href="tel:@SiteInfo.Phone1Tel">
+                        <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>@SiteInfo.Phone1Display
+                    </a>
+                    <a class="primary-nav__contact" href="mailto:@SiteInfo.Email">
+                        <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>@SiteInfo.Email
+                    </a>
+                </div>
+            </nav>
+
+            <div class="navbar__actions">
+                <a class="btn btn--accent navbar__cta" href="/register-now/">
+                    Enquire Now
+                    <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                </a>
+                <button type="button" class="nav-burger" data-nav-open aria-controls="primary-nav" aria-expanded="false">
+                    <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+                    <span class="visually-hidden">Open menu</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="nav-backdrop" data-nav-close hidden></div>
+</header>

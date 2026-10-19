@@ -1,0 +1,14 @@
+/* MAIAM – welding-technician.css
+   Shared course components (facts strip, module list, related courses) live in common.css. */
+.wt-availability {
+    margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.page-welding-technician .module::before {
+    -webkit-text-stroke-color: var(--accent-orange);
+}
+
+@media (min-width: 1024px) {
+    /* long module descriptions read better in a narrower measure */
+    .page-welding-technician .module p { max-width: 78ch; }
+}

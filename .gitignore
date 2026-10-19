@@ -1,0 +1,39 @@
+# ---------------------------------------------------------------------------
+# MAIAM website – ASP.NET Core MVC
+# ---------------------------------------------------------------------------
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+publish/
+*.user
+*.suo
+*.cache
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+*.sln.docstates
+
+# ---------------------------------------------------------------------------
+# Secrets – never commit these
+# appsettings.json holds the live database connection string on each machine.
+# Copy appsettings.Example.json to appsettings.json and fill in real values,
+# or use user secrets / environment variables (see docs/EMAIL_SETUP.md).
+# ---------------------------------------------------------------------------
+appsettings.json
+appsettings.Production.json
+appsettings.*.local.json
+secrets.json
+*.pfx
+*.p12
+
+# Logs and temp files
+logs/
+*.log
+*.tmp
+Thumbs.db
+desktop.ini

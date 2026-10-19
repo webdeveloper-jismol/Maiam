@@ -1,0 +1,173 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Advanced Welding Technician") };
+    const string summary = "3-month NSDC certified Advanced Welding Technician course at MAIAM, Thrissur: SMAW, GMAW (MIG/MAG) and TIG welding, with regular and weekend batches.";
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Advanced Welding Technician Course, Thrissur",
+        Description = summary,
+        Path = "/advanced-welding-technician/",
+        OgImage = "/assets/images/og/advanced-welding.jpg",
+        Breadcrumbs = crumbs,
+        StructuredData = [StructuredData.Course("Advanced Welding Technician", summary, "/advanced-welding-technician/", "P3M", "NSDC certification")],
+    });
+    ViewData["BodyClass"] = "page-course page-welding";
+    var hero = new PageHeroModel(
+        Title: "Advanced Welding Technician",
+        Lead: "Industrial concentrated training in advanced TIG, MIG/MAG, GMAW, spot, electrical and gas welding – including pipe welding – with NSDC certification.",
+        ImageKey: "advanced-welding/instructor-guided-practice",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Course · NSDC certification");
+    var processes = new[] { "SMAW / Arc", "GMAW (MIG & MAG)", "TIG", "Spot", "Electrical", "Gas", "Pipe welding" };
+    var practical = new[]
+    {
+        "advanced-welding/student-welding",
+        "advanced-welding/floor-practice",
+        "advanced-welding/arc-closeup-wide",
+        "workshops/student-workbench",
+        "workshops/students-hearing-protection",
+        "workshops/tool-board",
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/advanced-welding.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="course-facts" aria-label="Course facts">
+    <div class="container">
+        <dl class="fact-grid">
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>Certification</dt>
+                <dd>NSDC Certification</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>Duration</dt>
+                <dd>3 Months</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg>Qualification</dt>
+                <dd>SSLC or Plus Two</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg>Mode of class</dt>
+                <dd>Offline – regular &amp; weekend batches</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg>Placement</dt>
+                <dd>Placement assistance</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="welding-about-title">
+    <div class="container split split--wide-text">
+        <div>
+            <p class="eyebrow">About the course</p>
+            <h2 id="welding-about-title">Industrial concentrated welding training</h2>
+            <p class="lead">
+                Training for advanced TIG, MIG/MAG, GMAW, spot, electrical and gas welding, including ARC and pipe welding.
+                Regular and weekend batches are available.
+            </p>
+            <h3 class="welding-processes__title">Welding processes covered</h3>
+            <ul class="welding-processes">
+                @foreach (var process in processes)
+                {
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg>@process</li>
+                }
+            </ul>
+        </div>
+        <div class="welding-about__media">
+            <maiam-img key="advanced-welding/student-welding" class="welding-about__tall" sizes="(min-width: 960px) 22vw, 46vw" />
+            <maiam-img key="advanced-welding/floor-practice" class="welding-about__tall welding-about__offset" sizes="(min-width: 960px) 22vw, 46vw" />
+        </div>
+    </div>
+</section>
+
+<section class="section section--light" aria-labelledby="welding-modules-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Courses</p>
+            <h2 id="welding-modules-title">What you will train in</h2>
+        </div>
+        <ol class="module-list">
+            <li class="module">
+                <h3>Advanced SMAW Welding (Shielded Metal Arc Welding)</h3>
+                <p>
+                    The Advanced SMAW Welding course covers techniques for shielded metal arc welding, focusing on joint
+                    preparation, electrode selection, and advanced welding positions. Students learn to handle various
+                    materials, improve weld quality, and ensure safety practices. The course includes hands-on training,
+                    assessments, and project work to enhance practical skills and knowledge.
+                </p>
+            </li>
+            <li class="module">
+                <h3>Advanced GMAW (MIG &amp; MAG) Welding</h3>
+                <p>
+                    The Advanced GMAW Welding course emphasizes gas metal arc welding techniques, including equipment setup,
+                    wire feeding, and shielding gas selection. Students practice advanced welding positions and learn to weld
+                    various materials with precision. The course combines theory with hands-on training, focusing on quality
+                    control, safety measures, and troubleshooting techniques.
+                </p>
+            </li>
+            <li class="module">
+                <h3>Advanced TIG Welding</h3>
+                <p>
+                    The Advanced TIG Welding course focuses on tungsten inert gas welding techniques for precision and
+                    versatility. Students learn about equipment setup, filler materials, and advanced welding positions. The
+                    curriculum includes hands-on practice with various metals, troubleshooting methods, and quality control
+                    measures, ensuring mastery of high-quality welds in challenging applications.
+                </p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="welding-practical-title">
+    <div class="container">
+        <div class="section-head section-head--row">
+            <div>
+                <p class="eyebrow">Practical training</p>
+                <h2 id="welding-practical-title">Hands-on in the MAIAM workshop</h2>
+                <p class="lead">Photographs of students training at MAIAM.</p>
+            </div>
+            <a class="link-arrow" href="/gallery/">View the gallery <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+        <div class="course-gallery">
+            @foreach (var key in practical)
+            {
+                var image = ImageCatalog.Get(key);
+                <a class="image-tile" href="@image.LargestUrl" data-lightbox="welding-practical">
+                    <maiam-img key="@key" sizes="(min-width: 960px) 30vw, 46vw" />
+                    <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--dark" aria-labelledby="welding-safety-title">
+    <div class="container split">
+        <div>
+            <p class="eyebrow eyebrow--light">Training approach</p>
+            <h2 id="welding-safety-title">Theory, practice and safety together</h2>
+            <ul class="check-list">
+                <li>Hands-on training, assessments and project work</li>
+                <li>Equipment setup, electrode, filler and shielding gas selection</li>
+                <li>Advanced welding positions on various materials and metals</li>
+                <li>Quality control, safety practices and troubleshooting</li>
+            </ul>
+        </div>
+        <div class="media-frame">
+            <maiam-img key="advanced-welding/arc-closeup-wide" sizes="(min-width: 960px) 46vw, 92vw" />
+        </div>
+    </div>
+</section>
+
+<partial name="_RelatedCourses" model="@("/advanced-welding-technician/")" />
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/advanced-welding.js" asp-append-version="true" defer></script>
+}

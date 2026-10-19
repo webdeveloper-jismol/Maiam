@@ -1,0 +1,36 @@
+@model string
+@* Related courses for a course page. Model: the current course path. *@
+<section class="section section--light" aria-labelledby="related-courses-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Related courses</p>
+            <h2 id="related-courses-title">Explore other MAIAM courses</h2>
+        </div>
+        <div class="grid related-courses">
+            @foreach (var course in SiteContent.RelatedTo(Model))
+            {
+                <article class="course-card">
+                    <div class="course-card__media">
+                        <maiam-img key="@course.ImageKey" sizes="(min-width: 960px) 600px, 92vw" />
+                        <span class="course-card__tag">@course.Certification Certification</span>
+                    </div>
+                    <div class="course-card__body">
+                        <h3><a href="@course.Path">@course.Name</a></h3>
+                        <p>@course.Summary</p>
+                        <dl class="course-card__facts">
+                            <div>
+                                <dt><svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg><span class="visually-hidden">Duration</span></dt>
+                                <dd><strong>Duration:</strong> @course.Duration</dd>
+                            </div>
+                            <div>
+                                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg><span class="visually-hidden">Qualification</span></dt>
+                                <dd><strong>Qualification:</strong> @course.Qualification</dd>
+                            </div>
+                        </dl>
+                        <span class="link-arrow" aria-hidden="true">View course details <svg class="icon"><use href="#i-arrow-right"></use></svg></span>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,17 @@
+/* MAIAM – certificate-of-affiliation.css (ASDC, NCVET affiliation page)
+   Shared certificate layout, details list and copy button live in common.css. */
+.page-affiliation .certificate-figure {
+    border-top: 4px solid var(--brand-red); /* echoes the red accents of the ASDC certificate */
+}
+
+.affiliation-course {
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.affiliation-course p {
+    color: var(--text-secondary);
+}

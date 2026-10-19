@@ -1,0 +1,125 @@
+/* MAIAM – register-now.css (shared form controls live in common.css) */
+.register-layout {
+    display: grid;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .register-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; }
+}
+
+.register-form-card {
+    padding: clamp(22px, 4vw, 44px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow);
+}
+
+.register-status:empty { display: none; }
+.register-status { margin-bottom: 24px; }
+.register-status:focus { outline: none; }
+.register-status .alert + .alert { margin-top: 12px; }
+
+.register-form-card__title {
+    margin-bottom: 0.2em;
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+}
+
+.register-form-card__hint { margin: 0 0 24px; }
+
+.form-optional {
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.register-form__actions {
+    display: grid;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+@media (min-width: 640px) {
+    .register-form__actions { grid-template-columns: auto 1fr; align-items: center; gap: 20px; }
+    .register-form__actions .form-hint { margin: 0; }
+}
+
+.register-form button[disabled] {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* Contact aside */
+.register-aside {
+    position: relative;
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: var(--radius-lg);
+    background-color: var(--primary-navy);
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--text-on-dark-muted);
+}
+
+@media (min-width: 1024px) {
+    .register-aside {
+        position: sticky;
+        top: calc(var(--header-height) + 24px);
+    }
+}
+
+.register-aside__title {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.register-aside__list {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.register-aside__list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.register-aside__list .icon {
+    margin-top: 4px;
+    color: var(--accent-orange);
+}
+
+.register-aside a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.register-aside a:hover { color: var(--accent-orange); text-decoration: underline; }
+
+.register-aside__courses {
+    padding-top: 22px;
+    border-top: 1px solid var(--border-dark);
+}
+
+.register-aside__courses h3 {
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+}
+
+.register-aside__courses ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+}
+
+.register-aside__courses span {
+    display: block;
+    font-size: var(--fs-small);
+}

@@ -1,0 +1,262 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Automotive Body Repair Technician") };
+    const string summary = "One-year ASDC, NSDC & NCVET certified Automotive Body Repair Technician (Level 4) course in Thrissur, Kerala: 8 months training + 4 months internship.";
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Automotive Body Repair Technician Course, Thrissur",
+        Description = summary,
+        Path = "/courses/",
+        OgImage = "/assets/images/og/automotive-body-repair.jpg",
+        Breadcrumbs = crumbs,
+        StructuredData =
+        [
+            StructuredData.Course("Automotive Body Repair Technician", summary, "/courses/", "P1Y",
+                "ASDC (Automotive Skill Development Council), NSDC & NCVET certification"),
+        ],
+    });
+    ViewData["BodyClass"] = "page-course page-abr";
+    var hero = new PageHeroModel(
+        Title: "Automotive Body Repair Technician",
+        Lead: "Learn to repair the body and frame of vehicles damaged by major and minor dents – a one-year central government certified course with internship training in dealerships.",
+        ImageKey: "workshops/students-repair-bay",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Course · Model curriculum: Automotive Body Technician Level 4");
+    var practical = new[]
+    {
+        "automotive-body-repair/students-door-panel",
+        "automotive-body-repair/quarter-panel-replacement",
+        "automotive-body-repair/dent-repair-equipment",
+        "automotive-body-repair/door-inspection",
+        "workshops/paint-drying-equipment",
+        "automotive-body-repair/student-panel-work",
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/automotive-body-repair.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Key facts -->
+<section class="course-facts" aria-label="Course facts">
+    <div class="container">
+        <dl class="fact-grid">
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>Certification</dt>
+                <dd>ASDC, NSDC &amp; NCVET (central government certification)</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>Duration</dt>
+                <dd>1 Year: 8 months institutional + 4 months internship</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg>Qualification</dt>
+                <dd>SSLC or Plus Two</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg>Batch size</dt>
+                <dd>Maximum 25 students per batch</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg>Placement</dt>
+                <dd>100% placement assistance</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<!-- About the course -->
+<section class="section" aria-labelledby="abr-about-title">
+    <div class="container split split--wide-text">
+        <div>
+            <p class="eyebrow">About the course</p>
+            <h2 id="abr-about-title">Become an Automotive Body Repair Technician (Level 4)</h2>
+            <div class="prose">
+                <p>
+                    An Automotive Body Repair Technician Level 4 is responsible for the repair of vehicles by working on the
+                    body and frame of a vehicle damaged mostly by major or minor dents in the body. Whatever the damage or crash
+                    on the body of the vehicle, you can repair it and make it perfect.
+                </p>
+                <p>
+                    The course follows the model curriculum for Automotive Body Technician Level 4 of ASDC (Automotive Skill
+                    Development Council). The minimum educational qualification is a 10th class pass and the minimum job entry
+                    age is 18 years.
+                </p>
+                <p>Trainees who need to can continue their studies in their field during their employment and attain higher levels.</p>
+            </div>
+        </div>
+        <div class="media-frame">
+            <maiam-img key="automotive-body-repair/dent-repair-equipment" sizes="(min-width: 960px) 40vw, 92vw" />
+        </div>
+    </div>
+</section>
+
+<!-- Course structure -->
+<section class="section section--dark" aria-labelledby="abr-structure-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow eyebrow--light">Course structure</p>
+            <h2 id="abr-structure-title">From workshop training to the dealership floor</h2>
+        </div>
+        <ol class="course-timeline">
+            <li class="course-step">
+                <span class="course-step__marker">8<small>months</small></span>
+                <h3>Institutional training</h3>
+                <p>Theory and hands-on practice at MAIAM, with pneumatics, electric tools and the latest equipment.</p>
+            </li>
+            <li class="course-step">
+                <span class="course-step__marker">4<small>months</small></span>
+                <h3>Internship training</h3>
+                <p>Internship training in various automotive dealership workshops.</p>
+            </li>
+            <li class="course-step">
+                <span class="course-step__marker"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+                <h3>Assessment &amp; certification</h3>
+                <p>Assessment is conducted by the Automotive Skill Development Council (ASDC) – ASDC, NSDC &amp; NCVET certification.</p>
+            </li>
+            <li class="course-step">
+                <span class="course-step__marker"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                <h3>Placement assistance</h3>
+                <p>After successful completion, trainees are supported with placement in reputed firms.</p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- Curriculum document -->
+<section class="section" aria-labelledby="abr-curriculum-title">
+    <div class="container">
+        <div class="qp-card">
+            <span class="qp-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg></span>
+            <div class="qp-card__text">
+                <p class="eyebrow">Model curriculum</p>
+                <h2 id="abr-curriculum-title" class="qp-card__title">Qualification Pack – Auto Body Repair Technician Level 4</h2>
+                <p>The qualification pack published by the Automotive Skill Development Council sets out the job role, standards and assessment criteria for this course.</p>
+            </div>
+            <a class="btn btn--primary qp-card__btn" href="/assets/documents/qp-automotive-body-repair-technician-level-4.pdf" target="_blank" rel="noopener" type="application/pdf">
+                <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+                View PDF <span class="qp-card__size">(1.3 MB)</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Practical training -->
+<section class="section section--light" aria-labelledby="abr-practical-title">
+    <div class="container">
+        <div class="section-head section-head--row">
+            <div>
+                <p class="eyebrow">Practical training</p>
+                <h2 id="abr-practical-title">Inside the body repair workshop</h2>
+                <p class="lead">Photographs from MAIAM’s workshop at Painoor, Valapad.</p>
+            </div>
+            <a class="link-arrow" href="/our-facilities/">Our facilities <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+        <div class="course-gallery">
+            @foreach (var key in practical)
+            {
+                var image = ImageCatalog.Get(key);
+                <a class="image-tile" href="@image.LargestUrl" data-lightbox="abr-practical">
+                    <maiam-img key="@key" sizes="(min-width: 960px) 30vw, 46vw" />
+                    <span class="image-tile__zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"></use></svg></span>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Why this skill -->
+<section class="section" aria-labelledby="abr-why-title">
+    <div class="container split">
+        <div>
+            <p class="eyebrow">Why automotive body repair</p>
+            <h2 id="abr-why-title">A skill every vehicle will always need</h2>
+            <div class="prose">
+                <p>
+                    The Indian Automobile Industry is expected to employ 36 million people by 2026. To cope with such a
+                    transformation, constant skilling, re-skilling and up-skilling of the existing and future workforce is
+                    extremely important. The new jobs are likely to move away from traditional manufacturing.
+                </p>
+                <p>
+                    Technology and mechanisms may change, and vehicles are moving towards electrification. But every vehicle
+                    needs a body. It may be damaged, and the damage must be corrected and perfected – which is why body repair
+                    skills are valued around the world.
+                </p>
+            </div>
+        </div>
+        <div class="abr-asdc">
+            <h3>About ASDC</h3>
+            <p>
+                ASDC (Automotive Skill Development Council) is promoted by the automobile industry through the Society of
+                Indian Automobile Manufacturers (SIAM), Automotive Component Manufacturers Association (ACMA) and Federation of
+                Automobile Dealers Association (FADA), and by the Government of India, represented by the Department of Heavy
+                Industry and the National Skill Development Corporation (NSDC).
+            </p>
+            <p>ASDC is initiating structured reforms to bridge the demand–supply mismatch of the skilled workforce.</p>
+            <a class="link-arrow" href="/certificate-of-affiliation/">MAIAM’s ASDC affiliation <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+    </div>
+</section>
+
+<!-- Scholarships -->
+<section class="section section--blue" aria-labelledby="abr-scholarship-title">
+    <div class="container abr-scholarship">
+        <div>
+            <p class="eyebrow">Scholarships</p>
+            <h2 id="abr-scholarship-title">Scholarships for this course</h2>
+            <p class="text-muted">Available only for the Automotive Body Repair Technician course.</p>
+        </div>
+        <ul class="abr-scholarship__list">
+            <li><strong>10%</strong> Scholarship for BPL students</li>
+            <li><strong>5%</strong> Scholarship for APL backward students</li>
+        </ul>
+        <div class="notice abr-scholarship__notice">
+            <svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg>
+            <p>Eligibility conditions apply. Please contact MAIAM to confirm current scholarship availability before applying.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Course videos -->
+<section class="section section--dark" aria-labelledby="abr-videos-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow eyebrow--light">Course videos</p>
+            <h2 id="abr-videos-title">Auto Body Technician Level 4 at MAIAM</h2>
+        </div>
+        <div class="abr-videos">
+            <figure class="abr-videos__main">
+                <div class="native-video">
+                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician Level 4 course film">
+                        <source src="/assets/videos/maiam-brand-film.mp4" type="video/mp4" />
+                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician Level 4 course film</a>
+                    </video>
+                </div>
+                <figcaption class="video-embed__caption">Auto Body Technician Level 4 – course film</figcaption>
+            </figure>
+            <div class="abr-videos__intro">
+                <h3>Watch the course films</h3>
+                <p>See students training for the Auto Body Technician Level 4 course, with more films from Manappuram Foundation’s YouTube channel below.</p>
+                <a class="btn btn--ghost-light" href="/register-now/">Enquire about this course</a>
+            </div>
+            @{
+                var courseVideos = SiteContent.GalleryVideos.Where(v => v.Title.Contains("Body Technician")).ToList();
+            }
+            @foreach (var video in courseVideos)
+            {
+                // Two films share one YouTube title; number them so each has a distinct name.
+                var sameTitle = courseVideos.Where(v => v.Title == video.Title).ToList();
+                var title = sameTitle.Count > 1 ? $"{video.Title} – Part {sameTitle.IndexOf(video) + 1}" : video.Title;
+                <partial name="_VideoEmbed" model="new VideoEmbedModel(video.YouTubeId, title, Compact: true)" />
+            }
+        </div>
+    </div>
+</section>
+
+<partial name="_RelatedCourses" model="@("/courses/")" />
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/automotive-body-repair.js" asp-append-version="true" defer></script>
+}

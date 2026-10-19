@@ -1,0 +1,210 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Placements") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Our Placements – Campus Interviews & Industry Visits",
+        Description = "MAIAM placement assistance: campus interview by Annamalai’s Toyota, Mahindra factory visit in Coimbatore, Toyota plant visit and students placed in dealerships.",
+        Path = "/our-placements/",
+        OgImage = "/assets/images/og/placements.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-placements";
+    var hero = new PageHeroModel(
+        Title: "Our Placements",
+        Lead: "Placement assistance, campus interviews and industry visits that connect MAIAM students with the automotive industry.",
+        ImageKey: "placements/annamalais-toyota-campus-interview",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Placements");
+
+    var employers = new[] { "Nippon Toyota", "Gokulam Motors", "Sai Service", "Kia Motors", "Hyson Motors", "Annamalais Toyota", "CAI Mahindra", "PPS Mahindra" };
+    var placedStudent = SiteContent.Testimonials.First(t => t.Role == "Placed student");
+
+    var latest = new[]
+    {
+        new ImageTileModel("placements/latest-placements-poster", "placements-latest", "(min-width: 960px) 25vw, 46vw", CssClass: "tile--poster"),
+        new ImageTileModel("placements/abr-technicians-poster", "placements-latest", "(min-width: 960px) 25vw, 46vw", CssClass: "tile--poster"),
+        new ImageTileModel("placements/latest-placements-banner", "placements-latest", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/abr-technicians-banner", "placements-latest", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+    };
+    var campusInterview = new[]
+    {
+        new ImageTileModel("placements/annamalais-toyota-campus-interview", "placements-interview", "(min-width: 960px) 30vw, 92vw"),
+        new ImageTileModel("placements/annamalais-toyota-campus-interview-team", "placements-interview", "(min-width: 960px) 30vw, 92vw"),
+    };
+    var mahindraVisit = new[]
+    {
+        new ImageTileModel("placements/mahindra-factory-visit", "placements-mahindra", "(min-width: 960px) 30vw, 92vw"),
+        new ImageTileModel("gallery/mahindra-factory-visit/mahindra-factory-visit-01", "placements-mahindra", "(min-width: 960px) 30vw, 92vw"),
+    };
+    var toyotaVisit = new[]
+    {
+        new ImageTileModel("gallery/toyota-plant-visit/toyota-plant-visit-01", "placements-toyota", "(min-width: 960px) 30vw, 92vw"),
+        new ImageTileModel("gallery/toyota-plant-visit/toyota-plant-visit-02", "placements-toyota", "(min-width: 960px) 30vw, 92vw"),
+    };
+    var archive = new[]
+    {
+        new ImageTileModel("placements/placements-poster", "placements-archive", "(min-width: 960px) 30vw, 92vw", CssClass: "tile--poster"),
+        new ImageTileModel("placements/placed-students-board", "placements-archive", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/placed-students-banner", "placements-archive", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/placements-overview-banner", "placements-archive", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/nippon-toyota", "placements-archive", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/gokulam-motors", "placements-archive", "(min-width: 960px) 50vw, 92vw", CssClass: "tile--banner"),
+        new ImageTileModel("placements/sai-service", "placements-archive", "(min-width: 960px) 50vw, 92vw",
+            Alt: "Our Placements: MAIAM students placed at Sai Service, Kia Motors and Hyson Motors", CssClass: "tile--banner"),
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/our-placements.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- How placements work -->
+<section class="section" aria-labelledby="placements-support-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Placement support</p>
+            <h2 id="placements-support-title">From training to employment</h2>
+            <p class="lead">How MAIAM connects students with employers.</p>
+        </div>
+        <div class="grid grid--3">
+            <article class="card">
+                <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                <h3>Placement assistance</h3>
+                <p>100% placement assistance for the Automotive Body Repair Technician course and placement assistance for the Advanced Welding Technician course.</p>
+            </article>
+            <article class="card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                <h3>Dealership internships</h3>
+                <p>Automotive Body Repair students complete 4 months of internship training in various dealership workshops.</p>
+            </article>
+            <article class="card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg></span>
+                <h3>Campus interviews &amp; industry visits</h3>
+                <p>Employers conduct campus interviews at MAIAM, and students visit manufacturing plants and dealerships.</p>
+            </article>
+        </div>
+        <p class="placements-note">
+            <svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>
+            Placement assistance supports students in finding employment; it is not a guarantee of a job.
+        </p>
+    </div>
+</section>
+
+<!-- Employers -->
+<section class="section section--dark section--tight" aria-labelledby="placements-employers-title">
+    <div class="container placements-employers">
+        <div>
+            <p class="eyebrow eyebrow--light">Employers</p>
+            <h2 id="placements-employers-title">Dealerships in MAIAM placement announcements</h2>
+            <p class="placements-employers__source">As named on MAIAM’s placement banners and student testimonials.</p>
+        </div>
+        <ul class="employer-list">
+            @foreach (var employer in employers)
+            {
+                <li>@employer</li>
+            }
+        </ul>
+    </div>
+</section>
+
+<!-- Latest placements -->
+<section class="section" aria-labelledby="placements-latest-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Latest placements</p>
+            <h2 id="placements-latest-title">The success story continues</h2>
+            <p class="lead">Placement announcements published by MAIAM. Select an image to view it in full.</p>
+        </div>
+        <div class="placements-latest">
+            @foreach (var tile in latest)
+            {
+                <partial name="_ImageTile" model="tile" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Campus interview -->
+<section class="section section--light" aria-labelledby="placements-interview-title">
+    <div class="container placement-event">
+        <div class="placement-event__text">
+            <p class="eyebrow">Campus interview</p>
+            <h2 id="placements-interview-title">Campus interview by Annamalai’s Toyota</h2>
+            <p class="lead">Conducted a campus interview by Annamalai’s Toyota at the MAIAM campus.</p>
+        </div>
+        <div class="placement-event__photos">
+            @foreach (var tile in campusInterview)
+            {
+                <partial name="_ImageTile" model="tile" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Industry visits -->
+<section class="section" aria-labelledby="placements-visits-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Industry visits</p>
+            <h2 id="placements-visits-title">Learning beyond the workshop</h2>
+        </div>
+        <div class="placement-visits">
+            <article class="placement-visit">
+                <div class="placement-visit__photos">
+                    @foreach (var tile in mahindraVisit)
+                    {
+                        <partial name="_ImageTile" model="tile" />
+                    }
+                </div>
+                <h3>Mahindra Factory Visit – Coimbatore</h3>
+                <p>MAIAM students and staff visited the Mahindra facility in Coimbatore.</p>
+            </article>
+            <article class="placement-visit">
+                <div class="placement-visit__photos">
+                    @foreach (var tile in toyotaVisit)
+                    {
+                        <partial name="_ImageTile" model="tile" />
+                    }
+                </div>
+                <h3>Toyota Plant Visit</h3>
+                <p>Students and staff during the Toyota plant visit.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Placed student story -->
+<section class="section section--blue" aria-labelledby="placements-story-title">
+    <div class="container placements-story">
+        <maiam-img key="@placedStudent.ImageKey" alt="@placedStudent.Name" sizes="160px" class="placements-story__photo" />
+        <figure class="placements-story__quote">
+            <h2 id="placements-story-title" class="visually-hidden">A placed student’s story</h2>
+            <blockquote><p>@placedStudent.Quote</p></blockquote>
+            <figcaption><strong>@placedStudent.Name</strong> @placedStudent.Role</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- Archive -->
+<section class="section" aria-labelledby="placements-archive-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Our students placed in jobs</p>
+            <h2 id="placements-archive-title">Placement highlights</h2>
+            <p class="lead">Earlier placement banners and posters published by MAIAM.</p>
+        </div>
+        <div class="placements-archive">
+            @foreach (var tile in archive)
+            {
+                <partial name="_ImageTile" model="tile" />
+            }
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/our-placements.js" asp-append-version="true" defer></script>
+}

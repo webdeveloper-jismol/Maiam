@@ -1,0 +1,97 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Faculties") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Faculties – Automotive Training Instructors",
+        Description = "Meet MAIAM’s training instructors: 20+ years of automotive body repair and paint experience abroad with Toyota, Lexus and GM, and skill contest champions.",
+        Path = "/faculties/",
+        OgImage = "/assets/images/og/faculties.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-faculties";
+    var hero = new PageHeroModel(
+        Title: "Faculties",
+        Lead: "Training instructors with long international experience in automotive body repair, painting and workshop management.",
+        ImageKey: "facilities/classroom-address",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Our Faculty");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/faculties.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section" aria-labelledby="faculty-list-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Training Instructors</p>
+            <h2 id="faculty-list-title">Learn from experienced professionals</h2>
+            <p class="lead">MAIAM’s trainers are experienced in both teaching and training.</p>
+        </div>
+
+        <div class="faculty-list">
+            @for (var i = 0; i < SiteContent.Faculty.Count; i++)
+            {
+                var member = SiteContent.Faculty[i];
+                <article class="faculty-card" aria-labelledby="faculty-@i">
+                    <div class="faculty-card__photo">
+                        <maiam-img key="@member.ImageKey" sizes="200px" />
+                    </div>
+                    <div class="faculty-card__body">
+                        <h3 id="faculty-@i" class="faculty-card__name">@member.Name</h3>
+                        <p class="faculty-card__role">@member.Designation</p>
+                        <p class="faculty-card__experience">@member.Experience</p>
+                        @if (member.Achievements.Count > 0)
+                        {
+                            <h4 class="faculty-card__subtitle">Achievements</h4>
+                            <ul class="faculty-card__achievements">
+                                @foreach (var achievement in member.Achievements)
+                                {
+                                    <li><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>@achievement</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--dark" aria-labelledby="faculty-approach-title">
+    <div class="container split">
+        <div>
+            <p class="eyebrow eyebrow--light">Training approach</p>
+            <h2 id="faculty-approach-title">Industry experience in every session</h2>
+            <ul class="check-list">
+                <li>TOT certified trainers</li>
+                <li>Experience with Toyota, Lexus and GM abroad</li>
+                <li>Bodyshop supervision, estimation, service advisory, workshop control and denting expertise</li>
+                <li>Automotive body repair and automotive paint specialisations</li>
+            </ul>
+        </div>
+        <div class="media-frame">
+            <maiam-img key="advanced-welding/instructor-guided-practice" sizes="(min-width: 960px) 46vw, 92vw" />
+        </div>
+    </div>
+</section>
+
+<section class="section section--light" aria-labelledby="faculty-explore-title">
+    <div class="container faculty-explore">
+        <div>
+            <h2 id="faculty-explore-title">Train with MAIAM’s faculty</h2>
+            <p class="text-muted">Explore the courses our instructors teach.</p>
+        </div>
+        <div class="btn-row">
+            <a class="btn btn--primary" href="/courses/">Automotive Body Repair Technician</a>
+            <a class="btn btn--outline" href="/advanced-welding-technician/">Advanced Welding Technician</a>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/faculties.js" asp-append-version="true" defer></script>
+}

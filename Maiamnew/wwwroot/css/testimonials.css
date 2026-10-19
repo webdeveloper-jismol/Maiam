@@ -1,0 +1,37 @@
+/* MAIAM – testimonials.css */
+.testimonial-videos {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+@media (min-width: 1024px) {
+    /* first film larger, the other four in a 2 × 2 grid beside it */
+    .testimonial-videos {
+        grid-template-columns: 1.6fr 1fr 1fr;
+    }
+
+    .testimonial-videos > :first-child {
+        grid-row: span 2;
+        align-self: start;
+    }
+}
+
+.testimonial-wall {
+    list-style: none;
+    columns: 1;
+    column-gap: 24px;
+}
+
+.testimonial-wall li {
+    break-inside: avoid;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 720px) {
+    .testimonial-wall { columns: 2; }
+}
+
+@media (min-width: 1100px) {
+    .testimonial-wall { columns: 3; }
+}

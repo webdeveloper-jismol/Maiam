@@ -1,0 +1,118 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Contact Us") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Contact Us – Valapad, Thrissur",
+        Description = "Contact MAIAM at Manappuram Agro Farms, Painoor, Valapad, Thrissur 680567. Call +91 75948 10851 / +91 90726 23103 or email maiam@manappuramfoundation.org.",
+        Path = "/contact-us/",
+        OgImage = "/assets/images/og/contact.jpg",
+        Breadcrumbs = crumbs,
+        StructuredData = [StructuredData.Organization()],
+    });
+    ViewData["BodyClass"] = "page-contact";
+    var hero = new PageHeroModel(
+        Title: "Contact Us",
+        Lead: "Call, email or visit the MAIAM campus at Painoor, Valapad, Thrissur.",
+        ImageKey: "campus/reception-lobby",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Get in touch");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Contact details (original contact page) -->
+<section class="contact-cards" aria-label="Contact details">
+    <div class="container">
+        <div class="contact-cards__grid">
+            <article class="contact-card">
+                <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+                <h2 class="contact-card__title">Address</h2>
+                <address>
+                    @SiteInfo.AddressLine1,<br />
+                    @SiteInfo.AddressLine2<br />
+                    Pin Code: @SiteInfo.PostalCode
+                </address>
+                <a class="link-arrow" href="@SiteInfo.DirectionsUrl" target="_blank" rel="noopener noreferrer">
+                    Get directions <svg class="icon" aria-hidden="true"><use href="#i-navigation"></use></svg>
+                </a>
+            </article>
+            <article class="contact-card">
+                <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+                <h2 class="contact-card__title">Contact Number</h2>
+                <ul class="contact-card__list">
+                    <li><a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a></li>
+                    <li><a href="tel:@SiteInfo.Phone2Tel">@SiteInfo.Phone2Display</a></li>
+                </ul>
+                <a class="link-arrow" href="@SiteInfo.WhatsAppUrl" target="_blank" rel="noopener noreferrer">
+                    Chat on WhatsApp <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                </a>
+            </article>
+            <article class="contact-card">
+                <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+                <h2 class="contact-card__title">Email Address</h2>
+                <p class="contact-card__email"><a href="mailto:@SiteInfo.Email" id="contact-email">@SiteInfo.Email</a></p>
+                <button type="button" class="copy-btn" data-copy="#contact-email" aria-label="Copy email address" hidden>Copy email</button>
+                <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Map -->
+<section class="section" aria-labelledby="contact-map-title">
+    <div class="container contact-map-layout">
+        <div class="contact-map__text">
+            <p class="eyebrow">Find us</p>
+            <h2 id="contact-map-title">Visit the MAIAM campus</h2>
+            <p class="lead">Manappuram Institute of Automotive Skills is at Painoor, Valapad, near Manappuram Agro Farms and Kanoli Canal, in Thrissur district.</p>
+            <div class="btn-row">
+                <a class="btn btn--primary" href="@SiteInfo.DirectionsUrl" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" aria-hidden="true"><use href="#i-navigation"></use></svg>
+                    Get directions
+                </a>
+                <a class="btn btn--outline" href="tel:@SiteInfo.Phone1Tel">
+                    <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                    Call before you visit
+                </a>
+            </div>
+        </div>
+        <div class="contact-map" data-map data-map-src="@SiteInfo.MapEmbedUrl">
+            <div class="contact-map__placeholder">
+                <maiam-img key="campus/campus-entrance-building" class="contact-map__photo" sizes="(min-width: 960px) 55vw, 92vw" alt="" />
+                <div class="contact-map__overlay">
+                    <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                    <p>Manappuram Institute of Automotive Skills (MAIAM)</p>
+                    <button type="button" class="btn btn--accent" data-map-load hidden>Show map</button>
+                    <a class="btn btn--accent" href="@SiteInfo.DirectionsUrl" target="_blank" rel="noopener noreferrer" data-map-fallback>Open in Google Maps</a>
+                    <small>The map loads from Google Maps.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Managed by -->
+<section class="section section--light" aria-labelledby="contact-managed-title">
+    <div class="container contact-managed">
+        <img src="~/assets/images/branding/manappuram-foundation-logo.png" width="200" height="90" loading="lazy"
+             alt="Manappuram Foundation, CSR Body of Manappuram Finance Ltd." />
+        <div>
+            <p class="eyebrow">Managed by</p>
+            <h2 id="contact-managed-title" class="contact-managed__title">Manappuram Foundation</h2>
+            <p class="text-muted">(@SiteInfo.FoundationDescriptor) · @SiteInfo.FoundationAddress</p>
+            <p class="contact-managed__links">
+                <a href="tel:@SiteInfo.FoundationTollFreeTel"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>Call: @SiteInfo.FoundationTollFreeDisplay</a>
+                <a href="mailto:@SiteInfo.FoundationEmail"><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>@SiteInfo.FoundationEmail</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/contact.js" asp-append-version="true" defer></script>
+}

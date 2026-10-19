@@ -1,0 +1,87 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Two Wheeler Repair Technician") };
+    const string summary = "Two Wheeler Repair Technician course at MAIAM, Thrissur: 4 months, offline, MAIAM & NSDC certification. Learn mechanical repair of motorcycles and scooters.";
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Two Wheeler Repair Technician Course",
+        Description = summary,
+        Path = "/two-wheeler-repair-technician-course/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+        StructuredData = [StructuredData.Course("Two Wheeler Repair Technician", summary, "/two-wheeler-repair-technician-course/", "P4M", "MAIAM & NSDC certification")],
+    });
+    ViewData["BodyClass"] = "page-course page-two-wheeler";
+    var hero = new PageHeroModel(
+        Title: "Two Wheeler Repair Technician",
+        Lead: "A four-month course covering the fundamental mechanical repairs essential for maintaining and fixing motorcycles and scooters.",
+        ImageKey: null,
+        Breadcrumbs: crumbs,
+        Eyebrow: "Course · MAIAM & NSDC certification");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/two-wheeler-repair.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="course-facts" aria-label="Course facts">
+    <div class="container">
+        <dl class="fact-grid">
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg>Certification</dt>
+                <dd>MAIAM &amp; NSDC Certification</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>Duration</dt>
+                <dd>4 Months</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg>Mode of class</dt>
+                <dd>Offline</dd>
+            </div>
+            <div class="fact">
+                <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg>Qualification</dt>
+                <dd>SSLC or Plus Two</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<section class="section" aria-labelledby="tw-learn-title">
+    <div class="container">
+        <div class="notice tw-availability">
+            <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
+            <p>Please contact MAIAM to confirm current batch availability for this course before applying.</p>
+        </div>
+
+        <div class="split split--wide-text tw-learn">
+            <div>
+                <p class="eyebrow">What you will learn</p>
+                <h2 id="tw-learn-title">Mechanical repairing</h2>
+                <p class="lead">
+                    A two-wheeler repair technician course covers fundamental mechanical repairs essential for maintaining
+                    and fixing motorcycles and scooters.
+                </p>
+                <p class="text-muted">
+                    Students learn basic skills such as diagnosing engine problems, adjusting brakes, replacing worn-out parts
+                    like chains and tyres, and understanding electrical systems – across different types of two-wheelers.
+                </p>
+            </div>
+            <ul class="tw-skills">
+                <li><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-gear"></use></svg></span>Diagnosing engine problems</li>
+                <li><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg></span>Adjusting brakes</li>
+                <li><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>Replacing worn-out parts like chains and tyres</li>
+                <li><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg></span>Understanding electrical systems</li>
+                <li><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-layers"></use></svg></span>Different types of two-wheelers</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<partial name="_RelatedCourses" model="@("/two-wheeler-repair-technician-course/")" />
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/two-wheeler-repair.js" asp-append-version="true" defer></script>
+}

@@ -1,0 +1,183 @@
+@model RegisterEnquiry
+@{
+    var crumbs = new[] { new Breadcrumb("Register Now") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Register Now – Course Enquiry",
+        Description = "Register your interest in a MAIAM course in Valapad, Thrissur: send the student’s details to enquire about the Automotive Body Repair and Welding courses.",
+        Path = "/register-now/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-register";
+    var hero = new PageHeroModel(
+        Title: "Register Now",
+        Lead: "Share the student’s details to enquire about MAIAM courses. Comments or questions are welcome.",
+        ImageKey: null,
+        Breadcrumbs: crumbs,
+        Eyebrow: "Course enquiry");
+    var sent = TempData["EnquirySent"] is true;
+    var sendFailed = ViewData["SendFailed"] is true;
+    var courses = SiteContent.MainCourses.Select(c => c.Name).ToList();
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/register-now.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section">
+    <div class="container register-layout">
+        <div class="register-form-card">
+            <div id="enquiry-status" class="register-status" tabindex="-1" aria-live="polite">
+                @if (sent)
+                {
+                    <div class="alert alert--success" role="status">
+                        <svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>
+                        <div>
+                            <p><strong>Thank you. Your details have been sent to MAIAM.</strong></p>
+                            <p>Sending an enquiry does not confirm admission. For urgent questions, call <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a>.</p>
+                        </div>
+                    </div>
+                }
+                @if (sendFailed)
+                {
+                    <div class="alert alert--error" role="alert">
+                        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+                        <div>
+                            <p><strong>Your enquiry could not be sent right now.</strong></p>
+                            <p>
+                                Please call <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a> or
+                                <a href="tel:@SiteInfo.Phone2Tel">@SiteInfo.Phone2Display</a>, or email
+                                <a href="mailto:@SiteInfo.Email">@SiteInfo.Email</a>. Your details are still in the form below.
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <h2 class="register-form-card__title">Enquiry form</h2>
+            <p class="form-hint register-form-card__hint"><span class="required" aria-hidden="true">*</span> indicates a required field</p>
+
+            <form method="post" asp-controller="Register" asp-action="RegisterNow" asp-antiforgery="true" class="register-form" novalidate data-register-form>
+                <div asp-validation-summary="ModelOnly" role="alert"></div>
+
+                <div class="form-grid">
+                    <div class="form-field form-field--full">
+                        <label asp-for="StudentName">Name of the student <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="StudentName" class="form-control" autocomplete="name" maxlength="100" />
+                        <span asp-validation-for="StudentName" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Address">Address <span class="required" aria-hidden="true">*</span></label>
+                        <textarea asp-for="Address" class="form-control" rows="3" autocomplete="street-address" maxlength="400"></textarea>
+                        <span asp-validation-for="Address" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="Qualification">Educational qualification <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="Qualification" class="form-control" list="qualification-options" maxlength="100" aria-describedby="qualification-hint" />
+                        <datalist id="qualification-options">
+                            <option value="SSLC"></option>
+                            <option value="Plus Two"></option>
+                        </datalist>
+                        <p class="form-hint" id="qualification-hint">Courses require SSLC or Plus Two.</p>
+                        <span asp-validation-for="Qualification" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="Age">Age <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="Age" class="form-control" type="number" inputmode="numeric" min="14" max="60" />
+                        <span asp-validation-for="Age" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="ContactNumber">Contact number <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="ContactNumber" class="form-control" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" aria-describedby="phone-hint" />
+                        <p class="form-hint" id="phone-hint">10-digit mobile number, e.g. 98765 43210</p>
+                        <span asp-validation-for="ContactNumber" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="Email">Email address <span class="form-optional">(optional)</span></label>
+                        <input asp-for="Email" class="form-control" type="email" autocomplete="email" maxlength="150" />
+                        <span asp-validation-for="Email" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Course">Course of interest <span class="form-optional">(optional)</span></label>
+                        <select asp-for="Course" class="form-control">
+                            <option value="">Select a course</option>
+                            @foreach (var course in courses)
+                            {
+                                <option value="@course">@course</option>
+                            }
+                            <option value="Other / not sure">Other / not sure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Message">Comments or questions <span class="form-optional">(optional)</span></label>
+                        <textarea asp-for="Message" class="form-control" rows="4" maxlength="1000" aria-describedby="message-count"></textarea>
+                        <p class="form-hint" id="message-count" data-char-count="1000"></p>
+                        <span asp-validation-for="Message" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Spam protection: hidden field for bots, and a signed render time -->
+                <div class="form-honeypot" aria-hidden="true">
+                    <label for="Website">Leave this field empty</label>
+                    <input asp-for="Website" tabindex="-1" autocomplete="off" />
+                </div>
+                <input asp-for="FormToken" type="hidden" />
+
+                <div class="register-form__actions">
+                    <button type="submit" class="btn btn--accent btn--lg" data-submit>
+                        Send enquiry
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                    </button>
+                    <p class="form-hint">Your details are emailed to MAIAM only to respond to your enquiry. Sending an enquiry does not confirm admission.</p>
+                </div>
+            </form>
+        </div>
+
+        <aside class="register-aside" aria-labelledby="register-aside-title">
+            <h2 id="register-aside-title" class="register-aside__title">Prefer to talk?</h2>
+            <ul class="register-aside__list">
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                    <span><a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a><br /><a href="tel:@SiteInfo.Phone2Tel">@SiteInfo.Phone2Display</a></span>
+                </li>
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                    <a href="@SiteInfo.WhatsAppUrl" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                </li>
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                    <a href="mailto:@SiteInfo.Email">@SiteInfo.Email</a>
+                </li>
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg>
+                    <span>@SiteInfo.AddressLine1, @SiteInfo.AddressLine2 – @SiteInfo.PostalCode</span>
+                </li>
+            </ul>
+            <div class="register-aside__courses">
+                <h3>Courses</h3>
+                <ul>
+                    @foreach (var course in SiteContent.MainCourses)
+                    {
+                        <li><a href="@course.Path">@course.Name</a> <span>@course.Duration</span></li>
+                    }
+                </ul>
+            </div>
+        </aside>
+    </div>
+</section>
+
+@section Scripts {
+    @* Client-side validation (jQuery Validation Unobtrusive) is loaded by register-now.js
+       on first interaction with the form; the server always validates as well. *@
+    <script src="~/js/register-now.js" asp-append-version="true" defer
+            data-validation-scripts="/lib/jquery/dist/jquery.min.js /lib/jquery-validation/dist/jquery.validate.min.js /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

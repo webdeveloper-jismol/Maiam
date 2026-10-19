@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Page not found";
+    ViewData["BodyClass"] = "page-error";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/error.css" asp-append-version="true" />
+}
+
+<section class="error-page">
+    <div class="container error-page__inner">
+        <p class="error-page__code" aria-hidden="true">404</p>
+        <h1>We couldn’t find that page</h1>
+        <p class="lead">The page may have moved when the MAIAM website was redesigned. These links will help you find what you need.</p>
+        <ul class="error-page__links">
+            <li><a class="link-arrow" href="/courses/">Automotive Body Repair Technician <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></li>
+            <li><a class="link-arrow" href="/advanced-welding-technician/">Advanced Welding Technician <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></li>
+            <li><a class="link-arrow" href="/about-maiam/">About MAIAM <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></li>
+            <li><a class="link-arrow" href="/gallery/">Gallery <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></li>
+            <li><a class="link-arrow" href="/contact-us/">Contact Us <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></li>
+        </ul>
+        <div class="btn-row error-page__actions">
+            <a class="btn btn--accent" href="/">Go to the home page</a>
+            <button type="button" class="btn btn--outline" data-history-back hidden>Go back</button>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/error.js" asp-append-version="true" defer></script>
+}

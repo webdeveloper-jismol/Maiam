@@ -1,0 +1,12 @@
+@model VideoEmbedModel
+@* Lightweight YouTube embed: shows the thumbnail until played (privacy-enhanced mode).
+   Without JavaScript the link opens the video on YouTube. *@
+<figure class="video-embed@(Model.Compact ? " video-embed--compact" : "")">
+    <a class="video-embed__trigger" href="https://www.youtube.com/watch?v=@Model.YouTubeId"
+       data-youtube="@Model.YouTubeId" data-title="@Model.Title" target="_blank" rel="noopener noreferrer">
+        <img src="https://i.ytimg.com/vi/@Model.YouTubeId/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="" />
+        <span class="video-embed__play" aria-hidden="true"><svg class="icon"><use href="#i-play"></use></svg></span>
+        <span class="visually-hidden">Play video: @Model.Title</span>
+    </a>
+    <figcaption class="video-embed__caption">@Model.Title</figcaption>
+</figure>

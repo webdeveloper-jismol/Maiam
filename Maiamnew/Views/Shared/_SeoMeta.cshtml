@@ -1,0 +1,44 @@
+@{
+    var meta = ViewData.GetPageMeta();
+    var title = meta?.FullTitle ?? $"{ViewData["Title"]} | {SiteInfo.ShortName}";
+}
+<title>@title</title>
+@if (meta is not null)
+{
+    var ogImage = SiteInfo.AbsoluteUrl(meta.OgImage);
+    <meta name="description" content="@meta.Description" />
+    <link rel="canonical" href="@meta.CanonicalUrl" />
+    <meta name="robots" content="@(meta.NoIndex ? "noindex, follow" : "index, follow, max-image-preview:large")" />
+
+    <meta property="og:type" content="@meta.OgType" />
+    <meta property="og:site_name" content="@SiteInfo.Name" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content="@meta.FullTitle" />
+    <meta property="og:description" content="@meta.Description" />
+    <meta property="og:url" content="@meta.CanonicalUrl" />
+    <meta property="og:image" content="@ogImage" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="@meta.FullTitle" />
+    <meta name="twitter:description" content="@meta.Description" />
+    <meta name="twitter:image" content="@ogImage" />
+
+    if (meta.Path == "/")
+    {
+        <script type="application/ld+json">@Html.Raw(StructuredData.Organization())</script>
+        <script type="application/ld+json">@Html.Raw(StructuredData.WebSite())</script>
+    }
+    else if (meta.Breadcrumbs.Count > 0)
+    {
+        <script type="application/ld+json">@Html.Raw(StructuredData.Breadcrumbs(meta.Breadcrumbs, meta.Path))</script>
+    }
+    foreach (var json in meta.StructuredData)
+    {
+        <script type="application/ld+json">@Html.Raw(json)</script>
+    }
+}
+else
+{
+    <meta name="robots" content="noindex, follow" />
+}

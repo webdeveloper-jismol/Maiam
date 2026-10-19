@@ -1,0 +1,212 @@
+/* MAIAM – our-facilities.css */
+
+/* Highlights strip overlapping the hero */
+.facility-highlights {
+    position: relative;
+    z-index: 2;
+    margin-top: -36px;
+}
+
+.facility-highlights__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1px;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+.facility-highlights__list li {
+    display: grid;
+    gap: 4px;
+    padding: 22px 24px;
+    background: #fff;
+}
+
+.facility-highlights__list .icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 8px;
+    color: var(--accent-orange-text);
+}
+
+.facility-highlights__list strong {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--primary-navy);
+}
+
+.facility-highlights__list span {
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+}
+
+/* Workshop photo mosaic */
+.facility-mosaic {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1.3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.facility-mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.facility-mosaic__a { grid-row: span 2; min-height: 320px; }
+.facility-mosaic__b,
+.facility-mosaic__c { aspect-ratio: 4 / 3; }
+
+/* Learning spaces */
+.facility-learning {
+    display: grid;
+    gap: 20px;
+}
+
+@media (min-width: 960px) {
+    .facility-learning { grid-template-columns: 1.15fr 1fr; gap: 24px; }
+}
+
+.facility-learning__side {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+}
+
+.facility-card {
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.facility-card__img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.facility-card__body {
+    padding: 24px 26px 28px;
+}
+
+.facility-card h3 { margin-bottom: 0.3em; }
+.facility-card p { margin: 0; color: var(--text-secondary); }
+
+.facility-card--compact {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px;
+}
+
+.facility-card--compact .icon-badge { margin: 0; }
+.facility-card--compact h3 { margin: 0; font-size: 1.05rem; }
+
+.facility-learning__photo {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+.facility-learning__photo img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+.facility-learning__photo figcaption {
+    margin-top: 10px;
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+}
+
+/* Student support (dark section) */
+.support-card {
+    height: 100%;
+    padding: clamp(24px, 3vw, 32px);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.support-card p {
+    margin: 0;
+    color: var(--text-on-dark-muted);
+}
+
+/* Campus features */
+.campus-features {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin: 24px 0 28px;
+}
+
+.campus-features li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.campus-features .icon-badge {
+    flex: none;
+    margin: 0;
+}
+
+/* Photo tour */
+.facility-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.facility-filter button {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--border-light);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--primary-navy);
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--duration) var(--ease), border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.facility-filter button:hover { border-color: var(--primary-navy); }
+
+.facility-filter button[aria-pressed="true"] {
+    border-color: var(--primary-navy);
+    background: var(--primary-navy);
+    color: #fff;
+}
+
+.facility-gallery {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.facility-gallery .image-tile { aspect-ratio: 4 / 3; }
+.facility-gallery li[hidden] { display: none; }
+
+@media (min-width: 768px) {
+    .facility-gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1200px) {
+    .facility-gallery { grid-template-columns: repeat(4, 1fr); }
+}

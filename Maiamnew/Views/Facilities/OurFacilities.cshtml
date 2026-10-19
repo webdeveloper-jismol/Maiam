@@ -1,0 +1,213 @@
+@{
+    var crumbs = new[] { new Breadcrumb("Our Facilities") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Our Facilities – Workshop, Classrooms & Campus",
+        Description = "MAIAM facilities: fully mechanized practical lab, computer lab, smart and AC classrooms, free hostel and transport, eco and disabled friendly campus.",
+        Path = "/our-facilities/",
+        OgImage = "/assets/images/og/facilities.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-facilities";
+    var hero = new PageHeroModel(
+        Title: "Our Facilities",
+        Lead: "A fully mechanized practical lab, technology-equipped classrooms and student support services at Painoor, Valapad.",
+        ImageKey: "workshops/equipment-bay",
+        Breadcrumbs: crumbs,
+        Eyebrow: "Campus & infrastructure");
+
+    var facility = SiteContent.Facilities.ToDictionary(f => f.Title);
+
+    // Photo gallery: (key, category) – categories drive the filter in our-facilities.js
+    var photos = new (string Key, string Category)[]
+    {
+        ("workshops/tool-board", "workshop"),
+        ("workshops/paint-drying-equipment", "workshop"),
+        ("workshops/equipment-bay", "workshop"),
+        ("workshops/students-repair-bay", "workshop"),
+        ("automotive-body-repair/door-inspection", "workshop"),
+        ("advanced-welding/floor-practice", "workshop"),
+        ("facilities/computer-lab", "learning"),
+        ("facilities/classroom-faculty", "learning"),
+        ("facilities/classroom", "learning"),
+        ("facilities/classroom-session", "learning"),
+        ("facilities/laptop-classroom", "learning"),
+        ("campus/seminar-room", "learning"),
+        ("campus/campus-entrance-building", "campus"),
+        ("campus/campus-pathway", "campus"),
+        ("campus/reception-lobby", "campus"),
+    };
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/our-facilities.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<!-- Highlights (original facilities page) -->
+<section class="facility-highlights" aria-label="Highlights">
+    <div class="container">
+        <ul class="facility-highlights__list">
+            <li>
+                <svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg>
+                <strong>100% Placement</strong>
+                <span>All India based dealerships</span>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true"><use href="#i-users"></use></svg>
+                <strong>TOT Certified Trainers</strong>
+                <span>Experienced in teaching and training</span>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true"><use href="#i-heart"></use></svg>
+                <strong>BPL/APL Scholarship</strong>
+                <span>For the Automotive Body Repair course</span>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true"><use href="#i-gear"></use></svg>
+                <strong>Fully Mechanized Practical Lab</strong>
+                <span>Pneumatics, electric tools and the latest equipment</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Workshop -->
+<section class="section" aria-labelledby="facility-workshop-title">
+    <div class="container split split--wide-media">
+        <div class="facility-mosaic">
+            <maiam-img key="workshops/tool-board" class="facility-mosaic__a" sizes="(min-width: 960px) 30vw, 60vw" />
+            <maiam-img key="workshops/paint-drying-equipment" class="facility-mosaic__b" sizes="(min-width: 960px) 22vw, 40vw" />
+            <maiam-img key="workshops/students-repair-bay" class="facility-mosaic__c" sizes="(min-width: 960px) 22vw, 40vw" />
+        </div>
+        <div>
+            <p class="eyebrow">Practical training infrastructure</p>
+            <h2 id="facility-workshop-title">Fully mechanized practical lab</h2>
+            <p class="lead">The infrastructure facilities are the best in class. During training, students are exposed to pneumatics, electric tools and the latest equipment.</p>
+            <p class="text-muted">The workshop is equipped with basic as well as advanced facilities to train the trainees – from organised hand tools to body repair, paint and welding equipment.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Learning spaces -->
+<section class="section section--light" aria-labelledby="facility-learning-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Learning spaces</p>
+            <h2 id="facility-learning-title">Classrooms and computer lab</h2>
+        </div>
+        <div class="facility-learning">
+            <article class="facility-card facility-card--feature">
+                <maiam-img key="facilities/computer-lab" class="facility-card__img" sizes="(min-width: 960px) 40vw, 92vw" />
+                <div class="facility-card__body">
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-monitor"></use></svg></span>
+                    <h3>Computer Lab</h3>
+                    <p>@facility["Computer Lab"].Description</p>
+                </div>
+            </article>
+            <div class="facility-learning__side">
+                <article class="facility-card facility-card--compact">
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-screen"></use></svg></span>
+                    <h3>Smart Classroom</h3>
+                </article>
+                <article class="facility-card facility-card--compact">
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-snow"></use></svg></span>
+                    <h3>Air Conditioned Classroom</h3>
+                </article>
+                <figure class="facility-learning__photo">
+                    <maiam-img key="facilities/classroom-faculty" sizes="(min-width: 960px) 40vw, 92vw" alt="Faculty members with students in a MAIAM classroom" />
+                    <figcaption>A classroom session at MAIAM</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Student support -->
+<section class="section section--dark" aria-labelledby="facility-support-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow eyebrow--light">Student support</p>
+            <h2 id="facility-support-title">Support beyond the classroom</h2>
+        </div>
+        <div class="grid grid--3">
+            <article class="support-card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-bed"></use></svg></span>
+                <h3>Hostel Facility</h3>
+                <p>@facility["Hostel Facility"].Description</p>
+            </article>
+            <article class="support-card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-bus"></use></svg></span>
+                <h3>Transportation</h3>
+                <p>@facility["Transportation"].Description</p>
+            </article>
+            <article class="support-card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg></span>
+                <h3>Soft Skills Empowerment</h3>
+                <p>@facility["Soft Skills Empowerment"].Description</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Campus -->
+<section class="section" aria-labelledby="facility-campus-title">
+    <div class="container split">
+        <div>
+            <p class="eyebrow">Campus</p>
+            <h2 id="facility-campus-title">An accessible, green campus</h2>
+            <ul class="campus-features">
+                <li>
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+                    <span>Eco Friendly Campus</span>
+                </li>
+                <li>
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-access"></use></svg></span>
+                    <span>Disabled Friendly Campus and Restroom</span>
+                </li>
+                <li>
+                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+                    <span>@SiteInfo.AddressLine1, @SiteInfo.AddressLine2</span>
+                </li>
+            </ul>
+            <a class="link-arrow" href="/contact-us/">Get directions <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+        </div>
+        <div class="media-frame">
+            <maiam-img key="campus/campus-pathway" sizes="(min-width: 960px) 46vw, 92vw" />
+        </div>
+    </div>
+</section>
+
+<!-- Facility photo gallery with category filter -->
+<section class="section section--light" aria-labelledby="facility-gallery-title">
+    <div class="container">
+        <div class="section-head section-head--row">
+            <div>
+                <p class="eyebrow">Photo tour</p>
+                <h2 id="facility-gallery-title">Inside MAIAM</h2>
+            </div>
+            <div class="facility-filter" role="group" aria-label="Filter photos" data-facility-filter hidden>
+                <button type="button" aria-pressed="true" data-filter="all">All</button>
+                <button type="button" aria-pressed="false" data-filter="workshop">Workshop</button>
+                <button type="button" aria-pressed="false" data-filter="learning">Learning spaces</button>
+                <button type="button" aria-pressed="false" data-filter="campus">Campus</button>
+            </div>
+        </div>
+        <ul class="facility-gallery" data-facility-gallery>
+            @foreach (var photo in photos)
+            {
+                var tile = new ImageTileModel(photo.Key, "facilities");
+                <li data-category="@photo.Category">
+                    <partial name="_ImageTile" model="tile" />
+                </li>
+            }
+        </ul>
+        <p class="visually-hidden" aria-live="polite" data-facility-status></p>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/our-facilities.js" asp-append-version="true" defer></script>
+}

@@ -1,0 +1,168 @@
+/* MAIAM – contact.css */
+
+/* Contact cards overlapping the hero */
+.contact-cards {
+    position: relative;
+    z-index: 2;
+    margin-top: -40px;
+}
+
+.contact-cards__grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: clamp(24px, 3vw, 32px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow);
+}
+
+.contact-card .icon-badge { margin-bottom: 12px; }
+
+.contact-card__title {
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+}
+
+.contact-card address,
+.contact-card__list {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.contact-card__list {
+    list-style: none;
+}
+
+.contact-card__list a,
+.contact-card__email a {
+    color: var(--primary-navy);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.contact-card__list a:hover,
+.contact-card__email a:hover {
+    color: var(--automotive-blue);
+    text-decoration: underline;
+}
+
+.contact-card__list li + li { margin-top: 4px; }
+
+.contact-card__email {
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+.contact-card .link-arrow { margin-top: auto; }
+
+/* Map */
+.contact-map-layout {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .contact-map-layout { grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
+}
+
+.contact-map {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    background: var(--background-blue);
+    box-shadow: var(--shadow);
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.contact-map__placeholder,
+.contact-map__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-map__photo {
+    object-fit: cover;
+    filter: saturate(0.6);
+}
+
+.contact-map__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    background: rgba(13, 28, 46, 0.68);
+    color: #fff;
+    text-align: center;
+}
+
+.contact-map__overlay > .icon {
+    width: 44px;
+    height: 44px;
+    color: var(--accent-orange);
+}
+
+.contact-map__overlay p {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.contact-map__overlay small { color: var(--text-on-dark-muted); }
+
+/* Managed by */
+.contact-managed {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 40px;
+}
+
+.contact-managed img {
+    width: 200px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-managed__title { margin-bottom: 0.2em; }
+
+.contact-managed__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin: 0;
+}
+
+.contact-managed__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}

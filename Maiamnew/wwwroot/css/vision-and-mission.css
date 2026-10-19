@@ -1,0 +1,135 @@
+/* MAIAM – vision-and-mission.css */
+.vision__inner {
+    display: grid;
+    gap: 28px;
+}
+
+@media (min-width: 1024px) {
+    .vision__inner { grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+}
+
+.vision__label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.vision__icon {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: var(--primary-navy);
+    color: var(--accent-orange);
+}
+
+.vision__icon .icon { width: 30px; height: 30px; }
+
+.vision__icon--accent {
+    background: var(--accent-orange);
+    color: var(--primary-navy);
+}
+
+.vision__title { margin: 0; }
+
+.vision__statement {
+    position: relative;
+    margin: 0;
+    padding-left: clamp(20px, 3vw, 36px);
+    border-left: 4px solid var(--accent-orange);
+}
+
+.vision__statement p {
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 1rem + 0.9vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--primary-navy);
+}
+
+.vision__statement p + p {
+    font-family: var(--font-body);
+    font-size: var(--fs-lead);
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.vision__statement p:last-child { margin-bottom: 0; }
+
+/* Decorative photo band */
+.vision-band {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    height: clamp(160px, 22vw, 320px);
+}
+
+.vision-band img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 640px) {
+    .vision-band { grid-template-columns: 1fr 1fr; }
+    .vision-band img:last-child { display: none; }
+}
+
+/* Mission */
+.mission__head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.mission__head h2 { margin: 0; }
+
+.mission-list {
+    list-style: none;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
+.mission-pillar {
+    position: relative;
+    padding: clamp(26px, 3vw, 36px);
+    padding-top: clamp(56px, 6vw, 72px);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.mission-pillar::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--automotive-blue), var(--accent-orange));
+}
+
+.mission-pillar__number {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #C9D5E1;
+}
+
+.mission-pillar__title { margin-bottom: 0.6em; }
+
+.mission-pillar p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.vision__actions { margin-top: 28px; }

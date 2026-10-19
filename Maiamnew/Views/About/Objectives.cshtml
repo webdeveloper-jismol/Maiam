@@ -1,0 +1,129 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Objectives") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "Objectives – Automotive Body Repair Training in Kerala",
+        Description = "MAIAM’s objectives: Kerala’s first Automotive Body Repair Level 4 training centre, ASDC assessment, dealership internships and hands-on equipment training.",
+        Path = "/objectives/",
+        OgImage = "/assets/images/og/automotive-body-repair.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-objectives";
+    var hero = new PageHeroModel(
+        Title: "Objectives",
+        Lead: "The goals that shape training at Manappuram Institute of Automotive Skills.",
+        ImageKey: "workshops/students-hearing-protection",
+        Breadcrumbs: crumbs,
+        Eyebrow: "About Us");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/objectives.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section">
+    <div class="container objectives-layout">
+        <nav class="objectives-index" aria-label="Objectives sections" data-objectives-index>
+            <p class="objectives-index__title">On this page</p>
+            <ol>
+                <li><a href="#the-need" aria-current="true">The need for skilled technicians</a></li>
+                <li><a href="#how-we-train">How MAIAM trains</a></li>
+                <li><a href="#industry">Connected to industry</a></li>
+            </ol>
+        </nav>
+
+        <div class="objectives-content">
+            <section class="objective-group" id="the-need" aria-labelledby="the-need-title" data-objective-group>
+                <p class="eyebrow">01 · The need</p>
+                <h2 id="the-need-title">The need for skilled technicians</h2>
+                <ol class="objective-list">
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                        <p>Automotive servicing is the sector where maximum job opportunities are available.</p>
+                    </li>
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-target"></use></svg></span>
+                        <p>Training in the Automotive Body Repair and Auto Body Painting trades is very limited in India.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="objective-group" id="how-we-train" aria-labelledby="how-we-train-title" data-objective-group>
+                <p class="eyebrow">02 · Our training</p>
+                <h2 id="how-we-train-title">How MAIAM trains</h2>
+                <figure class="objective-figure media-frame">
+                    <maiam-img key="automotive-body-repair/students-door-panel" sizes="(min-width: 1024px) 720px, 92vw" />
+                </figure>
+                <ol class="objective-list">
+                    <li class="objective">
+                        <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-award"></use></svg></span>
+                        <p>We are the first training centre in Kerala to start Automotive Body Repair Level 4.</p>
+                    </li>
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                        <p>The infrastructure facilities are the best in class, and the trainers are qualified and well trained.</p>
+                    </li>
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+                        <p>During the training process, students are exposed to pneumatics, electric tools and the latest equipment.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="objective-group" id="industry" aria-labelledby="industry-title" data-objective-group>
+                <p class="eyebrow">03 · Industry</p>
+                <h2 id="industry-title">Connected to industry</h2>
+                <ol class="objective-list">
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                        <p>All students have to undergo internship training in dealership workshops.</p>
+                    </li>
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+                        <p>The assessment is conducted by the Automotive Skill Development Council (ASDC), and the training centre is fully accredited to ASDC.</p>
+                    </li>
+                    <li class="objective">
+                        <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-gear"></use></svg></span>
+                        <p>Manappuram Institute of Automotive Skills has an association with different automotive manufacturing companies and automotive machine repair manufacturing companies, which improves the training process.</p>
+                    </li>
+                </ol>
+            </section>
+        </div>
+    </div>
+</section>
+
+<section class="section section--light">
+    <div class="container">
+        <div class="section-head section-head--center">
+            <p class="eyebrow">Explore further</p>
+            <h2>Learn more about MAIAM</h2>
+        </div>
+        <div class="grid grid--3">
+            <a class="card card--hover objectives-link" href="/about-maiam/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-building"></use></svg></span>
+                <h3>About MAIAM</h3>
+                <p>An initiative of Manappuram Foundation, established in 2019.</p>
+                <span class="link-arrow" aria-hidden="true">Read more <svg class="icon"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+            <a class="card card--hover objectives-link" href="/vision-and-mission/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-eye"></use></svg></span>
+                <h3>Vision and Mission</h3>
+                <p>What MAIAM aims to achieve for students and the automotive industry.</p>
+                <span class="link-arrow" aria-hidden="true">Read more <svg class="icon"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+            <a class="card card--hover objectives-link" href="/courses/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg></span>
+                <h3>Automotive Body Repair Technician</h3>
+                <p>The one-year ASDC, NSDC &amp; NCVET certified course with a dealership internship.</p>
+                <span class="link-arrow" aria-hidden="true">View course <svg class="icon"><use href="#i-arrow-right"></use></svg></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/objectives.js" asp-append-version="true" defer></script>
+}

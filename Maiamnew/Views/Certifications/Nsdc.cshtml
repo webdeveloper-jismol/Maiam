@@ -1,0 +1,94 @@
+@{
+    var crumbs = new[] { new Breadcrumb("About Us", "/about-maiam/"), new Breadcrumb("Certifications"), new Breadcrumb("NSDC") };
+    ViewData.SetPageMeta(new PageMeta
+    {
+        Title = "NSDC Certificate of Partnership",
+        Description = "Manappuram Foundation, which runs MAIAM, is an Approved Training Partner of the National Skill Development Corporation (NSDC). View the certificate.",
+        Path = "/nsdc/",
+        OgImage = "/assets/images/og/default.jpg",
+        Breadcrumbs = crumbs,
+    });
+    ViewData["BodyClass"] = "page-certificate page-nsdc";
+    var hero = new PageHeroModel(
+        Title: "NSDC",
+        Lead: "Manappuram Foundation is an Approved Training Partner of the National Skill Development Corporation (NSDC).",
+        ImageKey: null,
+        Breadcrumbs: crumbs,
+        Eyebrow: "Certifications");
+    var certificate = ImageCatalog.Get("certificates/nsdc-certificate-of-partnership");
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/nsdc.css" asp-append-version="true" />
+}
+
+<partial name="_PageHero" model="hero" />
+
+<section class="section">
+    <div class="container certificate-layout">
+        <figure class="certificate-figure">
+            <a href="@certificate.LargestUrl" data-lightbox="nsdc" data-caption="NSDC Certificate of Partnership – Manappuram Foundation">
+                <maiam-img key="certificates/nsdc-certificate-of-partnership" eager="true" sizes="(min-width: 1024px) 720px, 92vw" />
+            </a>
+            <figcaption>
+                <span>NSDC Certificate of Partnership</span>
+                <a class="link-arrow" href="@certificate.LargestUrl" target="_blank" rel="noopener">
+                    View full size <svg class="icon" aria-hidden="true"><use href="#i-expand"></use></svg>
+                </a>
+            </figcaption>
+        </figure>
+
+        <div class="certificate-details">
+            <h2>Certificate details</h2>
+            <p class="text-muted">As printed on the certificate issued by the National Skill Development Corporation.</p>
+            <dl class="detail-list">
+                <div><dt>Certificate</dt><dd>Certificate of Partnership</dd></div>
+                <div><dt>Issued to</dt><dd>Manappuram Foundation</dd></div>
+                <div><dt>Status</dt><dd>Approved Training Partner of National Skill Development Corporation (NSDC)</dd></div>
+                <div>
+                    <dt>Certificate No.</dt>
+                    <dd class="certificate-number">
+                        <span id="nsdc-certificate-number">NSDC/2025-26/10166</span>
+                        <button type="button" class="copy-btn" data-copy="#nsdc-certificate-number" aria-label="Copy certificate number" hidden>Copy</button>
+                    </dd>
+                </div>
+                <div><dt>Date of issue</dt><dd>26 October 2025</dd></div>
+                <div><dt>Valid up to</dt><dd>25 October 2026</dd></div>
+            </dl>
+            <div class="notice certificate-notice">
+                <svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg>
+                <p>To verify NSDC training partner details, visit <a href="https://www.nsdcindia.org/" target="_blank" rel="noopener noreferrer">www.nsdcindia.org</a> or scan the QR code on the certificate.</p>
+            </div>
+            <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+        </div>
+    </div>
+</section>
+
+<section class="section section--light" aria-labelledby="nsdc-courses-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">NSDC certification at MAIAM</p>
+            <h2 id="nsdc-courses-title">Courses with NSDC certification</h2>
+        </div>
+        <div class="grid grid--2">
+            <a class="card card--hover certificate-course" href="/courses/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+                <h3>Automotive Body Repair Technician</h3>
+                <p>ASDC (Automotive Skill Development Council), NSDC &amp; NCVET certification · 1 year</p>
+            </a>
+            <a class="card card--hover certificate-course" href="/advanced-welding-technician/">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-flame"></use></svg></span>
+                <h3>Advanced Welding Technician</h3>
+                <p>NSDC certification · 3 months</p>
+            </a>
+        </div>
+        <p class="certificate-related">
+            Also see the <a href="/certificate-of-affiliation/">ASDC, NCVET Affiliation Certificate</a>.
+        </p>
+    </div>
+</section>
+
+<partial name="_EnquiryCTA" />
+
+@section Scripts {
+    <script src="~/js/nsdc.js" asp-append-version="true" defer></script>
+}

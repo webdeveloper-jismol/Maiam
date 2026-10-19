@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <partial name="_SeoMeta" />
+    <meta name="theme-color" content="#14283F" />
+    <link rel="icon" href="~/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="~/assets/images/branding/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="~/assets/images/branding/apple-touch-icon.png" />
+    <link rel="preload" href="~/assets/fonts/sora-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="~/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="~/css/common.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="@ViewData["BodyClass"]">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <partial name="_IconSprite" />
+    <partial name="_Header" />
+
+    <main id="main" tabindex="-1">
+        @RenderBody()
+    </main>
+
+    <partial name="_Footer" />
+
+    <script src="~/js/common.js" asp-append-version="true" defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

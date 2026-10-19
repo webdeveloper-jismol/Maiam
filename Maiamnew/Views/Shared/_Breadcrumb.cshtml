@@ -1,0 +1,25 @@
+@model IReadOnlyList<Breadcrumb>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+        <li><a href="/">Home</a></li>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var crumb = Model[i];
+            var isLast = i == Model.Count - 1;
+            <li>
+                @if (isLast)
+                {
+                    <span aria-current="page">@crumb.Label</span>
+                }
+                else if (crumb.Path is not null)
+                {
+                    <a href="@crumb.Path">@crumb.Label</a>
+                }
+                else
+                {
+                    <span>@crumb.Label</span>
+                }
+            </li>
+        }
+    </ol>
+</nav>
