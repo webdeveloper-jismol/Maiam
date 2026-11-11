@@ -127,5 +127,5 @@ Renditions are `/assets/images/{key}-{width}.webp`. All are original MAIAM photo
 | `assets/images/posters/maiam-brand-film.webp`, `student-testimonial.webp` | Frames from the two videos below |
 | `assets/videos/maiam-brand-film.mp4` | https://maiam.co.in/wp-content/uploads/2022/02/Video-in-Dark-Green-White-Simple-and-Minimal-Simple-and-Minimal-Style.mp4 |
 | `assets/videos/student-testimonial.mp4` | https://maiam.co.in/wp-content/uploads/2022/02/Untitled-design.mp4 |
-| `assets/documents/qp-automotive-body-repair-technician-level-4.pdf` | https://maiam.co.in/wp-content/uploads/2022/02/QP-Auto-Body-Repair-Technician-level-4.pdf |
+| `assets/documents/qp-automotive-body-repair-technician.pdf` | https://maiam.co.in/wp-content/uploads/2022/02/QP-Auto-Body-Repair-Technician-level-4.pdf |
 | `assets/fonts/sora-latin-var.woff2`, `inter-latin-var.woff2` | Google Fonts (Sora, Inter – SIL Open Font License 1.1) |

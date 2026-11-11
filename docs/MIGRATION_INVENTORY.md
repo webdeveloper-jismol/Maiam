@@ -44,7 +44,8 @@ Status values: **Complete** · **Complete** · **Blocked** (needs owner input) �
 
 | Item | Source | Migrated to |
 |------|--------|-------------|
-| Phone +91 7594810851, +91 90726 23103 | Header, footer, contact page | `SiteInfo` (header, footer, contact, CTA) |
+| Phone +91 7594810851 | Header, footer, contact page | `SiteInfo` (header, footer, contact, CTA) |
+| ~~Phone +91 90726 23103~~ | Header, footer, contact page | **Removed on request, 11 Nov 2026.** The original site listed a second number; the new site shows +91 75948 10851 only. |
 | Email maiam@manappuramfoundation.org | Header, footer, contact page | `SiteInfo` |
 | Address: Manappuram Agro Farms Painoor, Valapad, Thrissur, Pin 680567 | Footer, contact page | `SiteInfo` |
 | Managed by: Manappuram Foundation (CSR Body of Manappuram Finance Ltd.), Ummaih Complex, Chandapady, Near Police Station Valapad, Call 1800 123 6866, crmhead@manappuramfoundation.org | Footer | Footer "Managed By" + home band |
@@ -58,7 +59,7 @@ Status values: **Complete** · **Complete** · **Blocked** (needs owner input) �
 
 * **149 original images** downloaded from `wp-content/uploads`, converted to responsive WebP (480/720/960/1600 or 640/960/1200/1920 widths) – 467 MB → 23 MB. Catalog: `Infrastructure/ImageCatalog.Generated.cs` (key, size, alt text). Each key maps back to its WordPress file (see `docs/IMAGE_SOURCES.md`).
 * **Videos:** 2 self-hosted MP4s (`assets/videos/`), 10 YouTube videos (5 testimonials, 2 gallery, 3 video gallery) embedded with privacy-enhanced, click-to-load players.
-* **Document:** `QP-Auto-Body-Repair-Technician-level-4.pdf` → `assets/documents/qp-automotive-body-repair-technician-level-4.pdf` (old URL 301-redirected).
+* **Document:** `QP-Auto-Body-Repair-Technician-level-4.pdf` → `assets/documents/qp-automotive-body-repair-technician.pdf` (old URL 301-redirected). Renamed 11 Nov 2026 when "Level 4" was removed from the site.
 
 ### Images not migrated as MAIAM photographs
 

@@ -3,7 +3,7 @@
     ViewData.SetPageMeta(new PageMeta
     {
         Title = "Our Facilities – Workshop, Classrooms & Campus",
-        Description = "MAIAM facilities: fully mechanized practical lab, computer lab, smart and AC classrooms, free hostel and transport, eco and disabled friendly campus.",
+        Description = "MAIAM facilities: fully mechanized practical lab, smart and air-conditioned classrooms, free hostel and transport, eco and disabled friendly campus.",
         Path = "/our-facilities/",
         OgImage = "/assets/images/og/facilities.jpg",
         Breadcrumbs = crumbs,
@@ -27,7 +27,6 @@
         ("workshops/students-repair-bay", "workshop"),
         ("automotive-body-repair/door-inspection", "workshop"),
         ("advanced-welding/floor-practice", "workshop"),
-        ("facilities/computer-lab", "learning"),
         ("facilities/classroom-faculty", "learning"),
         ("facilities/classroom", "learning"),
         ("facilities/classroom-session", "learning"),
@@ -94,17 +93,13 @@
     <div class="container">
         <div class="section-head">
             <p class="eyebrow">Learning spaces</p>
-            <h2 id="facility-learning-title">Classrooms and computer lab</h2>
+            <h2 id="facility-learning-title">Classrooms</h2>
         </div>
         <div class="facility-learning">
-            <article class="facility-card facility-card--feature">
-                <maiam-img key="facilities/computer-lab" class="facility-card__img" sizes="(min-width: 960px) 40vw, 92vw" />
-                <div class="facility-card__body">
-                    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-monitor"></use></svg></span>
-                    <h3>Computer Lab</h3>
-                    <p>@facility["Computer Lab"].Description</p>
-                </div>
-            </article>
+            <figure class="facility-learning__photo">
+                <maiam-img key="facilities/classroom-faculty" sizes="(min-width: 960px) 50vw, 92vw" alt="Faculty members with students in a MAIAM classroom" />
+                <figcaption>A classroom session at MAIAM</figcaption>
+            </figure>
             <div class="facility-learning__side">
                 <article class="facility-card facility-card--compact">
                     <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-screen"></use></svg></span>
@@ -114,10 +109,6 @@
                     <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-snow"></use></svg></span>
                     <h3>Air Conditioned Classroom</h3>
                 </article>
-                <figure class="facility-learning__photo">
-                    <maiam-img key="facilities/classroom-faculty" sizes="(min-width: 960px) 40vw, 92vw" alt="Faculty members with students in a MAIAM classroom" />
-                    <figcaption>A classroom session at MAIAM</figcaption>
-                </figure>
             </div>
         </div>
     </div>
@@ -130,21 +121,15 @@
             <p class="eyebrow eyebrow--light">Student support</p>
             <h2 id="facility-support-title">Support beyond the classroom</h2>
         </div>
-        <div class="grid grid--3">
+        <div class="grid support-grid">
             <article class="support-card">
                 <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-bed"></use></svg></span>
                 <h3>Hostel Facility</h3>
-                <p>@facility["Hostel Facility"].Description</p>
             </article>
             <article class="support-card">
                 <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-bus"></use></svg></span>
                 <h3>Transportation</h3>
                 <p>@facility["Transportation"].Description</p>
-            </article>
-            <article class="support-card">
-                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg></span>
-                <h3>Soft Skills Empowerment</h3>
-                <p>@facility["Soft Skills Empowerment"].Description</p>
             </article>
         </div>
     </div>

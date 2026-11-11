@@ -89,6 +89,60 @@
     color: var(--text-on-dark-muted);
 }
 
+/* Eligibility & career progression */
+.abr-pathway {
+    display: grid;
+    gap: 20px;
+}
+
+@media (min-width: 900px) {
+    /* career card is wider: it carries the longer content */
+    .abr-pathway { grid-template-columns: 1fr 1.35fr; gap: 24px; }
+}
+
+.abr-pathway__card {
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.abr-pathway__card h3 {
+    margin-bottom: 0.7em;
+    font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+}
+
+.abr-pathway__card > p { color: var(--text-secondary); }
+
+.abr-pathway__card .check-list li { font-weight: 500; }
+
+/* Workplaces a graduate can join */
+.abr-pathway__workplaces {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 4px 0 20px;
+}
+
+.abr-pathway__workplaces li {
+    padding: 8px 14px;
+    border: 1px solid var(--border-light);
+    border-radius: 999px;
+    background: var(--background-blue);
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.abr-pathway__note {
+    margin: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-light);
+}
+
 /* Qualification pack download */
 .qp-card {
     display: grid;

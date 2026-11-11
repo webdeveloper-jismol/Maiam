@@ -30,7 +30,11 @@ namespace Maiamnew.Infrastructure
 
             // Original document location
             ["/wp-content/uploads/2022/02/QP-Auto-Body-Repair-Technician-level-4.pdf"] =
-                "/assets/documents/qp-automotive-body-repair-technician-level-4.pdf",
+                "/assets/documents/qp-automotive-body-repair-technician.pdf",
+
+            // Earlier name of the same document on this site
+            ["/assets/documents/qp-automotive-body-repair-technician-level-4.pdf"] =
+                "/assets/documents/qp-automotive-body-repair-technician.pdf",
         };
 
         public Task InvokeAsync(HttpContext context)

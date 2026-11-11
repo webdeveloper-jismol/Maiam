@@ -428,3 +428,201 @@ In Development, Visual Studio's Browser Link and Hot Reload append `<script>` ta
 
 **Rollback**
 - Revert the two code changes above (re-enables compression in Development).
+
+### Task: Publish to GitHub
+
+**Objective**
+Push the project to https://github.com/webdeveloper-jismol/Maiam (no pull, per owner instruction).
+
+**Completed Work**
+- Initialised a git repository in `E:\Maiamnew` (none existed) and created `.gitignore`: build output (`bin/`, `obj/`, `publish/`), `.vs/`, logs, certificates and **`appsettings.json`**.
+- Added `Maiamnew/appsettings.Example.json` with placeholder connection string and Email settings, as the template to copy.
+- Commit `59a684d` – 570 files, 90 MB.
+- Added remote `origin` and force-updated `main` (owner chose force-overwrite over a separate branch).
+
+**Security**
+- The repo is **public** and `Maiamnew/appsettings.json` held a working SQL Server login (`sa`). It is git-ignored and was **not** published – verified: the file returns HTTP 404 on the GitHub API, `appsettings.Example.json` returns 200. The local file was left untouched so Visual Studio keeps working.
+- `git grep` over all tracked files found no credentials.
+
+**Protecting the previous work**
+- `main` previously held an earlier, unrelated MAIAM build (`Maiam/`, `Maiam_DAL/`, last commit `ebc7f75`, 13 Aug 2026). Before the force-push, those commits were preserved as remote branch **`backup-main-2026-08-13`** (`ebc7f75`). The force-push used `--force-with-lease` so it would have aborted if the remote had moved.
+
+**Result**
+- `main` = `59a684d` (local and remote match). Remote branches: `main`, `backup-main-2026-08-13`.
+- `Maiamnew/wwwroot/assets/videos/maiam-brand-film.mp4` is 48.3 MB – under GitHub's 100 MB limit but large; consider Git LFS or external hosting if the repo grows.
+
+**Manual Steps**
+- On any new clone: copy `Maiamnew/appsettings.Example.json` to `Maiamnew/appsettings.json` and fill in the real connection string.
+- Delete `backup-main-2026-08-13` once you are satisfied the old build is no longer needed.
+
+**Rollback**
+- To restore the previous `main`: `git push --force origin backup-main-2026-08-13:main`.
+
+## 2026-11-11
+
+### Task: Remove the second phone number (9072623103)
+
+**Objective**
+Owner requested the second contact number (+91 90726 23103) be removed from the site.
+
+**Completed Work**
+- `Infrastructure/SiteInfo.cs`: deleted the `Phone2Display` / `Phone2Tel` constants, so the number cannot reappear anywhere.
+- `Views/Shared/_Footer.cshtml`: Contact Us block now lists one number.
+- `Views/Contact/Contact.cshtml`: removed from the "Contact Number" card and from the page meta description (reworded, 155 chars).
+- `Views/Register/RegisterNow.cshtml`: removed from the "Prefer to talk?" sidebar and from the "could not be sent" fallback message.
+- `docs/MIGRATION_INVENTORY.md`: shared-content row updated to record the removal.
+- Not changed: Manappuram Foundation's toll-free number (1800 123 6866) in the "Managed By" blocks, and the WhatsApp link, which uses the 75948 10851 number.
+
+**Testing Performed**
+- Compiled to a separate output folder (the normal build was blocked by the running Visual Studio session): 0 warnings, 0 errors.
+- Crawled all 18 pages on a test instance: **0 occurrences** of `9072623103` / `90726 23103`. Remaining `tel:` links are `+917594810851` and the Foundation's `18001236866` only.
+- Visual check at 1280 px (contact cards, footer, Register Now sidebar) and 375 px (no horizontal overflow) — no gaps or broken layout from the removed lines.
+
+**Note**
+The number still appears inside some original MAIAM artwork (placement banners, posters, video overlays), which are photographs and cannot be edited in code. Replacement artwork would have to come from MAIAM.
+
+**Rollback**
+- Restore the two constants in `SiteInfo.cs` and the removed markup lines in the four views.
+
+### Task: Reword the enquiry CTA and add the second number back to it
+
+**Objective**
+Owner request: change the CTA heading "Interested in a MAIAM course?" to "Start Your Automotive Career with MAIAM", and show +91 90726 23103 in that band.
+
+**Completed Work**
+- `Views/Shared/_EnquiryCTA.cshtml`: new heading; added a fourth action button for +91 90726 23103 (click-to-call), alongside Enquire Now, +91 75948 10851 and WhatsApp.
+- `Infrastructure/SiteInfo.cs`: restored the `Phone2Display` / `Phone2Tel` constants (removed earlier the same day) so the number has a single source.
+- `wwwroot/css/common.css`: with four actions the old `flex-wrap: nowrap` rule produced a ragged three-row staircase at desktop width; the actions are now an even 2 x 2 grid (equal 224 px buttons) from 1024 px up, and still stack naturally below that.
+
+**Scope note**
+The second number is currently shown **only in this CTA band**. The footer, Contact Us card and Register Now sidebar still list +91 75948 10851 alone, per the earlier removal. Awaiting owner confirmation on whether to restore it there too.
+
+**Testing Performed**
+- Compiled to a separate output folder: 0 warnings, 0 errors.
+- All 17 pages carrying the CTA band show the new heading and the number; 0 pages still show the old heading. (`/register-now/` has no CTA band by design.)
+- Layout verified at 1440 px (2 x 2 block, no overflow), 768 px and 375 px (buttons stack, no horizontal overflow).
+
+### Task: Highlight the two closing statements on About MAIAM
+
+**Objective**
+Owner request: emphasise the closing sentence of each of the two About MAIAM sections.
+
+**Completed Work**
+- New shared `.statement` component in `wwwroot/css/common.css`: orange left rule, soft orange-tinted panel, heading font at 600 weight in navy, scaling 16–18.4 px. Written to override the muted `.prose p` colour, with a variant for dark sections so it can be reused elsewhere.
+- `Views/About/AboutMaiam.cshtml`: applied to "At MAIAM, our commitment goes beyond training…" (Introduction) and "Our mission extends beyond imparting technical skills…" (Empowering Aspirations). Wording unchanged.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors. Page renders exactly 2 highlighted statements.
+- Verified at 1440 px (both sections, white and grey backgrounds) and 375 px — no horizontal overflow, panel sits within the content column.
+
+**Note**
+`.statement` is reusable; the same class can mark key sentences on other pages if wanted.
+
+### Task: CTA band – keep only the newly added number
+
+**Objective**
+Owner request: in the enquiry CTA band, drop +91 75948 10851 and keep +91 90726 23103.
+
+**Completed Work**
+- `Views/Shared/_EnquiryCTA.cshtml`: removed the +91 75948 10851 button. The band is now Enquire Now · +91 90726 23103 · WhatsApp.
+- `wwwroot/css/common.css`: reverted the actions block from the 2 x 2 grid (added for four buttons) back to the single-row flex layout, which suits three.
+
+**Scope note**
+This covers the CTA band only. +91 75948 10851 is still shown in the top bar, footer, Contact Us card, Register Now sidebar and its fallback message, and is the number behind the WhatsApp link. Awaiting owner confirmation on whether to swap it site-wide.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors. Band renders 3 buttons on one row at 1440 px, stacked at 375 px, no overflow at either.
+
+### Task: Remove "Level 4" from the website
+
+**Objective**
+Owner request: remove every reference to "Level 4" from the site (reported first, then approved).
+
+**Completed Work — 21 text occurrences across 6 files**
+- `Views/Courses/AutomotiveBodyRepair.cshtml` (11): hero label, "Become an Automotive Body Repair Technician", two body sentences, Qualification Pack heading, PDF link, video section heading/caption/aria-label/download text/intro, page description and Course JSON-LD.
+- `Views/About/Objectives.cshtml` (2): body sentence now "…first training centre in Kerala to start Automotive Body Repair training."; page description.
+- `Views/Home/Index.cshtml` (3): video caption, aria-label, download link.
+- `Views/Certifications/AffiliationCertificate.cshtml` (1): "Model curriculum: Automotive Body Technician."
+- `Services/SiteContent.cs` (3): the three YouTube titles (shown on Gallery and Courses).
+- `Infrastructure/LegacyUrlMiddleware.cs`: redirect target updated.
+
+**Document renamed**
+- `qp-automotive-body-repair-technician-level-4.pdf` → `qp-automotive-body-repair-technician.pdf` (via `git mv`).
+- Two redirects now point at the new name: the original WordPress URL and the previous path on this site (which was already live on the test server).
+
+**Docs updated**: `docs/IMAGE_SOURCES.md`, `docs/MIGRATION_INVENTORY.md`. Earlier dated entries in this log are left as the historical record.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors.
+- Crawled all 18 pages: **0 occurrences** of "Level 4" / "level-4" in rendered HTML (was 41 across 5 pages).
+- PDF: new path 200; both old paths 301 → new path.
+- Meta descriptions still within length (Courses 160, Objectives 156). Visual check of the Courses hero, qualification-pack card and video section at 1440 px.
+
+**Still showing "Level 4" — cannot be changed in code**
+- The course video overlay ("AUTO BODY TECHNICIAN LEVEL 4") on Home and Courses, including its poster image. The opening frame (~1 s, MAIAM logo on white) is badge-free and could serve as a poster, but the badge returns once the video plays.
+- The three YouTube thumbnails and the video titles on the Manappuram Foundation channel.
+- The qualification-pack PDF itself is the Level 4 document.
+New media from MAIAM is required to clear these.
+
+### Task: Restructure Eligibility Criteria and Career Progression (Courses page)
+
+**Problem**
+Newly added copy on `/courses/` put both blocks inside a single `<p>`, with literal "•" characters and line breaks. HTML collapses those, so it rendered as one long run-on paragraph with the two headings buried in the text.
+
+**Completed Work**
+- Removed the run-on paragraph from the "About the course" prose.
+- Added a dedicated section, "Who can join, and where it leads" (eyebrow: Admission & careers), between About and Course structure, as two cards:
+  - **Eligibility Criteria** – the two requirements as a tick list (`.check-list`).
+  - **Career Progression** – lead-in sentence, the five workplace types as chips, then the closing sentence below a divider.
+- Wording is unchanged; only the presentation differs. The list of workplaces was split out of the sentence into separate items so it can be scanned.
+- New `.abr-pathway` styles in `automotive-body-repair.css`; the career card is the wider column (1 : 1.35) since it carries more content.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors. Old run-on paragraph no longer present; new section renders all 7 items.
+- Verified at 1440 px (two cards side by side) and 375 px (stacked, chips wrap) — no horizontal overflow at either.
+
+### Task: Remove the Computer Lab facility
+
+**Objective**
+Owner request: remove Computer Lab and its photograph from the site.
+
+**Completed Work** — removed site-wide so the facility is not advertised anywhere
+- `Views/Facilities/OurFacilities.cshtml`: deleted the Computer Lab feature card and its photo; section heading "Classrooms and computer lab" → "Classrooms"; removed the computer-lab photo from the photo tour (15 → 14 photos); page description reworded.
+- Section relaid out: the classroom photograph is now the left/feature element with the Smart Classroom and Air Conditioned Classroom cards stacked beside it (`our-facilities.css`: side column single-column with equal rows, compact cards vertically centred, photo 16/10).
+- `Services/SiteContent.cs`: removed the Computer Lab entry from `Facilities` (this also drops it from the Home facilities list, which now shows Hostel Facility, Transportation, Soft Skills Empowerment, Smart Classroom) and the computer-lab image from the "Practical Training & Campus" gallery album.
+- `Views/Home/Index.cshtml`: the facilities section photo was the computer lab — replaced with `facilities/classroom`.
+- `Views/About/DirectorsMessage.cshtml`: "Workshop, classrooms, computer lab, hostel and transport." → "Workshop, classrooms, hostel and transport."
+
+**Not removed**
+- The image files `wwwroot/assets/images/facilities/computer-lab-*.webp` and their generated `ImageCatalog` entry remain in the project but are no longer referenced by any page, so nothing is served to visitors. Left in place so the facility can be restored easily; say the word to delete them.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors.
+- Crawled all 18 pages: **0** occurrences of "computer lab".
+- Verified the rebuilt Classrooms section at 1440 px and 375 px (stacks correctly, no horizontal overflow) and the Home facilities section with its new photo. The classroom photo is lazy-loaded; confirmed it loads at both widths.
+
+### Task: Remove Soft Skills Empowerment and the hostel description
+
+**Objective**
+Owner request: remove the "Soft Skills Empowerment" facility, and the line "Free accommodation for MAIAM students." under Hostel Facility.
+
+**Completed Work**
+- `Services/SiteContent.cs`: deleted the Soft Skills Empowerment entry; Hostel Facility now has no description (title only, like Smart Classroom and the campus items).
+- `Views/Facilities/OurFacilities.cshtml`: Student support section now has two cards — Hostel Facility (title only) and Transportation (description kept). New `.support-grid` caps the row at ~820 px so two cards do not stretch across the full width.
+- `Views/Home/Index.cshtml`: the facilities list renders the description only when there is one, so title-only items no longer emit an empty `<p>`. The list (first four facilities) is now Hostel Facility, Transportation, Smart Classroom, Eco Friendly Campus.
+
+**Testing Performed**
+- Build: 0 warnings, 0 errors.
+- "Soft Skills" and "Free accommodation" return 0 matches across the site; 0 empty `<p></p>` on the home page.
+- Verified the Student support section and the Home facilities list at 1440 px and 375 px — no horizontal overflow.
+
+### Task: Centre the Student support cards
+
+**Completed Work**
+- `wwwroot/css/our-facilities.css`: added `margin-inline: auto` to `.support-grid`, so the two remaining cards sit centred in the section instead of hugging the left edge.
+
+**Testing Performed**
+- Build pass. At 1440 px the card row has equal 242 px gaps either side. At 375 px the grid is full width (343 px inside the gutters) with no horizontal overflow, so the centring has no effect on phones.
+
+**Note**
+Only the cards are centred; the "Support beyond the classroom" heading stays left-aligned to match every other section heading on the site.

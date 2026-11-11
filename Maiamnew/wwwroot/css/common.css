@@ -349,6 +349,31 @@ main:focus {
 
 .prose p:last-child { margin-bottom: 0; }
 
+/* Highlighted statement – draws the eye to a closing or defining sentence.
+   Used as <p class="statement">…</p>, inside .prose or on its own. */
+.statement {
+    position: relative;
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: linear-gradient(90deg, rgba(242, 140, 40, 0.12), rgba(242, 140, 40, 0.02));
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 0.96rem + 0.28vw, 1.15rem);
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+}
+
+/* Beats the muted colour that .prose p sets. */
+.prose .statement,
+.statement { color: var(--primary-navy); }
+
+.section--dark .statement {
+    background: linear-gradient(90deg, rgba(242, 140, 40, 0.18), rgba(255, 255, 255, 0.02));
+    color: #fff;
+}
+
 .check-list {
     list-style: none;
     display: grid;

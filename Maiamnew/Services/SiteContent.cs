@@ -86,11 +86,9 @@ namespace Maiamnew.Services
 
         public static readonly IReadOnlyList<Facility> Facilities =
         [
-            new("Computer Lab", "MAIAM Institution has well-furnished computer labs.", "monitor"),
-            new("Hostel Facility", "Free accommodation for MAIAM students.", "bed"),
+            new("Hostel Facility", null, "bed"),
             new("Transportation", "Free transportation from the nearest bus stop to MAIAM.", "bus"),
-            new("Soft Skills Empowerment", "MAIAM equips you with the skill of English communication that will launch you into a brilliant life of exciting opportunities.", "chat"),
-            // The original page lists these four by title only.
+            // Listed by title only.
             new("Smart Classroom", null, "screen"),
             new("Eco Friendly Campus", null, "leaf"),
             new("Disabled Friendly Campus and Restroom", null, "access"),
@@ -134,7 +132,6 @@ namespace Maiamnew.Services
                 "facilities/classroom-address",
                 "facilities/classroom-session",
                 "facilities/classroom",
-                "facilities/computer-lab",
                 "facilities/laptop-classroom",
                 "campus/campus-entrance-building",
                 "campus/reception-lobby",
@@ -152,9 +149,9 @@ namespace Maiamnew.Services
         [
             new("uQ79kUA4AKg", "Automotive Skill Course | Job Placement | MAIAM", "MAIAM"),
             new("LTe5-aD19K4", "Transforming Dreams into Careers | Manappuram Institute of Automotive Skills (MAIAM)", "MAIAM"),
-            new("QgEMwiQQY9Y", "Manappuram Auto Body Technician Level 4 Course Brief", "Manappuram Foundation"),
-            new("tSfozQnB3bw", "Manappuram Auto Body Technician Level 4 Course", "Manappuram Foundation"),
-            new("jG3oUwu7Po8", "Manappuram Auto Body Technician Level 4 Course", "Manappuram Foundation"),
+            new("QgEMwiQQY9Y", "Manappuram Auto Body Technician Course Brief", "Manappuram Foundation"),
+            new("tSfozQnB3bw", "Manappuram Auto Body Technician Course", "Manappuram Foundation"),
+            new("jG3oUwu7Po8", "Manappuram Auto Body Technician Course", "Manappuram Foundation"),
         ];
 
         /// <summary>Videos embedded on the original Testimonials page.</summary>

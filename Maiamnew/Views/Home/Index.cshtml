@@ -269,7 +269,10 @@
                         <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-@facility.Icon"></use></svg></span>
                         <div>
                             <h3>@facility.Title</h3>
-                            <p>@facility.Description</p>
+                            @if (facility.Description is not null)
+                            {
+                                <p>@facility.Description</p>
+                            }
                         </div>
                     </li>
                 }
@@ -278,7 +281,7 @@
         </div>
         <div class="home-facilities__media" data-reveal>
             <div class="media-frame">
-                <maiam-img key="facilities/computer-lab" sizes="(min-width: 960px) 40vw, 92vw" />
+                <maiam-img key="facilities/classroom" sizes="(min-width: 960px) 40vw, 92vw" />
             </div>
         </div>
     </div>
@@ -392,12 +395,12 @@
         <div class="grid grid--2">
             <figure class="home-film" data-reveal>
                 <div class="native-video">
-                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician Level 4 course film">
+                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician course film">
                         <source src="/assets/videos/maiam-brand-film.mp4" type="video/mp4" />
-                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician Level 4 course film</a>
+                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician course film</a>
                     </video>
                 </div>
-                <figcaption>Auto Body Technician Level 4 at MAIAM</figcaption>
+                <figcaption>Auto Body Technician training at MAIAM</figcaption>
             </figure>
             <figure class="home-film" data-reveal>
                 <div class="native-video">

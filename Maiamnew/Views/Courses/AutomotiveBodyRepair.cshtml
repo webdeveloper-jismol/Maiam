@@ -1,6 +1,6 @@
 @{
     var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Automotive Body Repair Technician") };
-    const string summary = "One-year ASDC, NSDC & NCVET certified Automotive Body Repair Technician (Level 4) course in Thrissur, Kerala: 8 months training + 4 months internship.";
+    const string summary = "One-year ASDC, NSDC & NCVET certified Automotive Body Repair Technician course in Thrissur, Kerala: 8 months training + 4 months dealership internship.";
     ViewData.SetPageMeta(new PageMeta
     {
         Title = "Automotive Body Repair Technician Course, Thrissur",
@@ -20,7 +20,7 @@
         Lead: "Learn to repair the body and frame of vehicles damaged by major and minor dents – a one-year central government certified course with internship training in dealerships.",
         ImageKey: "workshops/students-repair-bay",
         Breadcrumbs: crumbs,
-        Eyebrow: "Course · Model curriculum: Automotive Body Technician Level 4");
+        Eyebrow: "Course · Model curriculum: Automotive Body Technician");
     var practical = new[]
     {
         "automotive-body-repair/students-door-panel",
@@ -70,23 +70,61 @@
     <div class="container split split--wide-text">
         <div>
             <p class="eyebrow">About the course</p>
-            <h2 id="abr-about-title">Become an Automotive Body Repair Technician (Level 4)</h2>
+            <h2 id="abr-about-title">Build Technical Expertise. Develop Practical Skills. Shape Your Automotive Career</h2>
             <div class="prose">
                 <p>
-                    An Automotive Body Repair Technician Level 4 is responsible for the repair of vehicles by working on the
-                    body and frame of a vehicle damaged mostly by major or minor dents in the body. Whatever the damage or crash
-                    on the body of the vehicle, you can repair it and make it perfect.
+                    An Automotive Body Repair Technician is a skilled professional responsible for inspecting, 
+                    assessing and repairing damaged vehicle body structures and components resulting from minor or major collisions, 
+                    dents and other forms of physical damage.
                 </p>
                 <p>
-                    The course follows the model curriculum for Automotive Body Technician Level 4 of ASDC (Automotive Skill
-                    Development Council). The minimum educational qualification is a 10th class pass and the minimum job entry
-                    age is 18 years.
+                    This programme is designed to develop the technical knowledge and practical competencies required to perform 
+                    automotive body repair operations using appropriate tools, equipment and industry-standard techniques. 
+                    Through hands-on training and structured practical learning, trainees gain the skills necessary to restore damaged 
+                    vehicle body components to their required condition while following workplace safety and quality standards.
                 </p>
-                <p>Trainees who need to can continue their studies in their field during their employment and attain higher levels.</p>
+                <p>The course is aligned with the Automotive Body Repair Technician  Model Curriculum prescribed by the Automotive 
+                    Skills Development Council (ASDC), ensuring industry-relevant training and occupational competencies.</p>
             </div>
         </div>
         <div class="media-frame">
             <maiam-img key="automotive-body-repair/dent-repair-equipment" sizes="(min-width: 960px) 40vw, 92vw" />
+        </div>
+    </div>
+</section>
+
+<!-- Eligibility & career progression -->
+<section class="section section--light" aria-labelledby="abr-pathway-title">
+    <div class="container">
+        <div class="section-head">
+            <p class="eyebrow">Admission &amp; careers</p>
+            <h2 id="abr-pathway-title">Who can join, and where it leads</h2>
+        </div>
+        <div class="abr-pathway">
+            <article class="abr-pathway__card">
+                <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg></span>
+                <h3>Eligibility Criteria</h3>
+                <ul class="check-list">
+                    <li>Minimum educational qualification: 10th Standard pass.</li>
+                    <li>Minimum age for entry: 18 years.</li>
+                </ul>
+            </article>
+            <article class="abr-pathway__card">
+                <span class="icon-badge icon-badge--accent"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"></use></svg></span>
+                <h3>Career Progression</h3>
+                <p>Successful trainees can explore employment opportunities in:</p>
+                <ul class="abr-pathway__workplaces">
+                    <li>Automobile dealerships</li>
+                    <li>Authorised service centres</li>
+                    <li>Multi-brand workshops</li>
+                    <li>Vehicle body repair facilities</li>
+                    <li>Automotive collision repair units</li>
+                </ul>
+                <p class="abr-pathway__note">
+                    They can also pursue further training and higher-level qualifications while gaining professional
+                    experience, enabling continuous career advancement in the automotive industry.
+                </p>
+            </article>
         </div>
     </div>
 </section>
@@ -130,10 +168,10 @@
             <span class="qp-card__icon"><svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg></span>
             <div class="qp-card__text">
                 <p class="eyebrow">Model curriculum</p>
-                <h2 id="abr-curriculum-title" class="qp-card__title">Qualification Pack – Auto Body Repair Technician Level 4</h2>
+                <h2 id="abr-curriculum-title" class="qp-card__title">Qualification Pack – Auto Body Repair Technician</h2>
                 <p>The qualification pack published by the Automotive Skill Development Council sets out the job role, standards and assessment criteria for this course.</p>
             </div>
-            <a class="btn btn--primary qp-card__btn" href="/assets/documents/qp-automotive-body-repair-technician-level-4.pdf" target="_blank" rel="noopener" type="application/pdf">
+            <a class="btn btn--primary qp-card__btn" href="/assets/documents/qp-automotive-body-repair-technician.pdf" target="_blank" rel="noopener" type="application/pdf">
                 <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
                 View PDF <span class="qp-card__size">(1.3 MB)</span>
             </a>
@@ -148,7 +186,7 @@
             <div>
                 <p class="eyebrow">Practical training</p>
                 <h2 id="abr-practical-title">Inside the body repair workshop</h2>
-                <p class="lead">Photographs from MAIAM’s workshop at Painoor, Valapad.</p>
+                <!--<p class="lead">Photographs from MAIAM’s workshop at Painoor, Valapad.</p>-->
             </div>
             <a class="link-arrow" href="/our-facilities/">Our facilities <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
         </div>
@@ -169,30 +207,54 @@
 <section class="section" aria-labelledby="abr-why-title">
     <div class="container split">
         <div>
-            <p class="eyebrow">Why automotive body repair</p>
-            <h2 id="abr-why-title">A skill every vehicle will always need</h2>
+            <!--<p class="eyebrow">Why automotive body repair</p>-->
+            <h2 id="abr-why-title">
+                The Expertise behind Vehicle Restoration and Collision Repair
+            </h2>
             <div class="prose">
                 <p>
-                    The Indian Automobile Industry is expected to employ 36 million people by 2026. To cope with such a
-                    transformation, constant skilling, re-skilling and up-skilling of the existing and future workforce is
-                    extremely important. The new jobs are likely to move away from traditional manufacturing.
+                    The automotive industry is undergoing a major transformation driven by technological advancements, 
+                    vehicle electrification and evolving mobility solutions. As the industry continues to grow, 
+                    the demand for skilled and qualified automotive professionals remains essential.
                 </p>
                 <p>
-                    Technology and mechanisms may change, and vehicles are moving towards electrification. But every vehicle
-                    needs a body. It may be damaged, and the damage must be corrected and perfected – which is why body repair
-                    skills are valued around the world.
+                    Regardless of whether a vehicle is powered by petrol, diesel, electricity or hybrid technology, 
+                    its body structure remains a critical component. Accidents, collisions, dents, 
+                    corrosion and structural damage make professional body repair an essential part of vehicle maintenance and 
+                    restoration.
+                </p>
+                <p>
+                    Automotive Body Repair Technicians play a vital role in restoring damaged vehicles through specialised repair 
+                    techniques, modern equipment and precision workmanship. From minor dent removal to major structural repairs, 
+                    their expertise helps restore vehicle appearance, structural integrity and safety in accordance with manufacturer 
+                    specifications.
+                </p>
+                <p>
+                    With the continuous expansion of the global automotive industry, automotive body repair offers opportunities for 
+                    skilled professionals across authorised dealerships, multi-brand service centres, independent workshops and 
+                    specialised collision repair facilities.
+                </p>
+                <p>
+                    Technology may transform the automobile, but the need for skilled professionals to repair and restore vehicles 
+                    remains. Automotive Body Repair is a skill with lasting relevance and promising career opportunities.
                 </p>
             </div>
         </div>
         <div class="abr-asdc">
-            <h3>About ASDC</h3>
+            <h3>Strengthening India's Automotive Skills Ecosystem</h3>
             <p>
-                ASDC (Automotive Skill Development Council) is promoted by the automobile industry through the Society of
-                Indian Automobile Manufacturers (SIAM), Automotive Component Manufacturers Association (ACMA) and Federation of
-                Automobile Dealers Association (FADA), and by the Government of India, represented by the Department of Heavy
-                Industry and the National Skill Development Corporation (NSDC).
+                The Automotive Skills Development Council (ASDC) is India's sector-specific skill development council 
+                for the automotive industry. It is an industry-led initiative promoted by the Society of Indian Automobile
+                Manufacturers (SIAM), Automotive Component Manufacturers Association of India (ACMA) and Federation of Automobile 
+                Dealers Associations (FADA), with support from the Government of India and the National Skill Development Corporation
+                (NSDC).
             </p>
-            <p>ASDC is initiating structured reforms to bridge the demand–supply mismatch of the skilled workforce.</p>
+            <p>ASDC works towards developing a skilled, competent and industry-ready workforce by aligning skill development programmes
+                with the evolving requirements of the automotive sector. Through industry-driven occupational standards, structured 
+                training frameworks and recognised qualification pathways, ASDC aims to bridge the gap between industry skill 
+                requirements and workforce capabilities.</p>
+            <p>Its initiatives focus on enhancing employability, promoting technical excellence and ensuring that India's automotive 
+                workforce is equipped to meet emerging technological advancements and changing industry demands.</p>
             <a class="link-arrow" href="/certificate-of-affiliation/">MAIAM’s ASDC affiliation <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
         </div>
     </div>
@@ -222,21 +284,21 @@
     <div class="container">
         <div class="section-head">
             <p class="eyebrow eyebrow--light">Course videos</p>
-            <h2 id="abr-videos-title">Auto Body Technician Level 4 at MAIAM</h2>
+            <h2 id="abr-videos-title">Auto Body Technician training at MAIAM</h2>
         </div>
         <div class="abr-videos">
             <figure class="abr-videos__main">
                 <div class="native-video">
-                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician Level 4 course film">
+                    <video controls preload="none" playsinline poster="/assets/images/posters/maiam-brand-film.webp" aria-label="Auto Body Technician course film">
                         <source src="/assets/videos/maiam-brand-film.mp4" type="video/mp4" />
-                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician Level 4 course film</a>
+                        <a href="/assets/videos/maiam-brand-film.mp4">Download the Auto Body Technician course film</a>
                     </video>
                 </div>
-                <figcaption class="video-embed__caption">Auto Body Technician Level 4 – course film</figcaption>
+                <figcaption class="video-embed__caption">Auto Body Technician – course film</figcaption>
             </figure>
             <div class="abr-videos__intro">
                 <h3>Watch the course films</h3>
-                <p>See students training for the Auto Body Technician Level 4 course, with more films from Manappuram Foundation’s YouTube channel below.</p>
+                <p>See students training for the Auto Body Technician course, with more films from Manappuram Foundation’s YouTube channel below.</p>
                 <a class="btn btn--ghost-light" href="/register-now/">Enquire about this course</a>
             </div>
             @{
