@@ -36,8 +36,13 @@ namespace Maiamnew.Models
         [Display(Name = "Age")]
         public int? Age { get; set; }
 
-        [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
-        [StringLength(150)]
+        // A bare address only: it becomes the email's Reply-To, so display names, angle brackets,
+        // commas and spaces are rejected here. [EmailAddress] is too permissive for that — it
+        // accepts "Name <a@b.com>" and "a@b c", which would either smuggle a display name into the
+        // header or throw when the address is parsed, losing the enquiry.
+        [StringLength(150, ErrorMessage = "Email must be 150 characters or fewer.")]
+        [RegularExpression(@"^[A-Za-z0-9._%+'\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}$",
+            ErrorMessage = "Please enter a valid email address.")]
         [Display(Name = "Email address (optional)")]
         public string? Email { get; set; }
 

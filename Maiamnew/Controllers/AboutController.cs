@@ -17,7 +17,7 @@ namespace Maiamnew.Controllers
         [Route("testimonials")]
         public IActionResult Testimonials() => View();
 
-        [Route("directors-message")]
-        public IActionResult DirectorsMessage() => View();
+        // The Director's Message page was removed at the owner's request on 13 Nov 2026.
+        // /directors-message/ now 301s to /about-maiam/ (see LegacyUrlMiddleware).
     }
 }

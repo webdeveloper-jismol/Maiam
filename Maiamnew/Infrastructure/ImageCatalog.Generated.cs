@@ -27,10 +27,19 @@ namespace Maiamnew.Infrastructure
             Add("automotive-body-repair/dent-repair-equipment", 450, 338, "Dent-pulling equipment fitted to a car door during dent repair practice", 450);
             Add("automotive-body-repair/quarter-panel-replacement", 1280, 720, "Quarter panel replacement in progress at the MAIAM workshop", 480, 720, 960, 1280);
             Add("automotive-body-repair/door-inspection", 1600, 1200, "Students examining a car door during practical training", 480, 720, 960, 1600);
+            Add("automotive-body-repair/bumper-heat-repair", 1600, 1065, "Student using a heat gun to repair a plastic bumper while classmates watch", 480, 720, 960, 1600);
+            Add("automotive-body-repair/bench-grinding", 1600, 1065, "Student grinding a metal strip held in a bench vice", 480, 720, 960, 1600);
+            Add("automotive-body-repair/sheet-metal-marking", 1600, 1065, "Students marking and cutting sheet metal at a workbench", 480, 720, 960, 1600);
+            Add("automotive-body-repair/sheet-metal-bench", 1280, 1923, "Student shaping sheet metal at a workbench in the MAIAM workshop", 480, 720, 960, 1280);
+            Add("automotive-body-repair/panel-inspection-students", 1280, 1923, "Students inspecting a formed sheet-metal piece during practical training", 480, 720, 960, 1280);
             Add("advanced-welding/instructor-guided-practice", 1600, 1064, "Instructor guiding students during welding practice", 480, 720, 960, 1600);
             Add("advanced-welding/student-welding", 1600, 2405, "Student welding with a protective mask at MAIAM", 480, 720, 960, 1600);
             Add("advanced-welding/floor-practice", 1600, 2405, "Students practising welding on the workshop floor", 480, 720, 960, 1600);
             Add("advanced-welding/arc-closeup-wide", 1860, 676, "Close-up of arc welding during practical training", 640, 960, 1200, 1860);
+            Add("advanced-welding/mig-practice-supervised", 1600, 1065, "Students practising MIG welding under instructor supervision in the MAIAM workshop", 480, 720, 960, 1600);
+            Add("advanced-welding/student-mig-torch", 1600, 1065, "Student welding a metal plate while an instructor and a classmate watch", 480, 720, 960, 1600);
+            Add("advanced-welding/booth-welding-practice", 1600, 1065, "Students welding inside a shielded booth while an instructor steadies it", 480, 720, 960, 1600);
+            Add("advanced-welding/student-mask-welding", 1126, 2000, "Student welding a steel bracket wearing a full welding mask", 480, 720, 960, 1126);
             Add("facilities/computer-lab", 720, 540, "MAIAM computer lab with student workstations", 480, 720);
             Add("facilities/classroom-session", 720, 540, "Students attentive during a classroom session", 480, 720);
             Add("facilities/classroom", 720, 540, "Students seated in a MAIAM classroom", 480, 720);
@@ -38,6 +47,7 @@ namespace Maiamnew.Infrastructure
             Add("facilities/classroom-address", 1600, 1064, "Faculty addressing students in a MAIAM classroom", 480, 720, 960, 1600);
             Add("facilities/hall-session-wide", 1920, 876, "Students attending a session in the MAIAM hall", 640, 960, 1200, 1920);
             Add("facilities/laptop-classroom", 1600, 1200, "Students working on laptops in a classroom", 480, 720, 960, 1600);
+            Add("facilities/classroom-instructor-session", 1600, 1065, "Instructor addressing students during a classroom session at MAIAM", 480, 720, 960, 1600);
             Add("about/technician-safety-gloves", 480, 583, "Technician wearing safety gloves in the MAIAM workshop", 480);
             Add("about/students-tool-board", 480, 583, "Students at the workshop tool board", 480);
             Add("about/director-sivadas-aniyan", 400, 400, "Dr. Sivadas Aniyan T.S, Director, MAIAM", 400);
@@ -108,6 +118,7 @@ namespace Maiamnew.Infrastructure
             Add("gallery/festive-celebrations/festive-celebrations-06", 1280, 960, "Students in Santa caps during Christmas celebrations", 480, 720, 960, 1280);
             Add("gallery/festive-celebrations/festive-celebrations-07", 1599, 899, "Students and staff gathered for Christmas celebrations in the hall", 480, 720, 960, 1599);
             Add("gallery/festive-celebrations/festive-celebrations-08", 480, 1041, "Illuminated Christmas crib decoration at MAIAM", 480);
+            Add("gallery/festive-celebrations/festive-celebrations-09", 1600, 900, "Students and staff celebrating with a Maveli performer in the MAIAM workshop", 480, 720, 960, 1600);
             Add("gallery/students-and-faculty/students-and-faculty-01", 1280, 853, "Group photograph of MAIAM students with faculty and guests", 480, 720, 960, 1280);
             Add("gallery/students-and-faculty/students-and-faculty-02", 1600, 1064, "MAIAM students in uniform posing in the workshop", 480, 720, 960, 1600);
             Add("gallery/students-and-faculty/students-and-faculty-03", 1600, 1064, "Students and staff group photograph in the workshop", 480, 720, 960, 1600);

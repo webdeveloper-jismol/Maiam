@@ -31,7 +31,7 @@ Status values: **Complete** · **Complete** · **Blocked** (needs owner input) �
 |--------------|-------|---------|----------|
 | `/two-wheeler-repair-technician-course/` | Two Wheeler Repair Technician | 4-month course details | Rebuilt at the same URL, kept out of the menu (as on the original). Current availability must be confirmed. |
 | `/welding-technician/` | Welding Technician | 1-month course, 5 welding modules | Rebuilt at the same URL, kept out of the menu. Overlaps the 3-month Advanced Welding course: confirm whether it is still offered. |
-| `/directors-message/` | Directors Message | Message from Dr. Sivadas Aniyan T.S, Director | Rebuilt at the same URL; linked from About MAIAM. Confirm the message and director details are current. |
+| `/directors-message/` | Directors Message | Message from Dr. Sivadas Aniyan T.S, Director | **Removed at the owner’s request, 13 Nov 2026.** The URL now 301s to `/about-maiam/`, and the teaser on About MAIAM was removed with it. |
 | `/who-we-are/` | Who We Are | Older "about" text | Content merged into About MAIAM (`#who-we-are`); URL 301 → `/about-maiam/#who-we-are`. |
 | `/video-gallery/` | Video Gallery | 3 YouTube videos | Videos merged into Gallery (`#videos`); URL 301 → `/gallery/#videos`. |
 | `/certifications/` | Certifications | Empty page | 301 → `/nsdc/`. |
@@ -86,4 +86,4 @@ Status values: **Complete** · **Complete** · **Blocked** (needs owner input) �
 8. **Gallery grouping** – two images under "Drug Awareness Section" show a Mahindra bodyshop visit and a Toyota facility visit; they are grouped with those visits in the new gallery.
 9. **Course page statements** – "Indian Automobile Industry is expected to employ 36 million people by 2026" and "By 2030, all the vehicles in the world will be electrified" are dated/unverifiable claims kept from the original.
 10. **Two Wheeler Repair** and **Welding Technician** (1 month) courses are not in the original menu – confirm whether they are offered.
-11. **Director's Message** – confirm Dr. Sivadas Aniyan T.S is the current director.
+11. ~~**Director's Message** – confirm Dr. Sivadas Aniyan T.S is the current director.~~ No longer applicable: the page was removed on 13 Nov 2026.

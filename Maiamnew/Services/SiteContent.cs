@@ -113,6 +113,17 @@ namespace Maiamnew.Services
                 Range("gallery/new-batch-commencement/new-batch-commencement", 8)),
             new("practical-training", "Practical Training & Campus", null,
             [
+                // Newest MAIAM photographs first
+                "advanced-welding/mig-practice-supervised",
+                "advanced-welding/student-mig-torch",
+                "advanced-welding/booth-welding-practice",
+                "advanced-welding/student-mask-welding",
+                "automotive-body-repair/bumper-heat-repair",
+                "automotive-body-repair/sheet-metal-marking",
+                "automotive-body-repair/bench-grinding",
+                "automotive-body-repair/sheet-metal-bench",
+                "automotive-body-repair/panel-inspection-students",
+                "facilities/classroom-instructor-session",
                 "automotive-body-repair/students-door-panel",
                 "workshops/students-repair-bay",
                 "advanced-welding/instructor-guided-practice",
@@ -139,7 +150,7 @@ namespace Maiamnew.Services
                 "campus/campus-pathway",
             ]),
             new("festive-celebrations", "Festive Celebrations", null,
-                Range("gallery/festive-celebrations/festive-celebrations", 8)),
+                Range("gallery/festive-celebrations/festive-celebrations", 9)),
             new("students-and-faculty", "Students & Faculty", null,
                 Range("gallery/students-and-faculty/students-and-faculty", 9)),
         ];

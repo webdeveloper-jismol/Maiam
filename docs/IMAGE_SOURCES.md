@@ -129,3 +129,26 @@ Renditions are `/assets/images/{key}-{width}.webp`. All are original MAIAM photo
 | `assets/videos/student-testimonial.mp4` | https://maiam.co.in/wp-content/uploads/2022/02/Untitled-design.mp4 |
 | `assets/documents/qp-automotive-body-repair-technician.pdf` | https://maiam.co.in/wp-content/uploads/2022/02/QP-Auto-Body-Repair-Technician-level-4.pdf |
 | `assets/fonts/sora-latin-var.woff2`, `inter-latin-var.woff2` | Google Fonts (Sora, Inter – SIL Open Font License 1.1) |
+
+## Photographs supplied by MAIAM – 13 November 2026
+
+Eleven original MAIAM photographs supplied directly by the institute (not from the WordPress site).
+Processed to the same responsive WebP format as everything above, quality 72.
+
+| Key | Widths | Largest | Alt text |
+|-----|--------|---------|----------|
+| `advanced-welding/mig-practice-supervised` | 480, 720, 960, 1600 | 1600×1065 | Students practising MIG welding under instructor supervision in the MAIAM workshop |
+| `advanced-welding/student-mig-torch` | 480, 720, 960, 1600 | 1600×1065 | Student welding a metal plate while an instructor and a classmate watch |
+| `advanced-welding/booth-welding-practice` | 480, 720, 960, 1600 | 1600×1065 | Students welding inside a shielded booth while an instructor steadies it |
+| `advanced-welding/student-mask-welding` | 480, 720, 960, 1126 | 1126×2000 | Student welding a steel bracket wearing a full welding mask |
+| `automotive-body-repair/bumper-heat-repair` | 480, 720, 960, 1600 | 1600×1065 | Student using a heat gun to repair a plastic bumper while classmates watch |
+| `automotive-body-repair/bench-grinding` | 480, 720, 960, 1600 | 1600×1065 | Student grinding a metal strip held in a bench vice |
+| `automotive-body-repair/sheet-metal-marking` | 480, 720, 960, 1600 | 1600×1065 | Students marking and cutting sheet metal at a workbench |
+| `automotive-body-repair/sheet-metal-bench` | 480, 720, 960, 1280 | 1280×1923 | Student shaping sheet metal at a workbench in the MAIAM workshop |
+| `automotive-body-repair/panel-inspection-students` | 480, 720, 960, 1280 | 1280×1923 | Students inspecting a formed sheet-metal piece during practical training |
+| `facilities/classroom-instructor-session` | 480, 720, 960, 1600 | 1600×1065 | Instructor addressing students during a classroom session at MAIAM |
+| `gallery/festive-celebrations/festive-celebrations-09` | 480, 720, 960, 1600 | 1600×900 | Students and staff celebrating with a Maveli performer in the MAIAM workshop |
+
+The original JPEGs (2000×1331 / 1331×2000 / 1920×1080 / 1126×2000) are **not** kept in this
+repository — only the optimised WebP renditions are. Keep the originals in MAIAM's own file store
+in case the images ever need re-cropping or re-encoding.

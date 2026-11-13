@@ -9,18 +9,6 @@
     .register-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; }
 }
 
-.register-form-card {
-    padding: clamp(22px, 4vw, 44px);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    background: #fff;
-    box-shadow: var(--shadow);
-}
-
-.register-status:empty { display: none; }
-.register-status { margin-bottom: 24px; }
-.register-status:focus { outline: none; }
-.register-status .alert + .alert { margin-top: 12px; }
 
 .register-form-card__title {
     margin-bottom: 0.2em;
@@ -28,27 +16,6 @@
 }
 
 .register-form-card__hint { margin: 0 0 24px; }
-
-.form-optional {
-    font-weight: 400;
-    color: var(--text-secondary);
-}
-
-.register-form__actions {
-    display: grid;
-    gap: 12px;
-    margin-top: 28px;
-}
-
-@media (min-width: 640px) {
-    .register-form__actions { grid-template-columns: auto 1fr; align-items: center; gap: 20px; }
-    .register-form__actions .form-hint { margin: 0; }
-}
-
-.register-form button[disabled] {
-    opacity: 0.7;
-    cursor: progress;
-}
 
 /* Contact aside */
 .register-aside {

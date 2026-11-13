@@ -1,3 +1,4 @@
+@model ContactMessage
 @{
     var crumbs = new[] { new Breadcrumb("Contact Us") };
     ViewData.SetPageMeta(new PageMeta
@@ -16,6 +17,8 @@
         ImageKey: "campus/reception-lobby",
         Breadcrumbs: crumbs,
         Eyebrow: "Get in touch");
+    var messageSent = TempData["ContactSent"] is true;
+    var sendFailed = ViewData["SendFailed"] is true;
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/contact.css" asp-append-version="true" />
@@ -60,8 +63,125 @@
     </div>
 </section>
 
+<!-- Send us a message -->
+<section class="section" id="send-message" aria-labelledby="contact-form-title">
+    <div class="container contact-form-layout">
+        <div class="contact-form-intro">
+            <p class="eyebrow">Send us a message</p>
+            <h2 id="contact-form-title">Have a question for MAIAM?</h2>
+            <p class="lead">Fill in the form and our team will get back to you. For anything urgent, please call us.</p>
+            <ul class="contact-form-intro__list">
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg>
+                    <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a>
+                </li>
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                    <a href="@SiteInfo.WhatsAppUrl" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                </li>
+                <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                    <a href="mailto:@SiteInfo.Email">@SiteInfo.Email</a>
+                </li>
+            </ul>
+            <p class="form-hint">Looking to join a course? The <a href="/register-now/">Register Now</a> form collects the details MAIAM needs for admissions.</p>
+        </div>
+
+        <div class="form-card contact-form-card">
+            <div id="message-status" class="form-status" tabindex="-1" aria-live="polite">
+                @if (messageSent)
+                {
+                    <div class="alert alert--success" role="status">
+                        <svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>
+                        <div>
+                            <p><strong>Thank you. Your message has been sent to MAIAM.</strong></p>
+                            <p>We will get back to you at the email or phone number you provided.</p>
+                        </div>
+                    </div>
+                }
+                @if (sendFailed)
+                {
+                    <div class="alert alert--error" role="alert">
+                        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+                        <div>
+                            <p><strong>Your message could not be sent right now.</strong></p>
+                            <p>
+                                Please call <a href="tel:@SiteInfo.Phone1Tel">@SiteInfo.Phone1Display</a> or email
+                                <a href="mailto:@SiteInfo.Email">@SiteInfo.Email</a>. Your details are still in the form below.
+                            </p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <form method="post" asp-controller="Contact" asp-action="Contact" asp-antiforgery="true"
+                  novalidate data-form data-form-status="#message-status">
+                <div asp-validation-summary="ModelOnly" role="alert"></div>
+
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label asp-for="Name">Full name <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="Name" class="form-control" autocomplete="name" maxlength="100" />
+                        <span asp-validation-for="Name" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field">
+                        <label asp-for="Phone">Phone number <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="Phone" class="form-control" type="tel" inputmode="tel" autocomplete="tel"
+                               maxlength="16" aria-describedby="contact-phone-hint" />
+                        <p class="form-hint" id="contact-phone-hint">10-digit mobile number, e.g. 98765 43210</p>
+                        <span asp-validation-for="Phone" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Email">Email address <span class="required" aria-hidden="true">*</span></label>
+                        <input asp-for="Email" class="form-control" type="email" autocomplete="email" maxlength="254" />
+                        <span asp-validation-for="Email" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Course">Course of interest <span class="form-optional">(optional)</span></label>
+                        <select asp-for="Course" class="form-control">
+                            <option value="">Select a course</option>
+                            @foreach (var course in SiteContent.MainCourses)
+                            {
+                                <option value="@course.Name">@course.Name</option>
+                            }
+                            <option value="Other / general enquiry">Other / general enquiry</option>
+                        </select>
+                        <span asp-validation-for="Course" class="field-validation-error"></span>
+                    </div>
+
+                    <div class="form-field form-field--full">
+                        <label asp-for="Message">Message <span class="required" aria-hidden="true">*</span></label>
+                        <textarea asp-for="Message" class="form-control" rows="5" maxlength="1000"
+                                  placeholder="How can we help you?" aria-describedby="contact-message-count"></textarea>
+                        <p class="form-hint" id="contact-message-count" data-char-count="1000"></p>
+                        <span asp-validation-for="Message" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Spam protection: hidden field for bots, and a signed render time -->
+                <div class="form-honeypot" aria-hidden="true">
+                    <label for="Website">Leave this field empty</label>
+                    <input asp-for="Website" tabindex="-1" autocomplete="off" />
+                </div>
+                <input asp-for="FormToken" type="hidden" />
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--accent btn--lg" data-submit>
+                        Send message
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+                    </button>
+                    <p class="form-hint">Your details are emailed to MAIAM only so we can reply to your message.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
 <!-- Map -->
-<section class="section" aria-labelledby="contact-map-title">
+<section class="section section--light" aria-labelledby="contact-map-title">
     <div class="container contact-map-layout">
         <div class="contact-map__text">
             <p class="eyebrow">Find us</p>
@@ -114,4 +234,8 @@
 
 @section Scripts {
     <script src="~/js/contact.js" asp-append-version="true" defer></script>
+    @* Client-side validation (jQuery Validation Unobtrusive) is loaded by forms.js
+       on first interaction with the form; the server always validates as well. *@
+    <script src="~/js/forms.js" asp-append-version="true" defer
+            data-validation-scripts="/lib/jquery/dist/jquery.min.js /lib/jquery-validation/dist/jquery.validate.min.js /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

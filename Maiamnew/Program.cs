@@ -54,6 +54,9 @@ builder.Services.AddRateLimiter(options =>
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Email"));
 builder.Services.AddScoped<IEnquiryEmailSender, SmtpEnquiryEmailSender>();
 
+// Shared spam check (signed render timestamp) for the Register Now and Contact Us forms.
+builder.Services.AddSingleton<FormGuard>();
+
 // Output non-ASCII text (–, ’, ₹, Malayalam) as UTF-8 instead of numeric entities
 builder.Services.Configure<WebEncoderOptions>(options =>
     options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All));

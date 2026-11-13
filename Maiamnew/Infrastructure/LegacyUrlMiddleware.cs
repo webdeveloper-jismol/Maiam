@@ -12,6 +12,7 @@ namespace Maiamnew.Infrastructure
         {
             // Pages that were merged into other pages
             ["/who-we-are/"] = "/about-maiam/#who-we-are",
+            ["/directors-message/"] = "/about-maiam/",
             ["/video-gallery/"] = "/gallery/#videos",
             ["/certifications/"] = "/nsdc/",
             ["/accreditation-certificate/"] = "/certificate-of-affiliation/",

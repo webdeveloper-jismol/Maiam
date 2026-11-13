@@ -28,8 +28,8 @@
 
 <section class="section">
     <div class="container register-layout">
-        <div class="register-form-card">
-            <div id="enquiry-status" class="register-status" tabindex="-1" aria-live="polite">
+        <div class="form-card register-form-card">
+            <div id="enquiry-status" class="form-status" tabindex="-1" aria-live="polite">
                 @if (sent)
                 {
                     <div class="alert alert--success" role="status">
@@ -58,7 +58,8 @@
             <h2 class="register-form-card__title">Enquiry form</h2>
             <p class="form-hint register-form-card__hint"><span class="required" aria-hidden="true">*</span> indicates a required field</p>
 
-            <form method="post" asp-controller="Register" asp-action="RegisterNow" asp-antiforgery="true" class="register-form" novalidate data-register-form>
+            <form method="post" asp-controller="Register" asp-action="RegisterNow" asp-antiforgery="true"
+                  novalidate data-form data-form-status="#enquiry-status">
                 <div asp-validation-summary="ModelOnly" role="alert"></div>
 
                 <div class="form-grid">
@@ -131,7 +132,7 @@
                 </div>
                 <input asp-for="FormToken" type="hidden" />
 
-                <div class="register-form__actions">
+                <div class="form-actions">
                     <button type="submit" class="btn btn--accent btn--lg" data-submit>
                         Send enquiry
                         <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
@@ -175,8 +176,8 @@
 </section>
 
 @section Scripts {
-    @* Client-side validation (jQuery Validation Unobtrusive) is loaded by register-now.js
+    @* Client-side validation (jQuery Validation Unobtrusive) is loaded by forms.js
        on first interaction with the form; the server always validates as well. *@
-    <script src="~/js/register-now.js" asp-append-version="true" defer
+    <script src="~/js/forms.js" asp-append-version="true" defer
             data-validation-scripts="/lib/jquery/dist/jquery.min.js /lib/jquery-validation/dist/jquery.validate.min.js /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

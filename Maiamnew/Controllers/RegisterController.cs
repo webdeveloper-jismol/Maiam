@@ -1,7 +1,6 @@
-using System.Globalization;
+using Maiamnew.Infrastructure;
 using Maiamnew.Models;
 using Maiamnew.Services;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
@@ -10,16 +9,14 @@ namespace Maiamnew.Controllers
     /// <summary>"Register Now" enquiry form (original URL /register-now/), delivered by email.</summary>
     public class RegisterController : Controller
     {
-        private static readonly TimeSpan MinimumFillTime = TimeSpan.FromSeconds(2);
-
         private readonly IEnquiryEmailSender _sender;
-        private readonly IDataProtector _protector;
+        private readonly FormGuard _formGuard;
         private readonly ILogger<RegisterController> _logger;
 
-        public RegisterController(IEnquiryEmailSender sender, IDataProtectionProvider protection, ILogger<RegisterController> logger)
+        public RegisterController(IEnquiryEmailSender sender, FormGuard formGuard, ILogger<RegisterController> logger)
         {
             _sender = sender;
-            _protector = protection.CreateProtector("Maiamnew.RegisterNow.FormToken");
+            _formGuard = formGuard;
             _logger = logger;
         }
 
@@ -36,6 +33,12 @@ namespace Maiamnew.Controllers
         [EnableRateLimiting("forms")]
         public async Task<IActionResult> RegisterNow(RegisterEnquiry model, CancellationToken cancellationToken)
         {
+            // Normalise before validating, so input made only of spaces fails the Required checks
+            // and no stray control characters reach the email.
+            Normalise(model);
+            ModelState.Clear();
+            TryValidateModel(model);
+
             if (!string.IsNullOrEmpty(model.Website) || !FilledByPerson(model.FormToken))
             {
                 _logger.LogWarning("Register Now submission rejected by spam checks.");
@@ -61,25 +64,19 @@ namespace Maiamnew.Controllers
             return Redirect("/register-now/#enquiry-status");
         }
 
-        private string NewFormToken() =>
-            _protector.Protect(DateTime.UtcNow.Ticks.ToString(CultureInfo.InvariantCulture));
-
-        private bool FilledByPerson(string? token)
+        private static void Normalise(RegisterEnquiry model)
         {
-            if (string.IsNullOrEmpty(token))
-            {
-                return false;
-            }
-
-            try
-            {
-                var rendered = new DateTime(long.Parse(_protector.Unprotect(token), CultureInfo.InvariantCulture), DateTimeKind.Utc);
-                return DateTime.UtcNow - rendered >= MinimumFillTime;
-            }
-            catch (Exception ex) when (ex is System.Security.Cryptography.CryptographicException or FormatException or ArgumentOutOfRangeException)
-            {
-                return false;
-            }
+            model.StudentName = FormText.SingleLine(model.StudentName) ?? string.Empty;
+            model.Qualification = FormText.SingleLine(model.Qualification) ?? string.Empty;
+            model.ContactNumber = FormText.SingleLine(model.ContactNumber) ?? string.Empty;
+            model.Email = FormText.SingleLine(model.Email);
+            model.Course = FormText.SingleLine(model.Course);
+            model.Address = FormText.MultiLine(model.Address);
+            model.Message = FormText.MultiLine(model.Message);
         }
+
+        private string NewFormToken() => _formGuard.NewToken();
+
+        private bool FilledByPerson(string? token) => _formGuard.FilledByPerson(token);
     }
 }

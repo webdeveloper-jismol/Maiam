@@ -166,3 +166,42 @@
     font-weight: 600;
     overflow-wrap: anywhere;
 }
+
+/* Send us a message */
+.contact-form-layout {
+    display: grid;
+    gap: 32px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .contact-form-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 56px; }
+    .contact-form-intro { position: sticky; top: calc(var(--header-height) + 24px); }
+}
+
+.contact-form-intro .lead { margin-bottom: 28px; }
+
+.contact-form-intro__list {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.contact-form-intro__list li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.contact-form-intro__list .icon { color: var(--accent-orange); flex-shrink: 0; }
+
+.contact-form-intro__list a {
+    color: var(--primary-navy);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.contact-form-intro__list a:hover { color: var(--automotive-blue); text-decoration: underline; }

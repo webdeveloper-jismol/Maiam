@@ -626,3 +626,286 @@ Owner request: remove the "Soft Skills Empowerment" facility, and the line "Free
 
 **Note**
 Only the cards are centred; the "Support beyond the classroom" heading stays left-aligned to match every other section heading on the site.
+
+---
+
+## 2026-11-13 – Contact Us message form
+
+### Task: Add a Contact Us form (modelled on the Mageet school site) delivering to mafoundteamit@gmail.com
+
+**Objective**
+Owner request: give the Contact page the same kind of contact form the Mageet site has, with
+messages emailed to `mafoundteamit@gmail.com`. The MAIAM Contact page previously showed contact
+details and a map only.
+
+**Completed Work**
+
+*Backend*
+- `Models/ContactMessage.cs` (new): Name, Email, Phone (all required), Course (optional), Message
+  (5–1000 chars), plus the `Website` honeypot and signed `FormToken`. Validation mirrors the
+  Register Now model — Malayalam-safe name regex, bare-address email regex, Indian mobile regex.
+- `Infrastructure/FormGuard.cs` (new): the spam guard (DataProtection-signed render timestamp,
+  2-second minimum fill time) extracted from `RegisterController` so both forms share one copy.
+  Registered as a singleton in `Program.cs`; `RegisterController` now uses it instead of its own
+  private implementation.
+- `Controllers/ContactController.cs`: GET issues a fresh form token; POST is `[ValidateAntiForgeryToken]`
+  + `[EnableRateLimiting("forms")]`, normalises input, re-validates, checks honeypot and fill time,
+  and uses the PRG pattern (`TempData["ContactSent"]` → `/contact-us/#message-status`). It never
+  reports success unless the mail server accepted the message.
+- `Services/EnquiryEmailSender.cs`: added `EmailSettings.ContactToAddress` (default
+  `mafoundteamit@gmail.com`) and a `SendAsync(ContactMessage, …)` overload. The message is sent
+  **from** the site mailbox with **Reply-To** set to the visitor, so it passes SPF/DKIM while Reply
+  still reaches the visitor. Subject is forced to a single line; the body is plain text.
+
+*Front end*
+- `Views/Contact/Contact.cshtml`: new "Send us a message" section between the contact cards and the
+  map — an intro column (phone / WhatsApp / email, and a pointer to Register Now for admissions)
+  beside the form card. The map section moved to `section--light` so the two alternate.
+- `wwwroot/css/common.css`: promoted the generic form rules that previously lived only in
+  `register-now.css` — `.form-status`, `.form-optional`, `.form-actions`, `.form-card`, and the
+  disabled-while-submitting button state — so both forms share them.
+- `wwwroot/css/contact.css`: `.contact-form-layout` (sticky intro + form, two columns from 1024 px,
+  stacked below) and `.contact-form-intro__list`.
+- `wwwroot/js/forms.js` (new, replaces `register-now.js`): the same behaviour, generalised to every
+  `[data-form]` on a page — lazy-loaded jQuery validation on first interaction, character counter
+  (driven by `aria-describedby` instead of a hard-coded `#Message`), double-submit protection with
+  a "Sending…" state, `aria-invalid` syncing, and focus moved to the result message via
+  `data-form-status`. `register-now.js` was deleted; both pages now load `forms.js`.
+
+*Configuration and docs*
+- `appsettings.Example.json`: added `Email:ContactToAddress`.
+- `docs/EMAIL_SETUP.md`: rewritten to cover both forms, with a Gmail App Password section. **The
+  password is not in the repository** — it must be set through user secrets (development) or
+  environment variables (IIS). Note recorded there that configuring SMTP enables both forms at once.
+
+**Testing Performed**
+Run on `http://localhost:5180` with `Email:PickupDirectory` set through user secrets (messages
+written as `.eml` files instead of sent); the setting was removed again after testing.
+- Build: 0 warnings, 0 errors.
+- Valid submission → redirect to `/contact-us/#message-status`, success message shown, and the
+  `.eml` produced has `To: mafoundteamit@gmail.com`, `Reply-To: "Test Visitor" <…>`, single-line
+  subject and the full plain-text body.
+- Empty submission → server returns the form with four field errors and sends nothing.
+- POST without an anti-forgery token → **HTTP 400**.
+- POST faster than the 2-second minimum → rejected ("could not be processed"), nothing sent.
+- POST with the honeypot filled → rejected, nothing sent.
+- Rate limit: repeated posts return **HTTP 429** with the branded "Too many attempts" page.
+- Register Now re-tested after the `FormGuard` / `forms.js` refactor: valid enquiry still delivers
+  to `maiam@manappuramfoundation.org`; card styling, character counter and submit state unchanged.
+- Layout checked at 1440 px and 375 px on both pages: no horizontal overflow, no console errors.
+
+**Not Done / Owner Action Required**
+- The Gmail App Password has to be set by the owner (it must never be committed):
+  `dotnet user-secrets set "Email:Password" "<app password>" --project Maiamnew`, along with
+  `Email:Host`, `Email:Port`, `Email:UserName` and `Email:FromAddress`.
+- Until those settings exist, both forms validate input and show the honest "could not be sent —
+  please call or email" message.
+
+### Fix: email settings needed an app restart to take effect
+
+**Problem reported**
+"Contact form mail arrives but the Register Now enquiry form does not work."
+
+**Diagnosis**
+Neither form was broken. Submitting both through the running instance returned their success
+messages, and an SMTP check against `smtp.gmail.com:587` authenticated successfully (`235 Accepted`),
+so mail was being accepted by Gmail in both cases.
+
+The real cause was stale configuration: the running process started at 10:55:49 while
+`appsettings.json` was last edited at 11:11:54. `SmtpEnquiryEmailSender` took
+`IOptions<EmailSettings>`, which is resolved once and cached for the life of the process, so edits
+to `Email:ToAddress` / `Email:ContactToAddress` after start-up were ignored and each form kept
+mailing the address configured earlier.
+
+**Completed Work**
+- `Services/EnquiryEmailSender.cs`: `SmtpEnquiryEmailSender` now takes `IOptionsSnapshot<EmailSettings>`
+  instead of `IOptions<EmailSettings>`. The service is registered scoped, so the settings are re-read
+  once per request and changes to the `Email` section apply on the next submission without a restart.
+- `docs/EMAIL_SETUP.md`: noted that the two destination keys are separate — `ToAddress` is Register
+  Now, `ContactToAddress` is Contact Us.
+
+**Testing Performed**
+- Compile check (`dotnet build -t:Compile`): 0 warnings, 0 errors. A full build could not write to
+  `bin` because the owner's own instance held `Maiamnew.exe`; the running app must be restarted once
+  for this change to take effect.
+- Live submissions through the owner's running instance: Contact Us and Register Now both returned
+  their success messages, confirming Gmail accepted both messages.
+
+### Task: HTML enquiry emails (matching the Mageet School layout) + Register Now destination
+
+**Objective**
+Owner request: send Register Now enquiries to `jizmol29@gmail.com`, and format both forms' emails
+like the Mageet School website's enquiry mail (dark header band, label/value detail table, Message
+panel, footer note) instead of plain text.
+
+**Completed Work**
+- `Services/EnquiryEmailTemplate.cs` (new): builds the HTML and plain-text bodies. Email-client-safe
+  HTML — nested tables, inline styles only, `bgcolor` alongside `background-color`, no flex/grid, a
+  fixed 600px wrapper for Outlook desktop, and a hidden preheader. Styled in MAIAM's own colours:
+  navy `#14283F` header with a 4px `#F28C28` rule under it, navy labels, `#1769AA` email links, and
+  an orange-bordered message panel. Every submitted value is HTML-encoded; `Address` keeps its line
+  breaks via `<br />` only.
+- `Services/EnquiryEmailSender.cs`: both `BuildMessage` overloads now go through a shared
+  `NewMessage` helper that attaches **two** alternate views — `text/plain` first, `text/html` second
+  — so clients that cannot render HTML still show a readable enquiry. Subjects are now
+  "New Website Enquiry – {name}" (Contact Us) and "New Course Enquiry – {name}" (Register Now).
+  The old plain-text-only `BuildBody` methods were removed.
+- `appsettings.json` (local, git-ignored): `Email:ToAddress` → `jizmol29@gmail.com`.
+
+**Testing Performed**
+- Compile check (`dotnet build -t:Compile`): 0 warnings, 0 errors.
+- Rendered both emails from the real template code in a throwaway console host and inspected the
+  output: header band, detail rows, Submitted On row, message panel and footer all present and
+  well-formed.
+- Escaping: fed `<script>alert(1)</script>` as a name and `<img src=x onerror=alert(2)>` as the
+  message. Output contains **0** raw `<script` and **0** raw `<img` — both render as visible text.
+- Plain-text alternative checked by eye; reads correctly with the same fields.
+- Note: previewing the email through the site itself shows it unstyled, because the site's CSP is
+  `style-src 'self'` and the browser drops inline `style` attributes. Mail clients do not apply CSP,
+  so this affects the preview only, not the delivered email.
+
+**Not Done / Owner Action Required**
+- The running instance must be restarted to pick up the new template (a full build could not write
+  to `bin` while the owner's app held `Maiamnew.exe`).
+
+### Task: Validation audit of both forms, and two fixes to Register Now
+
+**Objective**
+Owner question: do both forms have proper validation? Audited every field on both forms against the
+real model metadata, and checked what client-side rules each page emits.
+
+**Audit result**
+Contact Us was sound. Register Now had two genuine gaps, both now fixed:
+
+1. **Permissive email validation.** `RegisterEnquiry.Email` used `[EmailAddress]`, which accepted
+   `Name <a@b.com>` and `a@b c`. That value becomes the email's `Reply-To`, so the first would have
+   smuggled a visitor-controlled display name into the header, and the second would have thrown
+   `FormatException` when the address was parsed — caught by the sender, so the enquiry would have
+   been silently lost behind a generic "could not be sent". Replaced with the same strict
+   bare-address regex the Contact form already used. Blank is still accepted (the field is optional).
+2. **No input normalisation.** `ContactController` cleaned control characters and whitespace-only
+   input before validating; `RegisterController` did not. Register Now now does the same.
+
+**Completed Work**
+- `Infrastructure/FormText.cs` (new): `SingleLine` / `MultiLine` cleaners, moved out of
+  `ContactController` so both controllers share one copy rather than duplicating it.
+- `Controllers/RegisterController.cs`: added `Normalise(model)` + `ModelState.Clear()` +
+  `TryValidateModel(model)` at the top of the POST, mirroring `ContactController`.
+- `Controllers/ContactController.cs`: now calls the shared `FormText` helpers.
+- `Models/RegisterEnquiry.cs`: `Email` now uses the strict bare-address regex instead of
+  `[EmailAddress]`, with an explicit 150-character message.
+
+**Testing Performed**
+- Compile check: 0 warnings, 0 errors.
+- Ran a 42-case validation matrix through the real `DataAnnotations` metadata for both models
+  (empty, whitespace-only, under/over length, script tags, Malayalam names, apostrophes and hyphens,
+  non-Indian and malformed phone numbers, out-of-range ages, malformed emails). All behaved as
+  intended; the only ACCEPTs outside the baselines were the deliberately permissive free-text
+  fields, `Course` and `Qualification`.
+- Re-ran the email cases after the fix: blank and `a@b.com` accepted; `a@b c`, `Name <a@b.com>`,
+  `a@b.com,c@d.com`, `a@b` and 151 characters all rejected.
+- Confirmed from the served HTML that both pages emit unobtrusive client-side rules
+  (Contact: 4 required / 6 regex / 10 length; Register: 5 required / 4 regex / 14 length / 3 range)
+  plus the anti-forgery token and the lazy validation-script tag.
+
+**Known, accepted**
+- `Course` (both forms) and `Qualification` (Register) accept any text within their length limits.
+  `Course` is a `<select>` and `Qualification` an open input with a datalist, so a crafted POST can
+  put arbitrary text there. It is only emailed, and is HTML-encoded on the way out, so the impact is
+  limited to a nonsense value in the enquiry mail.
+
+---
+
+## 2026-11-13 – New MAIAM photographs
+
+### Task: Add 11 supplied MAIAM photographs to the Gallery, Auto Body course, Advanced Welding course and Home page
+
+**Objective**
+Owner supplied 11 original MAIAM photographs and asked for them in the Gallery, with the best of
+them used on the Auto Body course page and the Home page. On a follow-up question the owner also
+approved refreshing the Advanced Welding course page with the new welding shots.
+
+**Approval obtained**
+This machine had no WebP encoder (no sharp, no ImageMagick; Windows' own imaging stack cannot write
+WebP). Per the project rule on packages, the owner was asked and chose a **throwaway install outside
+the repository** — `sharp` was installed into a temporary folder, used once, and deleted. Nothing
+was added to the project, to git, or to any package manifest.
+
+**Completed Work**
+- Processed all 11 JPEGs (2000×1331, 1331×2000, 1920×1080, 1126×2000) into the site's existing
+  responsive WebP format at quality 72 — **44 files, 1.87 MB total**, in line with the existing
+  images (480 px ≈ 11–32 KB, 1600 px ≈ 59–155 KB).
+- `Infrastructure/ImageCatalog.Generated.cs`: 11 new entries, each with hand-written alt text
+  describing only what is visible in the photograph. Catalog is now 120 entries.
+- `Services/SiteContent.cs`: the 10 training photographs added to the top of the
+  "Practical Training & Campus" album (24 → 34 photos); the celebration photograph added to
+  "Festive Celebrations" (8 → 9).
+- `Views/Home/Index.cshtml`: hero secondary tile → `advanced-welding/student-mask-welding`;
+  three of the five training-grid tiles replaced with new photographs (MIG practice, sheet-metal
+  marking, bumper heat repair) with matching captions; gallery preview now leads with the new
+  celebration photo and the new classroom session.
+- `Views/Courses/AutomotiveBodyRepair.cshtml`: hero → `bumper-heat-repair`; the 450 px
+  `dent-repair-equipment` image (the lowest-resolution asset on the page) replaced in the media
+  frame by `sheet-metal-marking`; practical strip rebuilt from the new photographs. Also dropped
+  `quarter-panel-replacement`, which has promotional text burnt into the image, in favour of a clean
+  photograph.
+- `Views/Courses/AdvancedWelding.cshtml`: hero → `booth-welding-practice`; tall column image →
+  `student-mask-welding`; practical strip now leads with the two new MIG practice photographs.
+- `docs/IMAGE_SOURCES.md`: new section recording all 11, their renditions and alt text, and noting
+  that the original JPEGs are deliberately **not** kept in the repository.
+
+**Testing Performed**
+Because the owner's instance held `bin`, a Release build was published to a scratch folder and run
+on port 5181 for verification.
+- Build: 0 warnings, 0 errors (compile + Razor generation).
+- Catalog audit: 120 entries, **0 missing rendition files**; every literal image key used in any
+  `.cshtml` resolves to a registered entry (**0 unregistered**).
+- Decoded a sample of the output with sharp to confirm valid WebP at the catalogued dimensions, and
+  confirmed they are served as `image/webp` with HTTP 200.
+- Home, Auto Body course, Advanced Welding course and Gallery, at **1280 px and 375 px**, after
+  scrolling to force every lazy image to load: **0 broken images, 0 horizontal overflow** on all
+  four pages at both widths.
+- Gallery album counts verified in the rendered page: Practical Training & Campus 34, Festive
+  Celebrations 9; gallery page now renders 97 images.
+
+**Note**
+The owner's running instance must be restarted to see these changes — Razor views are compiled into
+the assembly, so the already-running build still serves the previous pages.
+
+### Task: Remove the Director's Message
+
+**Objective**
+Owner request: remove the Director's Message — both the standalone page and the teaser on About MAIAM.
+
+**Completed Work**
+- Deleted `Views/About/DirectorsMessage.cshtml`, `wwwroot/css/directors-message.css` and
+  `wwwroot/js/directors-message.js`. Checked first that nothing else used their classes
+  (`.director`, `.director-link`) — they were used only by that page.
+- `Controllers/AboutController.cs`: removed the `[Route("directors-message")]` action.
+- `Views/About/AboutMaiam.cshtml`: removed the Director's message teaser section.
+- `wwwroot/css/about-maiam.css`: removed the now-orphaned `.director-teaser*` rules (40 lines).
+- `Infrastructure/SiteNavigation.cs`: removed `/directors-message/` from `IndexablePaths`, so it no
+  longer appears in sitemap.xml.
+- `Infrastructure/LegacyUrlMiddleware.cs`: added `/directors-message/` → `/about-maiam/` as a **301**.
+  The page was an original WordPress URL, so redirecting rather than 404-ing preserves any existing
+  inbound links and search results.
+- `docs/MIGRATION_INVENTORY.md`: the row for `/directors-message/` now records the removal, and the
+  "confirm the current director" verification item is struck through as no longer applicable.
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder (the owner's instance held `bin`).
+- Build: 0 warnings, 0 errors.
+- Reference sweep across `.cs`, `.cshtml`, `.css`, `.js`, `.json`: the only remaining mentions are
+  the intentional redirect entry and an explanatory comment.
+- `/directors-message/` → **301** to `/about-maiam/`; `/directors-message` (no trailing slash) also
+  **301**; following the redirect ends at **200**.
+- `sitemap.xml`: **0** directors-message entries, 17 URLs total.
+- `/css/directors-message.css` and `/js/directors-message.js` → **404** (assets gone).
+- About MAIAM page: **0** occurrences of "Director" in the body text, **0** links to the old URL,
+  0 broken images, 0 horizontal overflow, stylesheets loading normally. The layout now flows
+  straight from the photo pair into the "Explore MAIAM" section with no gap.
+
+**Note**
+The portrait `about/director-sivadas-aniyan` (400×400) is now unused but was deliberately **left in
+place** — both the catalog entry and the image file — so the section can be restored without
+reprocessing. Remove it if the decision is permanent.

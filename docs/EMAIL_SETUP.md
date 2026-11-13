@@ -1,8 +1,16 @@
-# Register Now form – email setup
+# Website forms – email setup
 
-The Register Now form (`/register-now/`) emails each enquiry to MAIAM. Until SMTP settings are
-provided, the form validates input but shows an honest "could not be sent – please call or email"
-message. It never reports success unless the mail server accepted the message.
+Two forms send email, both through the same `Email` settings and the same mailbox:
+
+| Form | URL | Delivered to |
+|------|-----|--------------|
+| Register Now (course enquiry) | `/register-now/` | `Email:ToAddress` – default `maiam@manappuramfoundation.org` |
+| Contact Us (send us a message) | `/contact-us/` | `Email:ContactToAddress` – default `mafoundteamit@gmail.com` |
+
+Both set `Reply-To` to the visitor's own address, so replying from the mailbox goes straight back
+to them. Until SMTP settings are provided, each form validates input but shows an honest "could not
+be sent – please call or email" message. Neither ever reports success unless the mail server
+accepted the message.
 
 ## Settings
 
@@ -17,7 +25,30 @@ Configuration section `Email` (read by `Services/EmailSettings`):
 | `Email:Password` | *(secret)* | **Never commit this** |
 | `Email:FromAddress` | `website@manappuramfoundation.org` | Usually the same mailbox |
 | `Email:FromName` | `MAIAM Website` | Optional |
-| `Email:ToAddress` | `maiam@manappuramfoundation.org` | Default; where enquiries are delivered |
+| `Email:ToAddress` | `maiam@manappuramfoundation.org` | Where Register Now enquiries are delivered |
+| `Email:ContactToAddress` | `mafoundteamit@gmail.com` | Where Contact Us messages are delivered |
+
+> Setting these values switches on **both** forms at once – there is no separate on/off per form.
+
+> **The two destinations are separate keys.** `ToAddress` is the Register Now enquiry form;
+> `ContactToAddress` is the Contact Us message form. Changing one does not affect the other.
+
+### Using a Gmail mailbox
+
+Gmail rejects ordinary account passwords for SMTP. Turn on 2-Step Verification for the sending
+account and generate a 16-character **App Password** (Google Account → Security → App passwords),
+then use it as `Email:Password`:
+
+```text
+Email:Host     = smtp.gmail.com
+Email:Port     = 587
+Email:EnableSsl = true
+Email:UserName = <the Gmail address>
+Email:Password = <16-character app password, no spaces>
+Email:FromAddress = <the same Gmail address>
+```
+
+Gmail rewrites `From` to the authenticated mailbox, so `FromAddress` must match `UserName`.
 
 ### Development (Visual Studio / dotnet run)
 

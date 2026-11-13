@@ -1843,6 +1843,43 @@ textarea.form-control { min-height: 120px; resize: vertical; }
     overflow: hidden;
 }
 
+/* Result message above a form (success or send failure) */
+.form-status:empty { display: none; }
+.form-status { margin-bottom: 24px; }
+.form-status:focus { outline: none; }
+.form-status .alert + .alert { margin-top: 12px; }
+
+.form-optional {
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* Submit button plus the note that sits beside it */
+.form-actions {
+    display: grid;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+@media (min-width: 640px) {
+    .form-actions { grid-template-columns: auto 1fr; align-items: center; gap: 20px; }
+    .form-actions .form-hint { margin: 0; }
+}
+
+form button[disabled] {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* Card wrapper shared by the Register Now and Contact Us forms */
+.form-card {
+    padding: clamp(22px, 4vw, 44px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow);
+}
+
 .alert {
     display: flex;
     gap: 12px;

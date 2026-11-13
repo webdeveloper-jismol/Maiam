@@ -70,7 +70,6 @@ namespace Maiamnew.Infrastructure
             "/about-maiam/",
             "/vision-and-mission/",
             "/testimonials/",
-            "/directors-message/",
             "/nsdc/",
             "/certificate-of-affiliation/",
             "/courses/",
