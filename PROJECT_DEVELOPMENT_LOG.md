@@ -909,3 +909,76 @@ Verified on a Release build published to a scratch folder (the owner's instance 
 The portrait `about/director-sivadas-aniyan` (400×400) is now unused but was deliberately **left in
 place** — both the catalog entry and the image file — so the section can be restored without
 reprocessing. Remove it if the decision is permanent.
+
+### Task: Replace the site contact number with 90726 23103
+
+**Objective**
+Owner request: replace the number shown in the header top bar (+91 75948 10851) with 9072623103.
+
+**Completed Work**
+The header reads from a single shared constant, so the change applies everywhere that number appears.
+- `Infrastructure/SiteInfo.cs`: `Phone1Display` / `Phone1Tel` changed to `+91 90726 23103` /
+  `+919072623103`. This covers the header (desktop top bar and mobile nav), the footer, the Contact
+  page (4 places), the Register Now page (3 places), the rate-limit error page and the
+  `telephone` field in the site's structured data.
+- `SiteInfo.Phone2Display` / `Phone2Tel` held 90726 23103 and were the only other number on the
+  site. With Phone1 now carrying that number they were redundant, so they were removed and
+  `_EnquiryCTA.cshtml` (their only consumer) now reads Phone1. The CTA band shows the same number
+  as before.
+- `Views/Contact/Contact.cshtml`: the page's meta description had the old number hard-coded in the
+  text; updated so the search-result snippet matches the page.
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder.
+- Build: 0 warnings, 0 errors.
+- Source sweep: no occurrence of 7594810851 remains in any `.cs`, `.cshtml`, `.css`, `.js` or
+  `.json`, apart from the WhatsApp URL (see below) and an explanatory comment.
+- Rendered Home, Contact Us, Register Now, About MAIAM and Gallery: every `tel:` link is
+  `+919072623103` and every displayed number is `+91 90726 23103`. The only remaining occurrences of
+  the old number on each page are the WhatsApp links, and the counts match exactly.
+- Structured data on the Contact page now reports `"telephone":"+919072623103"`.
+- Header checked visually: top bar shows +91 90726 23103.
+
+**Not Done – owner decision needed**
+`SiteInfo.WhatsAppUrl` still points at `phone=917594810851`. Whether WhatsApp is registered on the
+new number is a fact that cannot be determined from the code, so it was deliberately left unchanged
+rather than guessed at. Every "Chat on WhatsApp" link on the site still opens a chat with the old
+number.
+
+---
+
+## 2026-11-14 – Phone numbers
+
+### Correction: 90726 23103 added alongside 75948 10851, not in place of it
+
+**What went wrong**
+Yesterday's request was to replace the number in the header top bar. That number came from a shared
+constant, so the change was applied everywhere it appeared — the footer, Contact page, Register Now
+page, error page and structured data included. That was wider than the request. The owner then
+asked for 90726 23103 to be **added** to the Contact page and footer without replacing the number
+already there, which confirmed both numbers should remain on the site.
+
+**Completed Work**
+- `Infrastructure/SiteInfo.cs`: restored `Phone1Display` / `Phone1Tel` to `+91 75948 10851` and
+  re-added `Phone2Display` / `Phone2Tel` for `+91 90726 23103`.
+- `Views/Shared/_Header.cshtml`: the desktop top bar and the mobile nav now show **Phone2 only**,
+  which is the change the owner actually asked for yesterday.
+- `Views/Shared/_Footer.cshtml`: the contact block lists **both** numbers, stacked under a single
+  phone icon.
+- `Views/Contact/Contact.cshtml`: the "Contact Number" card lists **both**; the "Have a question"
+  intro list beside the message form lists **both**; the page's meta description mentions both.
+- `Views/Shared/_EnquiryCTA.cshtml`: back to Phone2, as it was before yesterday's change.
+- Register Now, the rate-limit error page and the structured-data `telephone` field are back on
+  Phone1, as they were.
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder.
+- Build: 0 warnings, 0 errors.
+- Rendered Home: top bar shows 90726 23103 only; footer shows both; CTA band shows 90726 23103.
+- Rendered Contact Us: the Contact Number card and the form intro list each show both numbers.
+- 1280 px and 375 px: 0 horizontal overflow on both pages; the footer's two numbers stack cleanly
+  under one icon at both widths.
+
+**Still outstanding**
+`SiteInfo.WhatsAppUrl` continues to point at `phone=917594810851`. Whether WhatsApp is registered on
+90726 23103 cannot be determined from the code, so it is left for the owner to confirm.

@@ -23,6 +23,8 @@ namespace Maiamnew.Infrastructure
         public const double Longitude = 76.126489;
 
         // Contact
+        // Phone1 is the institute's original number; Phone2 was added later.
+        // The header shows Phone2 only; the footer and Contact page list both.
         public const string Phone1Display = "+91 75948 10851";
         public const string Phone1Tel = "+917594810851";
         public const string Phone2Display = "+91 90726 23103";
