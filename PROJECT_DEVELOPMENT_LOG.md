@@ -982,3 +982,159 @@ Verified on a Release build published to a scratch folder.
 **Still outstanding**
 `SiteInfo.WhatsAppUrl` continues to point at `phone=917594810851`. Whether WhatsApp is registered on
 90726 23103 cannot be determined from the code, so it is left for the owner to confirm.
+
+---
+
+## 2026-11-16 – Hero images
+
+### Task: Drop the small welding photo from the Home hero, and give the Gallery hero a training photo
+
+**Objective**
+Owner request: remove the small welding photo overlapping the Home page hero (it is already in the
+Gallery, so nothing is lost), and replace the Gallery page's hero — a tug-of-war photo from the Onam
+album — with a photograph of students working.
+
+**Completed Work**
+- `Views/Home/Index.cshtml`: removed the `home-hero__secondary` tile, which held
+  `advanced-welding/student-mask-welding`. That image is still published in the Gallery's
+  "Practical Training & Campus" album, so it remains on the site.
+- `wwwroot/css/index.css`: removed the now-orphaned `.home-hero__secondary` rules (two blocks plus
+  the two media-query overrides at 1024 px and 560 px). The tile was absolutely positioned, so the
+  hero's main image and the certification badge are unaffected.
+- `Views/Gallery/Gallery.cshtml`: hero `ImageKey` changed from `gallery/onam-2024/onam-2024-05` to
+  `advanced-welding/student-mig-torch` — a student welding with an instructor supervising, which
+  suits the page's "everyday training at MAIAM" lead better than the tug-of-war photo.
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder.
+- Build: 0 warnings, 0 errors.
+- Home page: the secondary tile is gone (0 in the DOM), the hero's main image and the certification
+  badge still render, 0 broken images, 0 horizontal overflow at desktop width and at 375 px.
+- Gallery page: hero now serves `student-mig-torch` with its catalogue alt text; 97 images render,
+  0 broken, 0 overflow.
+- Confirmed the removed welding photo still appears in the Gallery, and the "Practical Training &
+  Campus" album count is unchanged at 34 photos.
+
+### Task: Remove Mr. Kishore from the faculty
+
+**Objective**
+Owner request: remove Mr. Kishore from the Faculties page.
+
+**Completed Work**
+- `Services/SiteContent.cs`: removed the `Mr. Kishore` entry from the `Faculty` list. This drives
+  both the Faculties page and the faculty section on the Home page, so he is gone from both.
+- `Views/Faculties/Faculties.cshtml`: three pieces of copy claimed automotive **paint** expertise,
+  which came from Kishore's profile — he was the only Automotive Paint Technician listed. With him
+  removed, those claims had no basis among the remaining instructors, so they were corrected:
+  - meta description: "body repair and paint experience" → "body repair experience";
+  - hero lead: "body repair, painting and workshop management" → "body repair and workshop
+    management";
+  - Training approach list: "Automotive body repair and automotive paint specialisations" →
+    "Automotive body repair specialisation".
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder.
+- Build: 0 warnings, 0 errors.
+- Faculties page: lists Mr. Girish Kumar and Mr. Ramesh Babu only; "Kishore" and "paint" both return
+  0 matches anywhere in the rendered page; 0 broken images, 0 horizontal overflow.
+- Home page faculty section: two cards, both rendering correctly, no mention of Kishore.
+- Layout with two members instead of three: the Faculties page stacks full-width cards, so it is
+  unaffected. The Home page grid is `repeat(auto-fit, minmax(300px, 1fr))`, so at 1440 px the two
+  cards measure 604 px each and fill the row with no empty slot; 0 horizontal overflow.
+
+**Not Done – owner decision needed**
+- `faculties/kishore` (250×250) is still registered in the image catalog and the file is still
+  published, so the photograph remains reachable at its direct URL even though it is no longer
+  linked from any page. It was left in place so the profile can be restored without reprocessing,
+  but since it is a photograph of an individual, it should be deleted if the removal is permanent.
+- If MAIAM still teaches automotive painting with another trainer, the paint wording above can be
+  restored — it was removed only because no listed instructor now has that background.
+
+---
+
+## 2026-11-17 – Course durations
+
+### Task: Update the duration of both main courses everywhere it appears
+
+**Objective**
+Owner request: Automotive Body Repair Technician should read "8 months institutional training"
+(previously "8 months institutional"), and Advanced Welding Technician should read
+"4 Months (Weekends)" instead of "3 Months" — wherever either is used.
+
+**Completed Work**
+- Automotive Body Repair Technician
+  - `Services/SiteContent.cs` (course cards on Home and other pages):
+    "1 Year (8 months institutional training + 4 months internship)".
+  - `Views/Courses/AutomotiveBodyRepair.cshtml`: the Duration fact, and the meta description /
+    structured-data summary ("8 months institutional training + 4 months dealership internship";
+    ", Kerala" dropped from that sentence to keep it under 160 characters).
+- Advanced Welding Technician
+  - `Services/SiteContent.cs`: "3 Months" → "4 Months (Weekends)".
+  - `Views/Courses/AdvancedWelding.cshtml`: the Duration fact, the meta description ("4-month …"),
+    and the structured-data duration `P3M` → `P4M`.
+  - `Views/Certifications/Nsdc.cshtml`: "NSDC certification · 4 months (weekends)".
+  - `Views/Courses/WeldingTechnician.cshtml`: the cross-reference now says "the 4-month Advanced
+    Welding Technician course".
+
+**Testing Performed**
+- Build: 0 errors. Published a Release build to a scratch folder and fetched Home, Auto Body course,
+  Advanced Welding course, NSDC, Welding Technician and Objectives: 0 occurrences of "3 Months",
+  "3-month" or "P3M" remain; "4 Months (Weekends)" renders on all five pages that show the course;
+  the Auto Body duration renders with "institutional training" on the Home card and the course page.
+
+**Not Done – owner decision needed**
+The Advanced Welding page and course card still say "Regular and weekend batches are available"
+(three places, plus the meta description). That was not part of the request and was left unchanged,
+but it now sits beside a duration of "4 Months (Weekends)". If the course runs on weekends only,
+that wording should be changed too.
+
+### Task: New welding photographs – course card, course hero and Gallery
+
+**Objective**
+Owner supplied six photographs: use the best Advanced Welding shot on the Home page and the Advanced
+Welding course page, and put the rest in the Gallery.
+
+**Completed Work**
+- Processed with the same throwaway `sharp` install as before (outside the repo, deleted after use).
+- Best shot (38): a student grinding steel in a bench vice, with goggles, gloves and sparks. The
+  original is portrait, but the course card (16:10) and page hero are landscape, so a 939×587
+  landscape crop was made that keeps the face, PPE, grinder and sparks in frame:
+  `advanced-welding/angle-grinder-vice-wide`.
+  - `Services/SiteContent.cs`: the Advanced Welding course card image (shown on the Home page and
+    wherever the course cards appear) now uses it, replacing `instructor-guided-practice`.
+  - `Views/Courses/AdvancedWelding.cshtml`: page hero now uses it, replacing `booth-welding-practice`.
+- Gallery – added to the top of "Practical Training & Campus" (34 → 38 photos):
+  `advanced-welding/workbench-group-instructor`, `advanced-welding/chop-saw-pipe-cutting`,
+  `advanced-welding/bench-grinding-apron`, `placements/toyota-interview-panel`.
+- Photo 33 was **not** added: a pixel comparison showed it is the same classroom photo already on the
+  site as `facilities/classroom-instructor-session` (mean difference 4.4/255, i.e. compression only).
+- 5 catalog entries added; 16 WebP files written (largest 151 KB).
+
+**Testing Performed**
+Verified on a Release build published to a scratch folder.
+- Build: 0 errors.
+- Home (1280 px): the Advanced Welding card serves `angle-grinder-vice-wide-939.webp`, loaded.
+- Advanced Welding course page: hero serves the same image; 0 broken images, 0 overflow.
+- Gallery: all four new photos render; Practical Training & Campus shows 38 photos; 101 images
+  total, 0 broken, 0 overflow.
+- 375 px: Home and Advanced Welding course page – 0 broken images, 0 horizontal overflow.
+
+### Task: Faculties page banner photo
+
+- `Views/Faculties/Faculties.cshtml`: hero `ImageKey` changed from `facilities/classroom-address`
+  to `facilities/classroom-instructor-session` (the instructor addressing a full classroom), at the
+  owner's request. No new image processing was needed — that photo was already in the catalog.
+- Verified on a published build at 1280 px: the hero serves `classroom-instructor-session`, loaded;
+  0 broken images, 0 horizontal overflow.
+
+### Task: Remove the "Managed by Manappuram Foundation" strip from the Home page
+
+- `Views/Home/Index.cshtml`: removed the `home-managed` section (Foundation logo, "Managed by
+  Manappuram Foundation", address and toll-free number) that sat between the enquiry CTA band and
+  the footer.
+- `wwwroot/css/index.css`: removed the now-unused `.home-managed*` rules (5 blocks). No other page
+  used them.
+- The site footer's own "Managed By" column (logo, address, toll-free, email) was **not** touched
+  and still appears on every page. The Contact page's "Managed by" section is also unchanged.
+- Verified on a published build at 1280 px: the strip is gone, the CTA band is now the last section
+  before the footer, 0 broken images, 0 horizontal overflow.

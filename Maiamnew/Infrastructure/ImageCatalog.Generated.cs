@@ -40,6 +40,11 @@ namespace Maiamnew.Infrastructure
             Add("advanced-welding/student-mig-torch", 1600, 1065, "Student welding a metal plate while an instructor and a classmate watch", 480, 720, 960, 1600);
             Add("advanced-welding/booth-welding-practice", 1600, 1065, "Students welding inside a shielded booth while an instructor steadies it", 480, 720, 960, 1600);
             Add("advanced-welding/student-mask-welding", 1126, 2000, "Student welding a steel bracket wearing a full welding mask", 480, 720, 960, 1126);
+            Add("advanced-welding/angle-grinder-vice-wide", 939, 587, "Student in safety glasses and welding gloves grinding steel held in a bench vice, sparks flying", 480, 720, 939);
+            Add("advanced-welding/chop-saw-pipe-cutting", 943, 1668, "Student cutting a steel pipe on a cut-off saw as sparks fly", 480, 720, 943);
+            Add("advanced-welding/workbench-group-instructor", 922, 1706, "Instructor with students practising at a workbench in the MAIAM welding workshop", 480, 720, 922);
+            Add("advanced-welding/bench-grinding-apron", 945, 1665, "Student in a leather apron and welding gloves grinding a metal strip on a workbench", 480, 720, 945);
+            Add("placements/toyota-interview-panel", 1280, 852, "Interview panel, including two members in Toyota uniforms, speaking with a student at MAIAM", 480, 720, 960, 1280);
             Add("facilities/computer-lab", 720, 540, "MAIAM computer lab with student workstations", 480, 720);
             Add("facilities/classroom-session", 720, 540, "Students attentive during a classroom session", 480, 720);
             Add("facilities/classroom", 720, 540, "Students seated in a MAIAM classroom", 480, 720);

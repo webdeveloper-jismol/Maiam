@@ -1,6 +1,6 @@
 @{
     var crumbs = new[] { new Breadcrumb("Courses"), new Breadcrumb("Advanced Welding Technician") };
-    const string summary = "3-month NSDC certified Advanced Welding Technician course at MAIAM, Thrissur: SMAW, GMAW (MIG/MAG) and TIG welding, with regular and weekend batches.";
+    const string summary = "4-month NSDC certified Advanced Welding Technician course at MAIAM, Thrissur: SMAW, GMAW (MIG/MAG) and TIG welding, with regular and weekend batches.";
     ViewData.SetPageMeta(new PageMeta
     {
         Title = "Advanced Welding Technician Course, Thrissur",
@@ -8,13 +8,13 @@
         Path = "/advanced-welding-technician/",
         OgImage = "/assets/images/og/advanced-welding.jpg",
         Breadcrumbs = crumbs,
-        StructuredData = [StructuredData.Course("Advanced Welding Technician", summary, "/advanced-welding-technician/", "P3M", "NSDC certification")],
+        StructuredData = [StructuredData.Course("Advanced Welding Technician", summary, "/advanced-welding-technician/", "P4M", "NSDC certification")],
     });
     ViewData["BodyClass"] = "page-course page-welding";
     var hero = new PageHeroModel(
         Title: "Advanced Welding Technician",
         Lead: "Industrial concentrated training in advanced TIG, MIG/MAG, GMAW, spot, electrical and gas welding – including pipe welding – with NSDC certification.",
-        ImageKey: "advanced-welding/booth-welding-practice",
+        ImageKey: "advanced-welding/angle-grinder-vice-wide",
         Breadcrumbs: crumbs,
         Eyebrow: "Course · NSDC certification");
     var processes = new[] { "SMAW / Arc", "GMAW (MIG & MAG)", "TIG", "Spot", "Electrical", "Gas", "Pipe welding" };
@@ -43,7 +43,7 @@
             </div>
             <div class="fact">
                 <dt><svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>Duration</dt>
-                <dd>3 Months</dd>
+                <dd>4 Months (Weekends)</dd>
             </div>
             <div class="fact">
                 <dt><svg class="icon" aria-hidden="true"><use href="#i-cap"></use></svg>Qualification</dt>

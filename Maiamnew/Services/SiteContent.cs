@@ -13,7 +13,7 @@ namespace Maiamnew.Services
             new("Automotive Body Repair Technician",
                 "/courses/",
                 "Train to repair the body and frame of vehicles damaged by major and minor dents, with internship training in dealership workshops.",
-                "1 Year (8 months institutional + 4 months internship)",
+                "1 Year (8 months institutional training + 4 months internship)",
                 "ASDC, NSDC & NCVET",
                 "SSLC or Plus Two",
                 "automotive-body-repair/door-inspection",
@@ -21,10 +21,10 @@ namespace Maiamnew.Services
             new("Advanced Welding Technician",
                 "/advanced-welding-technician/",
                 "TIG, MIG/MAG and ARC welding including pipe welding. Regular and weekend batches are available.",
-                "3 Months",
+                "4 Months (Weekends)",
                 "NSDC",
                 "SSLC or Plus Two",
-                "advanced-welding/instructor-guided-practice",
+                "advanced-welding/angle-grinder-vice-wide",
                 InMainMenu: true),
             new("Two Wheeler Repair Technician",
                 "/two-wheeler-repair-technician-course/",
@@ -78,10 +78,6 @@ namespace Maiamnew.Services
                 "20 years’ experience as an Auto Body Repair and Body Training Instructor at Toyota and Lexus (Abroad).",
                 ["National Skill Champion in 2003, Oman", "Visited Toyota Plant, Japan in 2004", "GCC Grand Prix finalist in 2003"],
                 "faculties/ramesh-babu"),
-            new("Mr. Kishore", "Training Instructor",
-                "20 years’ experience as an Automotive Paint Technician (Abroad).",
-                [],
-                "faculties/kishore"),
         ];
 
         public static readonly IReadOnlyList<Facility> Facilities =
@@ -114,6 +110,10 @@ namespace Maiamnew.Services
             new("practical-training", "Practical Training & Campus", null,
             [
                 // Newest MAIAM photographs first
+                "advanced-welding/workbench-group-instructor",
+                "advanced-welding/chop-saw-pipe-cutting",
+                "advanced-welding/bench-grinding-apron",
+                "placements/toyota-interview-panel",
                 "advanced-welding/mig-practice-supervised",
                 "advanced-welding/student-mig-torch",
                 "advanced-welding/booth-welding-practice",
